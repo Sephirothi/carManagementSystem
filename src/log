@@ -1,0 +1,128 @@
+A   a1=new A1();
+a1.f1();
+
+interface A{f1;}
+class A1  implements A{}
+
+class A2  implements A{}
+
+A  a2=new A2();
+a2.f1();
+
+
+@override
+class  A3 implements A{}
+
+
+A  a3=new A3();
+a3.f1();
+
+
+
+
+
+
+开闭原则 ---系统开放的，可以升级添加新的功能。系统又是闭合的原来的代码不允许修改。
+
+A.f1  接口A中有f1方法
+1.调用代码 
+A  a=FactoryA.createInstance();
+a.f1();
+
+2.生产对象代码
+class FactoryA{
+
+  String className=property.get("clasName");  // 读 properties  clasName=dao.A3
+  public static A createInstance(){
+     return   Class.forName(className).newInstance();
+   
+   }
+
+  
+}
+
+
+
+Spring---核心的东西 就是一个bean容器，管理bean生命周期
+
+A  a;
+
+
+
+
+
+
+
+
+
+
+
+启动服务器-Tomcat
+web--->web.xml
+springframework---new Listener-spring.jar
+<contextConfigLoader>
+classpath:config/spring/spring*.xml
+
+1.spring  jar
+2.config/spring/spring-liu.xml
+scan-basepackage=com.liu  dao|service|web.action|config
+ 对象都加载到内存中
+ 
+ 服务器启动完成----------
+ 
+ 请求来启动-》
+ url---》servlet.login-
+ -service--dao---sessionFactory-
+ datasource-property
+ 
+ 
+ 
+ 
+ 
+ 
+ 1.规范化---
+ 2.提高效率---
+ 3.便于学习使用
+ 
+ 唯一的缺点：不便于调试
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ @Resoure("mya")
+ class A{
+   MyDAO  mydao;
+ }
+ 
+ 
+ 
+ @Resource("mydao")
+ class  MyDAO{}
+ <bean  id="mydao"  class="MyDAO">
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
