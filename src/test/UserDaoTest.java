@@ -13,15 +13,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/config/spring/spring-core.xml")
 public class UserDaoTest extends AbstractJUnit4SpringContextTests{
+	
 	@Resource(name="sessionFactory")
 	SessionFactory sf;
 	@Test
 	public void createOK(){
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
-		session.createQuery("from User").list();
-		tx.commit();
-		session.close();
+		
 		
 	}
 }
