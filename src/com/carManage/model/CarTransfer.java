@@ -1,0 +1,80 @@
+package com.carManage.model;
+
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class CarTransfer {
+	@Id
+	private Integer id;//表示唯一实体,无实际意义
+	@ManyToOne(fetch=FetchType.LAZY,
+			targetEntity=Car.class,
+			cascade=CascadeType.ALL
+		)
+	@JoinColumn(name="car_id")
+	private Car car = new Car();//外键,连接car表
+	private String comment;//备注
+	private String transfer_fee;//过户费用
+	private String new_user_id;//新车主身份证明
+	private Date transfer_time;
+	public CarTransfer(){
+		
+	}
+	public CarTransfer(Integer id, Car car, String comment, String transfer_fee, String new_user_id,Date transfer_time) {
+		super();
+		this.id = id;
+		this.car = car;
+		this.comment = comment;
+		this.transfer_fee = transfer_fee;
+		this.new_user_id = new_user_id;
+		this.transfer_time = transfer_time;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Car getCar() {
+		return car;
+	}
+	public void setCar(Car car) {
+		this.car = car;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public String getTransfer_fee() {
+		return transfer_fee;
+	}
+	public void setTransfer_fee(String transfer_fee) {
+		this.transfer_fee = transfer_fee;
+	}
+	public String getNew_user_id() {
+		return new_user_id;
+	}
+	public void setNew_user_id(String new_user_id) {
+		this.new_user_id = new_user_id;
+	}
+	@Override
+	public String toString() {
+		return "CarTransfer [id=" + id + ", car=" + car + ", comment=" + comment + ", transfer_fee=" + transfer_fee
+				+ ", new_user_id=" + new_user_id + "]";
+	}
+	public Date getTransfer_time() {
+		return transfer_time;
+	}
+	public void setTransfer_time(Date transfer_time) {
+		this.transfer_time = transfer_time;
+	}
+	
+}

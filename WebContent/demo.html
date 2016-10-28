@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<script type="text/javascript">
+		function isArray(obj) {
+			return Object.prototype.toString.call(obj) == '[object Array]';
+		}
+
+		var obj = {a: 1, b: 2};
+
+		console.log(isArray(obj));
+        
+        Object.prototype.clone = function() {
+        	var obj = this.constructor === 'Array' ? [] : {};
+        	for(var e in this) {
+        		obj[e] = typeof this[e] === 'object' ? this[e].clone() : this[e];
+        	}
+
+        	return obj;
+        }
+
+	</script>
+</body>
+</html>
