@@ -15,7 +15,7 @@
     <link href="css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
@@ -287,7 +287,7 @@
     <script src="js/jquery.customSelect.min.js" ></script>
 
     <!--common script for all pages-->
-    <script src="/js/common-scripts.js"></script>
+    <script src="js/common-scripts.js"></script>
 
   <script>
 
@@ -317,8 +317,8 @@
                password: password
            };
   
-          
-           /* $.ajax({
+           loginInfo.push(JSON.stringify(datalist));
+           $.ajax({
                url: '',
                type: 'POST',
                dataType: 'json',
@@ -327,7 +327,7 @@
                   console.log('success');
                   
                }
-           }) */
+           })
         })
 
   </script>
