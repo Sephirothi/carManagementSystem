@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.springframework.stereotype.Repository;
-
 /**
  * 
  * @author 47 用户,即管理员表映射的实体类
