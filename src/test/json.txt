@@ -1,6 +1,4 @@
-[
-	{
-		username:xiaoming,
-		password:123456
-	}
-]
+{
+		state:全部,
+		name:123
+}
