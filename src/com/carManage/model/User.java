@@ -4,7 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 
@@ -13,6 +17,8 @@ import javax.persistence.Id;
 @Entity
 public class User {
 	@Id
+	@GeneratedValue(generator = "generator")    
+	@GenericGenerator(name = "generator", strategy = "increment") 
 	private Integer id;// 判定实体的唯一性,没有实际含义
 	@Column(unique = true, nullable = false, length = 30)
 	private String username;// 用户名,不能为空,且唯一
@@ -101,8 +107,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", sex="
-				+ sex + ", state=" + state + ", authority=" + authority + "]";
+//		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", sex="
+//				+ sex + ", state=" + state + ", authority=" + authority + "]";
+		return "User [username=" + username + ", name=" + name + "]";
 	}
 
 	public Date getDate() {
@@ -111,5 +118,13 @@ public class User {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public void updateUser(User user) {
+		this.password = user.password == null ? this.password : user.password;
+		this.name = user.name == null ? this.name : user.name;
+		this.sex = user.sex == null ? this.sex : user.sex;
+		this.state = user.state == null ? this.state : user.state;
+		this.authority = user.authority == null ? this.authority : user.authority;
 	}
 }
