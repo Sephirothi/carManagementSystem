@@ -6,15 +6,16 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.carManage.service.UserService;
-import com.carManage.service.impl.UserServiceImpl;
 
-public class UserServiceTest {
-	
+public class SHUserServiceTest extends BaseDAOTest{
+	@Resource(name = "userServiceImpl")
+	UserService us;
 	String json = "";
 	@Before
 	public void before() {
@@ -42,10 +43,18 @@ public class UserServiceTest {
 		}
 	}
 	@Test
-	public void test() {
-		System.out.println(json);
-		UserService us = new UserServiceImpl();
-		String gson = us.querySingleUser(json);
-		System.out.println(gson);
+	public void createisOK(){
+		
+		System.out.println(us.checklogin(json));
+	}
+	@Test
+	public void loginisOK(){
+		
+		System.out.println(us.checklogin(json));
+	}
+	@Test
+	public void deleteisOK(){
+		
+		System.out.println(us.deleteUser(json));
 	}
 }

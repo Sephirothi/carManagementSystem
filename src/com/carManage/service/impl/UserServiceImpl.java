@@ -1,5 +1,6 @@
 package com.carManage.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
@@ -11,10 +12,11 @@ import com.carManage.dao.BaseDAO;
 import com.carManage.model.User;
 import com.carManage.service.ResponseType;
 import com.carManage.service.UserService;
-import com.carMmanage.utils.GsonUtils;
+import com.carManage.utils.GsonUtils;
+
 /**
- * 1 success
- * 0 failure
+ * 1 success 0 failure
+ * 
  * @author hp
  *
  */
@@ -31,8 +33,39 @@ public class UserServiceImpl extends ResponseType implements UserService {
 
 	@Override
 	public String deleteUser(String json) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = null;
+		//返回类型
+		ReturnResponse<String> rr = new ReturnResponse<>();
+		try {
+			List<User> list = GsonUtils.jsonToList(json, User.class);
+			if (list.size() == 1) {
+				if(baseDao.delete(list)!=1){
+					result = rr.extracted(0, "删除数据失败");
+				}else{
+					result = rr.extracted(1, "删除数据成功");
+				}
+				
+			} else {
+				result = deleteUsers(list,rr);
+			}
+		} catch (DataFormatException e) {
+			result = rr.extracted(0, "Json转化失败");
+		}
+		return result;
+	}
+	private String deleteUsers(List<User> list,ReturnResponse<String> rr) {
+		String result = null;
+		if(list.size()==0){
+			result = rr.extracted(0, "没有选择数据");
+		}else{
+			if(baseDao.delete(list)!=list.size()){
+				result = rr.extracted(0, "删除数据失败");
+			}else{
+				result = rr.extracted(1, "删除数据成功");
+			}
+			
+		}
+		return result;
 	}
 
 	@Override
@@ -41,52 +74,53 @@ public class UserServiceImpl extends ResponseType implements UserService {
 		return null;
 	}
 
-	@Override
-	public String deleteUsers(String json) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public String queryAllUsers(String json) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO这个线不写,等待后台确定数据参数
+		String reslut = null;
+
+		return reslut;
 	}
 
 	@Override
 	public String querySingleUser(String json) {
 		String result = null;
-		// 返回json包装类 
-		ResponseBody<User> rb = new ResponseBody<>();
+		// 返回json包装类
+		ReturnResponse<User> rr = new ReturnResponse<>();
 		try {
 			// 将前端传过来的数据转化为
 			List<User> user = GsonUtils.jsonToList(json, User.class);
 			// List<User> list = null;
-			if(user.size()==1){
-				List<User> list  = baseDao.query(user.get(0));
-				if(list.size()!=1){
-					result=extracted(0,"传输数据有误");
-				}else{
-					rb.code=1;
-					rb.data = list.get(0);
-					result = GsonUtils.objectToJson(rb);
+			if (user.size() == 1) {
+				// List<User> list = baseDao.query(user.get(0));
+				List<User> list = new ArrayList<>();
+				User u = new User();
+				u.setUsername("小明");
+				u.setPassword("123");
+				list.add(u);
+				if (list.size() != 1) {
+					result = rr.extracted(0, "传输数据有误");
+				} else {
+					result = rr.extracted(1, list.get(0), null);
 				}
-			}else{
-				result=extracted(0,"数据不是唯一性");
+			} else {
+				// 如果数据不是唯一的,返回错误不需要查询数据库
+				result = rr.extracted(0, "数据不是唯一性");
 			}
 		} catch (DataFormatException e) {
-			//转化失败返回的结果
-			result = extracted(0,"json转化失败");
+			// 转化失败返回的结果
+			result = rr.extracted(0, "json转化失败");
 		}
 		return result;
 	}
-
 
 	@Override
 	public String checklogin(String json) {
 		String result = null;
 		// 返回json包装类
-		ResponseBody<String> rb = new ResponseBody<>();
+		// ResponseBody<String> rb = new ResponseBody<>();
+		ReturnResponse<String> rr = new ReturnResponse<>();
 		try {
 			// 将前端传过来的数据转化为
 			List<User> user = GsonUtils.jsonToList(json, User.class);
@@ -94,26 +128,30 @@ public class UserServiceImpl extends ResponseType implements UserService {
 			if (user.size() == 1) {
 				User u = user.get(0);
 				if (u.getUsername().trim().equals("") || u.getPassword().trim().equals("")) {
-					rb.code = 0;// 表示认证失败
-					rb.data = "帐号或密码错误,请重试";
+					// rb.code = 0;// 表示认证失败
+					// rb.data = "帐号或密码错误,请重试";
+					result = rr.extracted(0, "帐号或密码错误");
 				} else {
+					// 查询数据库判断是否有这个人
 					if (baseDao.query(u).size() == 1) {
-						rb.code = 1;// 表示认证成功
-						rb.data = "登录成功";
+						// rb.code = 1;// 表示认证成功
+						// rb.data = "登录成功";
+						result = rr.extracted(1, "登录成功");
 					} else {
-						rb.code = 0;// 表示认证失败
-						rb.data = "帐号或密码错误,请重试";
+						result = rr.extracted(0, "帐号或密码错误");
 					}
 				}
 			} else {
-				rb.code=0;
-				rb.data="user不唯一";
+				// 数据不唯一,返回错误码
+				// rb.code=0;
+				// rb.data="user不唯一";
+				result = rr.extracted(0, "user不唯一");
 			}
-			result = GsonUtils.objectToJson(rb);
+			// result = GsonUtils.objectToJson(rb);
 		} catch (DataFormatException e) {
-			result = extracted(0,"json转化失败");
+			result = rr.extracted(0, "json转化失败");
 		}
 		return result;
 	}
-	
+
 }
