@@ -142,17 +142,18 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 	}
 
 	/**
-	 * 进行分页查询
-	 * 
+	 * 进行分页查询 正常返回固定条数的集合 如果出现错误，或者是参数有误，返回值为null
 	 */
 	@Override
 	public List<User> query(User t, int start, int count, NULL o1, NULL o2) {
+		if (t == null)
+			return null;
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(User.class);
 		// 此时表示查询多个
-		if (!t.getName().equals(""))
+		if (t.getName() != null && !t.getName().equals(""))
 			criteria.add(Restrictions.eq("name", t.getName()));
-		if (!t.getState().equals("全部"))
+		if (t.getState() != null && !t.getState().equals("全部"))
 			criteria.add(Restrictions.eq("state", t.getState()));
 		criteria.setFirstResult(start);
 		criteria.setMaxResults(count);
