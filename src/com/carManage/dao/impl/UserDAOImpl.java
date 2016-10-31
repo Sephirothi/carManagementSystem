@@ -26,7 +26,6 @@ public class UserDAOImpl extends BaseDAO<User> {
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
 
-	
 	/**
 	 * 进行User信息的更改
 	 */
@@ -41,7 +40,7 @@ public class UserDAOImpl extends BaseDAO<User> {
 			}
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			
+
 			// 查询库中是否有这个用户
 			String hql = "from User u where u.username = ?";
 			Query query = session.createQuery(hql);
@@ -53,14 +52,14 @@ public class UserDAOImpl extends BaseDAO<User> {
 			}
 			// 更新User数据
 			user.updateUser(t);
-			
+
 			session.getTransaction().commit();
-			
+
 		} catch (TransientObjectException ex) {
 			System.out.println("===============>发生异常，添加失败");
 			return false;
 		} finally {
-			if(session != null)
+			if (session != null)
 				session.close();
 		}
 		return true;
@@ -72,32 +71,48 @@ public class UserDAOImpl extends BaseDAO<User> {
 
 		int successCount = 0;
 		// 对集合中的User进行循环删除
-		for(User user : list) {
+		for (User user : list) {
 			session.beginTransaction();
-			
+
 			try {
 				// 查询
 				String hql = "from User u where u.username = ?";
 				Query query = session.createQuery(hql);
 				query.setParameter(0, user.getUsername());
 				User tempUser = (User) query.uniqueResult();
-				if(tempUser == null) {
-					
+				if (tempUser == null) {
+					// 表示表中并没有这个数据
+					continue;
 				}
-			} catch(Exception e) {
+				session.delete(tempUser);
+			} catch (Exception e) {
 				System.out.println("======>删除失败：" + user.getUsername());
 				e.printStackTrace();
 			}
-			
+			successCount++;
 			session.getTransaction().commit();
 		}
-		return 0;
+		return successCount;
 	}
 
+	/**
+	 * 添加一个数据到数据库中
+	 */
 	@Override
 	public boolean insert(User t) {
-		// TODO Auto-generated method stub
-		return super.insert(t);
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			session.save(t);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("======>保存失败");
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
