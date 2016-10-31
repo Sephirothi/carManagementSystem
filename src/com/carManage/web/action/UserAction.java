@@ -27,13 +27,7 @@ public class UserAction extends ActionSupport {
 	}
 
 	public String login() {
-		System.out.println(getUser().getUsername());
-		User u = (User) us.querySingle(getUser());
-		if (u != null) {
-			ActionContext.getContext().getSession().put("u", u);
-			return SUCCESS;
-		} else
-			return ERROR;
+		return null;
 	}
 
 	
