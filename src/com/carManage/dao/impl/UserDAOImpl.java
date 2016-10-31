@@ -141,4 +141,34 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		return resultList;
 	}
 
+	/**
+	 * 进行分页查询
+	 * 
+	 */
+	@Override
+	public List<User> query(User t, int start, int count, NULL o1, NULL o2) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(User.class);
+		// 此时表示查询多个
+		if (!t.getName().equals(""))
+			criteria.add(Restrictions.eq("name", t.getName()));
+		if (!t.getState().equals("全部"))
+			criteria.add(Restrictions.eq("state", t.getState()));
+		criteria.setFirstResult(start);
+		criteria.setMaxResults(count);
+		return criteria.list();
+	}
+
+	/**
+	 * 获取数据库中总的条数
+	 */
+	@Override
+	public long getDataCount(User t) {
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("select count(*) from User s ");
+		Long count = (Long) query.uniqueResult();
+		session.close();
+		return count;
+	}
+
 }

@@ -65,6 +65,21 @@ public abstract class BaseDAO<T, E> implements IDAO<T> {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * 获取到数据库中此类对象的总的条数
+	 * @param t 需要查询的对象
+	 * @return
+	 */
+	public long getDataCount(T t) {
+		try {
+			addException();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 
 	private void addException() throws Exception {
 		throw new Exception("no this method");
