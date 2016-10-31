@@ -143,7 +143,8 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 
 	/**
 	 * 进行分页查询
-	 * 
+	 * 正常返回固定条数的集合
+	 * 如果出现错误，或者是参数有误，返回值为null
 	 */
 	@Override
 	public List<User> query(User t, int start, int count, NULL o1, NULL o2) {
