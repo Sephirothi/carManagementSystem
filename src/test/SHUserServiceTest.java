@@ -6,8 +6,6 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,5 +54,15 @@ public class SHUserServiceTest extends BaseDAOTest{
 	public void deleteisOK(){
 		
 		System.out.println(us.deleteUser(json));
+	}
+	@Test
+	public void singleQueryisOK(){
+		
+		System.out.println(us.querySingleUser(json));
+	}
+	@Test
+	public void queryAllisOk(){
+		//使用单个json对象测试才支持
+		System.out.println(us.queryAllUsers(json));
 	}
 }
