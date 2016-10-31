@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.carManage.dao.BaseDAO;
+import com.carManage.dao.BaseDAO.NULL;
 import com.carManage.model.User;
 
 /**
@@ -22,7 +23,7 @@ import com.carManage.model.User;
  *
  */
 @Repository("userDAOImpl")
-public class UserDAOImpl extends BaseDAO<User> {
+public class UserDAOImpl extends BaseDAO<User, NULL> {
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
 

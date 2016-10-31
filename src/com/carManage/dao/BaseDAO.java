@@ -2,7 +2,7 @@ package com.carManage.dao;
 
 import java.util.List;
 
-public abstract class BaseDAO<T> implements IDAO<T>{
+public abstract class BaseDAO<T, E> implements IDAO<T> {
 
 	@Override
 	public boolean update(T t) {
@@ -43,8 +43,32 @@ public abstract class BaseDAO<T> implements IDAO<T>{
 		}
 		return null;
 	}
-	
-	private void addException() throws Exception{
+
+	/**
+	 * @param t
+	 *            传入的表实体
+	 * @param start
+	 *            请求数据，开始的位置
+	 * @param count
+	 *            请求的条数
+	 * @param o1
+	 *            限制条件1
+	 * @param o2
+	 *            限制条件2
+	 * @return
+	 */
+	public List<T> query(T t, int start, int count, E o1, E o2) {
+		try {
+			addException();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private void addException() throws Exception {
 		throw new Exception("no this method");
 	}
+	
+	public interface NULL {}
 }
