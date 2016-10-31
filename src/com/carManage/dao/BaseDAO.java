@@ -15,7 +15,7 @@ public abstract class BaseDAO<T> implements IDAO<T>{
 	}
 
 	@Override
-	public int delete(T t) {
+	public int delete(List<T> t) {
 		try {
 			addException();
 		} catch (Exception e) {
