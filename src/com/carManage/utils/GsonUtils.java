@@ -95,13 +95,13 @@ public class GsonUtils {
 	 * @return
 	 * @throws DataFormatException
 	 */
-	public static <T> Map<String, T> jsonToMaps(String gsonString)
+	public static  Map<String, String> jsonToMaps(String gsonString)
 			throws DataFormatException {
-		Map<String, T> map = null;
+		Map<String, String> map = null;
 		if (gson != null) {
 			try {
 				map = gson.fromJson(gsonString,
-						new TypeToken<Map<String, T>>() {
+						new TypeToken<Map<String, String>>() {
 						}.getType());
 			} catch (Exception e) {
 				throw new DataFormatException("解析json时出错");
