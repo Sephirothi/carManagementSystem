@@ -3,14 +3,8 @@ package com.carManage.dao.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.TransientObjectException;
-
 import com.carManage.dao.BaseDAO;
 import com.carManage.model.CarTransfer;
-import com.carManage.model.User;
-import com.carManage.utils.HibernateUtils;
 
 /**
  * 这里还是传入了业务实体
