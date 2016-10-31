@@ -21,6 +21,7 @@ public class CarTransfer {
 	private Car car = new Car();//外键,连接car表
 	private String comment;//备注
 	private String transfer_fee;//过户费用
+	private String old_user_id;//旧车主的身份证(也就是转换时的现车主，转换后的旧车主)
 	private String new_user_id;//新车主身份证明
 	private Date transfer_time;
 	public CarTransfer(){
