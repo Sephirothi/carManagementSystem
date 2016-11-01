@@ -108,7 +108,7 @@ public class ResponseType {
 	 * @throws Exception
 	 */
 	public <T> T getMaptoObject(Map<String, String> map, Class<T> clazz)
-			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+			throws  InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 		T t = clazz.newInstance();
 		Field[] fds = clazz.getDeclaredFields();
