@@ -22,8 +22,8 @@ import com.carManage.model.CarUser;
 import edu.emory.mathcs.backport.java.util.LinkedList;
 
 /**
- * 车辆查询页面 限制条件:无
- * （未测试）
+ * 车辆查询页面 限制条件:无 （未测试）
+ * 
  * @author admin
  *
  */
@@ -47,7 +47,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 
-			// 查询库中是否有这个用户
+			// 查询库
 			String hql = "from Car c where c.id = ?";
 			Query query = session.createQuery(hql);
 			query.setParameter(0, carId);
@@ -55,6 +55,15 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 			if (oldCar == null) {
 				System.out.println("======>数据库中查询没有此车");
 				return false;
+			}
+			// 判断是否改变User
+			if(car.getUser() != null) {
+				if(car.getUser().getId() != null &&!car.getUser().getId().equals("")) {
+					CarUser newUser = (CarUser) session.get(CarUser.class, car.getUser().getId());
+					car.setUser(newUser);
+				} else {
+					car.setUser(null);
+				}
 			}
 			// 更新carUser数据
 			oldCar.update(car);
@@ -120,7 +129,6 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 		try {
 			session.beginTransaction();
 			// 获取到车辆
-			System.out.println("======>开始获取转换订单中的车辆...");
 			Car car = (Car) session.get(Car.class, carId);
 			if (car != null) {
 				System.out.println("======>当前车辆已经在数据库中");
@@ -133,6 +141,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 				System.out.println("======>车主没在数据库中");
 				return false;
 			}
+			c.setUser(user);
 			session.save(c);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -174,6 +183,13 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 	@Override
 	public List<Car> query(Car t, int start, int count, NULL o1, NULL o2) {
 		Session session = sessionFactory.openSession();
+		// 查询车主
+		CarUser carUser = t.getUser();
+		if (carUser != null) {
+			String carUserId = carUser.getId();
+			if(carUserId != null && !carUserId.equals(""))
+				t.setUser((CarUser) session.get(CarUser.class, carUserId));
+		}
 		Criteria criteria = getCriteria(t, o1, o2, "", session);
 		if (start != -1 && count != -1) {
 			criteria.setFirstResult(start);
@@ -192,6 +208,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 	@Override
 	public long getDataCountWithLimit(Car t, NULL o1, NULL o2) {
 		Session session = sessionFactory.openSession();
+
 		Criteria criteria = getCriteria(t, o1, o2, "", session);
 		criteria.setProjection(Projections.rowCount());
 		try {
@@ -206,30 +223,30 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 
 	@Override
 	protected void doBussiness(Car t, Criteria criteria) {
-		if(t != null) {
+		if (t != null) {
 			// 添加车牌限制条件
 			String carId = t.getId();
-			if(carId != null && !carId.equals("")) {
+			if (carId != null && !carId.equals("")) {
 				criteria.add(Restrictions.eq("id", carId));
 			}
 			// 添加类型条件
 			String carType = t.getCar_type();
-			if(carType != null && !carType.equals("")  && !carType.equals("全部")) {
+			if (carType != null && !carType.equals("") && !carType.equals("全部")) {
 				criteria.add(Restrictions.eq("car_type", carType));
 			}
 			// 添加车主限制
 			CarUser user = t.getUser();
-			if(user != null) {
+			if (user != null) {
 				criteria.add(Restrictions.eq("user", user));
 			}
 			// 添加座位数限制
 			String seatCount = t.getSeat_count();
-			if(user != null) {
+			if (seatCount != null) {
 				criteria.add(Restrictions.eq("seat_count", seatCount));
 			}
 			// 添加颜色限制
 			String carColor = t.getCar_color();
-			if(user != null) {
+			if (carColor != null) {
 				criteria.add(Restrictions.eq("car_color", carColor));
 			}
 		}

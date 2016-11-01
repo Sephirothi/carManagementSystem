@@ -22,8 +22,8 @@ import com.carManage.model.CarUser;
 import edu.emory.mathcs.backport.java.util.LinkedList;
 
 /**
- * 管理费页面 限制条件：月份，类型String
- * （未测试）
+ * 管理费页面 限制条件：月份，类型String （未测试）
+ * 
  * @author admin
  *
  */
@@ -161,12 +161,12 @@ public class CarChargeDAOImpl extends BaseDAO<CarCharge, String> {
 			String payYear = t.getPay_year();
 			if (payYear != null && !payYear.equals(""))
 				criteria.add(Restrictions.eq("pay_year", payYear));
-			
+
 			// 根据收据单
 			String id = t.getRecript_id();
 			if (id != null && !id.equals(""))
 				criteria.add(Restrictions.eq("recript_id", id));
-			
+
 			// 缴费日期
 			Date pay_time = t.getPay_time();
 			if (pay_time != null)
