@@ -75,7 +75,11 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 			Car c = new Car();
 			c.setId(map.get("id"));
 			ct.setCar(c);
-			result = rr.extracted(1, ct, null);
+			if(baseDao.insert(ct)){
+				result = rr.extracted(1, "添加成功");
+			}else{
+				result = rr.extracted(0, "添加失败");
+			}
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "CarTransferServiceImpl--json转化错误");
 		} catch (InstantiationException e) {
