@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.TransientObjectException;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +18,8 @@ import com.carManage.dao.BaseDAO.NULL;
 import com.carManage.model.User;
 
 /**
- * 对用户表的增删改查
- * 限制条件：无
+ * 对用户表的增删改查 限制条件：无
+ * 
  * @author admin
  *
  */
@@ -149,27 +150,37 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		if (t == null)
 			return null;
 		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(User.class);
-		// 此时表示查询多个
-		if (t.getName() != null && !t.getName().equals(""))
-			criteria.add(Restrictions.eq("name", t.getName()));
-		if (t.getState() != null && !t.getState().equals("全部"))
-			criteria.add(Restrictions.eq("state", t.getState()));
+		Criteria criteria = getCriteria(t, o1, o2, "", session);
+		// 设置分页
 		criteria.setFirstResult(start);
 		criteria.setMaxResults(count);
 		return criteria.list();
 	}
 
-	/**
-	 * 获取数据库中总的条数
-	 */
 	@Override
-	public long getDataCount(User t) {
+	protected void doBussiness(User t, Criteria criteria) {
+		// 此时表示查询多个
+		if (t.getName() != null && !t.getName().equals(""))
+			criteria.add(Restrictions.eq("name", t.getName()));
+		if (t.getState() != null && !t.getState().equals("全部"))
+			criteria.add(Restrictions.eq("state", t.getState()));
+	}
+	
+	@Override
+	public long getDataCountWithLimit(User t,
+			com.carManage.dao.BaseDAO.NULL o1, com.carManage.dao.BaseDAO.NULL o2) {
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("select count(*) from User s ");
-		Long count = (Long) query.uniqueResult();
-		session.close();
-		return count;
+		Criteria criteria = getCriteria(t, o1, o2, "",
+				session);
+		criteria.setProjection(Projections.rowCount());
+		try {
+			String valStr = criteria.uniqueResult() + "";
+			return Long.valueOf(valStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("======>根据条件查询数据数量出错");
+			return -1;
+		}
 	}
 
 }

@@ -175,4 +175,19 @@ public class Car {
 				+ seat_count + ", car_state=" + car_state + ", car_color=" + car_color + ", create_time=" + create_time
 				+ ", comment=" + comment + ", pic_urls=" + pic_urls + "]";
 	}
+
+	public void update(Car car) {
+		this.user = car.user == null ? this.user : car.user;
+		this.car_type = car.car_type == null ? this.car_type : car.car_type;
+		this.brand = car.brand == null ? this.brand : car.brand;
+		this.engine_number = car.engine_number == null ? this.engine_number : car.engine_number;
+		this.drive_number = car.drive_number == null ? this.drive_number : car.drive_number;
+		this.fuel_type = car.fuel_type == null ? this.fuel_type : car.fuel_type;
+		this.seat_count = car.seat_count == null ? this.seat_count : car.seat_count;
+		this.car_state = car.car_state == null ? this.car_state : car.car_state;
+		this.car_color = car.car_color == null ? this.car_color : car.car_color;
+		this.create_time = car.create_time == null ? this.create_time : car.create_time;
+		this.comment = car.comment == null ? this.comment : car.comment;
+		this.pic_urls = car.pic_urls == null ? this.pic_urls : car.pic_urls;
+	}
 }

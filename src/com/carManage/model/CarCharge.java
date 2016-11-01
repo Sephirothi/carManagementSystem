@@ -108,4 +108,11 @@ public class CarCharge {
 				+ pay_type + ", hand_fee_person=" + hand_fee_person + ", pay_fee=" + pay_fee + ", pay_year=" + pay_year
 				+ ", pay_month=" + pay_month + ", gather_person=" + gather_person + ", comment=" + comment + "]";
 	}
+	public void update(CarCharge cc) {
+		this.pay_type = cc.pay_type == null ? this.pay_type : cc.pay_type;
+		this.gather_person = cc.gather_person == null ? this.gather_person : cc.gather_person;
+		this.pay_year = cc.pay_year == null ? this.pay_year : cc.pay_year;
+		this.pay_month = cc.pay_month == null ? this.pay_month : cc.pay_month;
+		this.comment = cc.comment == null ? this.comment : cc.comment;
+	}
 }
