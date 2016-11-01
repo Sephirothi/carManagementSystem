@@ -4,6 +4,9 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.zip.DataFormatException;
 
@@ -129,5 +132,29 @@ public class ResponseType {
 			}
 		}
 		return t;
+	}
+	/**
+	 * 
+	 * @param date 日期字符串
+	 * @return  返回日期 java.util.Date
+	 * @throws ParseException
+	 */
+	protected Date StringToDate(String date) throws ParseException {
+		if(date==null){
+			return null;
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.parse(date.trim());
+	}
+	/**
+	 * 
+	 * @param page 前端传来的和页面相关的字符串
+	 * @return 将String转化为Integer
+	 */
+	protected Integer stringToInteger(String page){
+		if(page==null){
+			return null;
+		}
+		return Integer.parseInt(page);
 	}
 }

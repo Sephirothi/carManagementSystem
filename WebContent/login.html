@@ -48,16 +48,16 @@
            var userId = $('.userId').val(),
                password = $('.password').val();
            var datalist = {
-               id: userId,
+               username: userId,
                password: password
            };
   
-           loginInfo.push(JSON.stringify(datalist));
+           //loginInfo.push(JSON.stringify(datalist));
            $.ajax({
-               url: '',
+               url: 'user_login.action',
                type: 'POST',
                dataType: 'json',
-               data: ,
+               data:JSON.stringify(datalist),
                success: function(data) {
                   console.log('success');
                   window.location.href = 'index.html';

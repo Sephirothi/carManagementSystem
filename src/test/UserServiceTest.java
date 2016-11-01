@@ -7,12 +7,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
-import java.util.Set;
 import java.util.zip.DataFormatException;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.carManage.model.User;
@@ -22,7 +22,7 @@ public class UserServiceTest {
 
 	String json = "";
 
-	@Before
+	// @Before
 	public void before() {
 		File file = new File("E:/EEout/sshCarManage/src/test/json.txt");
 		if (file.exists()) {
@@ -102,5 +102,23 @@ public class UserServiceTest {
 			}
 		}
 		return t;
+	}
+
+	@Test
+	public void testdate() {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			sdf.parse("1994-09-19");
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	protected Date StringtoDate(String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.parse(date.trim());
 	}
 }

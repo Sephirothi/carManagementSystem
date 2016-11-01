@@ -128,17 +128,13 @@ public class UserServiceImpl extends ResponseType implements UserService {
 					result = rr.extracted(1, users, baseDao.getDataCount(u));
 				}
 			} catch (InstantiationException e) {
-				e.printStackTrace();
-				rr.extracted(0, "反射失败1");
+				result=rr.extracted(0, "反射失败1");
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-				rr.extracted(0, "反射失败2");
+				result=rr.extracted(0, "反射失败2");
 			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-				rr.extracted(0, "反射失败3");
+				result=rr.extracted(0, "反射失败3");
 			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-				rr.extracted(0, "反射失败4");
+				result=rr.extracted(0, "反射失败4");
 			} catch (DataFormatException e) {
 				rr.extracted(0, "JSON转化失败");
 			}

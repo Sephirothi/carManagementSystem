@@ -1,4 +1,10 @@
 {
-		state:全部,
-		name:123
+		old_user_id:小明,
+		new_user_id:小红,
+		starttime:1994-09-19,
+		endtime:1994-08-14
+		id:ABC123
 }
+
+	
+

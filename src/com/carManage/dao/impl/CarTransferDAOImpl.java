@@ -3,6 +3,8 @@ package com.carManage.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.carManage.dao.BaseDAO;
 import com.carManage.model.CarTransfer;
 
@@ -11,6 +13,7 @@ import com.carManage.model.CarTransfer;
  * @author admin
  *
  */
+@Repository("carTransferDAOImpl")
 public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 
 	@Override

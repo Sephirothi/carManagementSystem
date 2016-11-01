@@ -1,5 +1,9 @@
 package test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.hibernate.Session;
@@ -18,9 +22,6 @@ public class UserDaoTest extends AbstractJUnit4SpringContextTests{
 	SessionFactory sf;
 	@Test
 	public void createOK(){
-		Session session = sf.openSession();
-		Transaction tx = session.beginTransaction();
-		
 		
 	}
 }
