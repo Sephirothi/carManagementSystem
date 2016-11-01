@@ -17,8 +17,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class User {
 	@Id
-	@GeneratedValue(generator = "generator")    
-	@GenericGenerator(name = "generator", strategy = "increment") 
+	@GeneratedValue(generator = "generator")
+	@GenericGenerator(name = "generator", strategy = "increment")
 	private Integer id;// 判定实体的唯一性,没有实际含义
 	@Column(unique = true, nullable = false, length = 30)
 	private String username;// 用户名,不能为空,且唯一

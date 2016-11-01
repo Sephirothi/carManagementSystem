@@ -18,8 +18,8 @@ import com.carManage.model.User;
 
 /**
  * 对用户表的增删改查
- * 
- * @author 47
+ * 限制条件：无
+ * @author admin
  *
  */
 @Repository("userDAOImpl")

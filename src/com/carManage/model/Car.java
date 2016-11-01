@@ -6,14 +6,20 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Car {
+//	@GeneratedValue(generator = "generator")
+//	@GenericGenerator(name = "generator", strategy = "assigned")
 	@Id
 	private String id;// 车牌号,主键,必填
+	
 	@ManyToOne(fetch=FetchType.LAZY,
 				targetEntity=CarUser.class,
 				cascade=CascadeType.ALL
