@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Entity
 public class CarUser {
 	@Id
-	private Integer id;//车主身份证信息,不能为空,也是主键
+	private String id;//车主身份证信息,不能为空,也是主键
 	@Column(nullable=false,length=10)
 	private String name;//车主姓名
 	@Column(nullable=true)
@@ -31,7 +31,7 @@ public class CarUser {
 	public CarUser(){
 		
 	}
-	public CarUser(Integer id, String name, Date birthday, String sex, Date create_time, String address,
+	public CarUser(String id, String name, Date birthday, String sex, Date create_time, String address,
 			String picture_urls, String phone) {
 		super();
 		this.id = id;
@@ -43,10 +43,10 @@ public class CarUser {
 		this.picture_urls = picture_urls;
 		this.phone = phone;
 	}
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
