@@ -18,18 +18,18 @@ public class CarCharge {
 			cascade=CascadeType.ALL
 		)
 	@JoinColumn(name="car_id")
-	private Car car = new Car();//车辆的外键
+	private Car car;//车辆的外键
 	private Date pay_time;//缴费时间
 	private String pay_type;//缴费类型
 	private String hand_fee_person;//交款人
 	private String pay_fee;//缴费金额
 	private String pay_year;//交款年
-	private String pay_month;//交款月
+	private Integer pay_month;//交款月
 	private String gather_person;//收款人
 	private String comment;//备注
 	public CarCharge(){}
 	public CarCharge(String recript_id, Car car, Date pay_time, String pay_type, String hand_fee_person, String pay_fee,
-			String pay_year, String pay_month, String gather_person, String comment) {
+			String pay_year, Integer pay_month, String gather_person, String comment) {
 		super();
 		this.recript_id = recript_id;
 		this.car = car;
@@ -84,10 +84,10 @@ public class CarCharge {
 	public void setPay_year(String pay_year) {
 		this.pay_year = pay_year;
 	}
-	public String getPay_month() {
+	public Integer getPay_month() {
 		return pay_month;
 	}
-	public void setPay_month(String pay_month) {
+	public void setPay_month(Integer pay_month) {
 		this.pay_month = pay_month;
 	}
 	public String getGather_person() {

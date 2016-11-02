@@ -151,7 +151,7 @@ public abstract class BaseDAO<T, E> implements IDAO<T> {
 		doBussiness(t, criteria);
 
 		// 附加限制条件（处理日期部分）
-		if (! (o1 instanceof NULL) && o1 != null || o2 != null) {
+		if (! (o1 instanceof NULL) && (o1 != null || o2 != null)) {
 			if (o1 != null && o2 != null) {
 				// 在两个时间段之间进查找
 				criteria.add(Restrictions.between(limitStr, o1, o2));

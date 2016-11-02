@@ -103,15 +103,16 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 	@Override
 	public boolean insert(User t) {
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-
 		try {
+			session.beginTransaction();
 			session.save(t);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("======>保存失败");
 			return false;
+		} finally {
+			session.close();
 		}
 
 		return true;
@@ -126,11 +127,11 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(User.class);
 		List<User> resultList = null;
-		if (t.getUsername().equals("")) {
+		if (t.getUsername() == null || t.getUsername().equals("")) {
 			// 此时表示查询多个
-			if (!t.getName().equals(""))
+			if (t.getName() != null && !t.getName().equals(""))
 				criteria.add(Restrictions.eq("name", t.getName()));
-			if (!t.getState().equals("全部"))
+			if (t.getState() != null && !t.getState().equals("全部"))
 				criteria.add(Restrictions.eq("state", t.getState()));
 		} else {
 			// 此时表示查询单个
@@ -165,13 +166,12 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		if (t.getState() != null && !t.getState().equals("全部"))
 			criteria.add(Restrictions.eq("state", t.getState()));
 	}
-	
+
 	@Override
 	public long getDataCountWithLimit(User t,
 			com.carManage.dao.BaseDAO.NULL o1, com.carManage.dao.BaseDAO.NULL o2) {
 		Session session = sessionFactory.openSession();
-		Criteria criteria = getCriteria(t, o1, o2, "",
-				session);
+		Criteria criteria = getCriteria(t, o1, o2, "", session);
 		criteria.setProjection(Projections.rowCount());
 		try {
 			String valStr = criteria.uniqueResult() + "";

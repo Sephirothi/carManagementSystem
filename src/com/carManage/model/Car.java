@@ -25,7 +25,7 @@ public class Car {
 				cascade=CascadeType.ALL
 			)
 	@JoinColumn(name="car_user_id")
-	private CarUser user = new CarUser();// 车主外键,必填
+	private CarUser user ;// 车主外键,必填
 	@Column(nullable = false)
 	private String car_type;// 车辆类型,不能为空
 	@Column(nullable = false)

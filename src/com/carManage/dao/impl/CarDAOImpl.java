@@ -22,7 +22,7 @@ import com.carManage.model.CarUser;
 import edu.emory.mathcs.backport.java.util.LinkedList;
 
 /**
- * 车辆查询页面 限制条件:无 （未测试）
+ * 车辆查询页面 限制条件:无
  * 
  * @author admin
  *
