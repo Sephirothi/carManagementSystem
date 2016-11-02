@@ -151,8 +151,12 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 	 * 查询多个，分页查询的时候对应的方法 不会返回null
 	 */
 	@Override
-	public List<CarUser> query(CarUser cu, int start, int count, Date o1,
+	public List<CarUser> query(CarUser cu, Integer start, Integer count, Date o1,
 			Date o2) {
+		if(start == null || count == null) {
+			System.out.println("传入的start | count为空");
+			return null;
+		}
 		List<CarUser> resultList = new LinkedList();
 		Session session = sessionFactory.openSession();
 		Criteria criteria = getCriteria(cu, o1, o2, "birthday", session);

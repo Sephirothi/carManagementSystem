@@ -73,7 +73,7 @@ public abstract class BaseDAO<T, E> implements IDAO<T> {
 	 *            限制条件2
 	 * @return
 	 */
-	public List<T> query(T t, int start, int count, E o1, E o2) {
+	public List<T> query(T t, Integer start, Integer count, E o1, E o2) {
 		try {
 			addException();
 		} catch (Exception e) {

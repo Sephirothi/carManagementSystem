@@ -181,7 +181,11 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 	}
 
 	@Override
-	public List<Car> query(Car t, int start, int count, NULL o1, NULL o2) {
+	public List<Car> query(Car t, Integer start, Integer count, NULL o1, NULL o2) {
+		if(start == null || count == null) {
+			System.out.println("传入的start | count为空");
+			return null;
+		}
 		Session session = sessionFactory.openSession();
 		// 查询车主
 		CarUser carUser = t.getUser();

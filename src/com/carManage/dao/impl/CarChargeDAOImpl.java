@@ -146,8 +146,12 @@ public class CarChargeDAOImpl extends BaseDAO<CarCharge, Integer> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<CarCharge> query(CarCharge t, int start, int count, Integer o1,
+	public List<CarCharge> query(CarCharge t, Integer start, Integer count, Integer o1,
 			Integer o2) {
+		if(start == null || count == null || o1 == null || o2 == null) {
+			System.out.println("======>传入参数为null");
+			return null;
+		}
 		List<CarCharge> resultList = new LinkedList();
 		Session session = sessionFactory.openSession();
 		Criteria criteria = getCriteria(t, o1, o2, "pay_month", session);

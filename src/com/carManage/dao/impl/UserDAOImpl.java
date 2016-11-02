@@ -147,7 +147,11 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 	 * 进行分页查询 正常返回固定条数的集合 如果出现错误，或者是参数有误，返回值为null
 	 */
 	@Override
-	public List<User> query(User t, int start, int count, NULL o1, NULL o2) {
+	public List<User> query(User t, Integer start, Integer count, NULL o1, NULL o2) {
+		if(start == null || count == null) {
+			System.out.println("传入的start | count为空");
+			return null;
+		}
 		if (t == null)
 			return null;
 		Session session = sessionFactory.openSession();
@@ -160,11 +164,13 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 
 	@Override
 	protected void doBussiness(User t, Criteria criteria) {
-		// 此时表示查询多个
-		if (t.getName() != null && !t.getName().equals(""))
-			criteria.add(Restrictions.eq("name", t.getName()));
-		if (t.getState() != null && !t.getState().equals("全部"))
-			criteria.add(Restrictions.eq("state", t.getState()));
+		if (t != null) {
+			// 此时表示查询多个
+			if (t.getName() != null && !t.getName().equals(""))
+				criteria.add(Restrictions.eq("name", t.getName()));
+			if (t.getState() != null && !t.getState().equals("全部"))
+				criteria.add(Restrictions.eq("state", t.getState()));
+		}
 	}
 
 	@Override

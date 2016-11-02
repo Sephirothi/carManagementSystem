@@ -118,8 +118,12 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 	 * count：需要多少条数据 o1：第一个限制参数，查询的开始日期 o2：第二个限制参数，查询的结束日期
 	 */
 	@Override
-	public List<CarTransfer> query(CarTransfer carTransfer, int start,
-			int count, Date o1, Date o2) {
+	public List<CarTransfer> query(CarTransfer carTransfer, Integer start,
+			Integer count, Date o1, Date o2) {
+		if(start == null || count == null) {
+			System.out.println("传入的start | count为空");
+			return null;
+		}
 		Session session = sessionFactory.openSession();
 		Criteria criteria = getCriteria(carTransfer, o1, o2, "transfer_time",
 				session);
@@ -162,25 +166,27 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 	@Override
 	protected void doBussiness(CarTransfer carTransfer, Criteria criteria) {
 		// 获取到车牌号，并添加条件
-		if (carTransfer.getCar() != null) {
-			String carId = carTransfer.getCar().getId();
-			Car car = new Car();
-			car.setId(carId);
-			criteria.add(Restrictions.eq("car", car));
-		}
+		if (carTransfer != null) {
+			if (carTransfer.getCar() != null) {
+				String carId = carTransfer.getCar().getId();
+				Car car = new Car();
+				car.setId(carId);
+				criteria.add(Restrictions.eq("car", car));
+			}
 
-		// 新车主条件
-		String newUserId = carTransfer.getNew_user_id();
-		if (newUserId != null && !newUserId.equals("")
-				&& !newUserId.equals("全部")) {
-			criteria.add(Restrictions.eq("new_user_id", newUserId));
-		}
+			// 新车主条件
+			String newUserId = carTransfer.getNew_user_id();
+			if (newUserId != null && !newUserId.equals("")
+					&& !newUserId.equals("全部")) {
+				criteria.add(Restrictions.eq("new_user_id", newUserId));
+			}
 
-		// 原车主条件
-		String oldUserId = carTransfer.getOld_user_id();
-		if (oldUserId != null && !oldUserId.equals("")
-				&& !oldUserId.equals("全部")) {
-			criteria.add(Restrictions.eq("old_user_id", oldUserId));
+			// 原车主条件
+			String oldUserId = carTransfer.getOld_user_id();
+			if (oldUserId != null && !oldUserId.equals("")
+					&& !oldUserId.equals("全部")) {
+				criteria.add(Restrictions.eq("old_user_id", oldUserId));
+			}
 		}
 	}
 }
