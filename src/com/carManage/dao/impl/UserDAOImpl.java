@@ -29,7 +29,7 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 	SessionFactory sessionFactory;
 
 	/**
-	 * 进行User信息的更改
+	 * 进行User信息的更改 通过Username来进行区分
 	 */
 	@Override
 	public boolean update(User t) {
@@ -37,21 +37,27 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		try {
 			String username = t.getUsername();
 			if (username == null || username.equals("")) {
-				System.out.println("======>username为空");
+				System.out.println("[UserDaoImpl#update]======>username为空");
 				return false;
 			}
+
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 
 			// 查询库中是否有这个用户
-			String hql = "from User u where u.username = ?";
-			Query query = session.createQuery(hql);
-			query.setParameter(0, t.getUsername());
-			User user = (User) query.uniqueResult();
-			if (user == null) {
+			List<User> tList = query(t);
+			if(tList == null || tList.size() == 0) {
 				System.out.println("======>数据库中查询没有此用户");
-				return false;
 			}
+			User user = tList.get(0);
+//			String hql = "from User u where u.username = ?";
+//			Query query = session.createQuery(hql);
+//			query.setParameter(0, t.getUsername());
+//			User user = (User) query.uniqueResult();
+//			if (user == null) {
+//				System.out.println("======>数据库中查询没有此用户");
+//				return false;
+//			}
 			// 更新User数据
 			user.updateUser(t);
 
@@ -78,14 +84,16 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 
 			try {
 				// 查询
-				String hql = "from User u where u.username = ?";
-				Query query = session.createQuery(hql);
-				query.setParameter(0, user.getUsername());
-				User tempUser = (User) query.uniqueResult();
-				if (tempUser == null) {
+//				String hql = "from User u where u.username = ?";
+//				Query query = session.createQuery(hql);
+//				query.setParameter(0, user.getUsername());
+//				User tempUser = (User) query.uniqueResult();
+				List<User> tList = query(user);
+				if (tList == null || tList.size() == 0) {
 					// 表示表中并没有这个数据
 					continue;
 				}
+				User tempUser = tList.get(0);
 				session.delete(tempUser);
 			} catch (Exception e) {
 				System.out.println("======>删除失败：" + user.getUsername());
@@ -94,6 +102,8 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 			successCount++;
 			session.getTransaction().commit();
 		}
+		// 关闭资源
+		session.close();
 		return successCount;
 	}
 
@@ -124,22 +134,37 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 	 */
 	@Override
 	public List<User> query(User t) {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(User.class);
-		List<User> resultList = null;
-		if (t.getUsername() == null || t.getUsername().equals("")) {
-			// 此时表示查询多个
-			if (t.getName() != null && !t.getName().equals(""))
-				criteria.add(Restrictions.eq("name", t.getName()));
-			if (t.getState() != null && !t.getState().equals("全部"))
-				criteria.add(Restrictions.eq("state", t.getState()));
-		} else {
-			// 此时表示查询单个
-			criteria.add(Restrictions.eq("username", t.getUsername()));
+		if(t == null) {
+			System.out.println("[UserDao#query]=====>传入的User对象为null");
+			return null;
 		}
-		resultList = criteria.list();
-
-		session.close();
+		Session session = sessionFactory.openSession();
+//		Criteria criteria = session.createCriteria(User.class);
+		List<User> resultList = null;
+		// 判断是否有UserName
+		if (t.getUsername() != null && !t.getUsername().equals("")) {
+			// // 此时表示查询多个
+			// if (t.getName() != null && !t.getName().equals(""))
+			// criteria.add(Restrictions.eq("name", t.getName()));
+			// if (t.getState() != null && !t.getState().equals("全部"))
+			// criteria.add(Restrictions.eq("state", t.getState()));
+			// } else {
+			// 此时表示查询单个
+			// 查询
+			String hql = "from User u where u.username = ?";
+			Query query = session.createQuery(hql);
+			query.setParameter(0, t.getUsername());
+			try {
+				resultList = query.list();
+			} catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("[UserDao#query]======>查询出错");
+			} finally {
+				session.close();
+			}
+		} else {
+			System.out.println("[UserDao#query]======>没有Username");
+		}
 		return resultList;
 	}
 
@@ -147,9 +172,10 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 	 * 进行分页查询 正常返回固定条数的集合 如果出现错误，或者是参数有误，返回值为null
 	 */
 	@Override
-	public List<User> query(User t, Integer start, Integer count, NULL o1, NULL o2) {
-		if(start == null || count == null) {
-			System.out.println("传入的start | count为空");
+	public List<User> query(User t, Integer start, Integer count, NULL o1,
+			NULL o2) {
+		if (start == null || count == null) {
+			System.out.println("======>传入的start | count为空");
 			return null;
 		}
 		if (t == null)
