@@ -60,7 +60,9 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 		} 
 		return result;
 	}
-
+	/**
+	 * 单个对象json
+	 */
 	@Override
 	public String addCarTransfers(String json) {
 		String result = null;
@@ -69,7 +71,7 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarTransfer ct = getMaptoObject(map, CarTransfer.class);
 			Car c = new Car();
-			c.setId(map.get("id"));
+			c.setId(map.get("car_id"));
 			ct.setCar(c);
 			if(baseDao.insert(ct)){
 				result = rr.extracted(1, "添加成功");
@@ -93,7 +95,7 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 	@Override
 	public String querySingle(String json) {
 		String result = null;
-		ReturnResponse<Car> rr = new ReturnResponse<>();
+		ReturnResponse<List<Car>> rr = new ReturnResponse<>();
 		try {
 
 			List<Car> car = GsonUtils.jsonToList(json, Car.class);
@@ -101,14 +103,13 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 				result = rr.extracted(0, "传输数据有误");
 			} else {
 				List<Car> list = cardao.query(car.get(0));
-				System.out.println(list.size());
-				System.out.println(list.get(0).getBrand());
-				result = (list==null||list.size()!=1)?rr.extracted(0, "没有符合条件的数据"):rr.extracted(1, list.get(0),null);
+//				System.out.println(list.size());
+//				System.out.println(list.get(0).getBrand());
+				result = (list==null||list.size()!=1)?rr.extracted(0, "没有符合条件的数据"):rr.extracted(1, list,null);
 			}
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "CarTransferServiceImpl--json转化错误");
 		}
 		return result;
 	}
-
 }

@@ -5,4 +5,5 @@ public interface CarService {
 	String deleteCars(String json);
 	String queryCar(String json);
 	String updateCar(String json);
+	String addCar(String json);
 }

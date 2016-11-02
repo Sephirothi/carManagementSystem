@@ -75,6 +75,7 @@ public class ResponseType {
 		 */
 		public String extracted(int code, T data, Long l) throws DataFormatException {
 			String result = null;
+			System.out.println("========>>>extracted");
 			if (l == null) {
 				ResponseBody<T> rb = new ResponseBody<>();
 				rb.code = code;
@@ -88,7 +89,6 @@ public class ResponseType {
 				System.out.println("objectTojson");
 				result = GsonUtils.objectToJson(lrb);
 			}
-			System.out.println("count");
 			return result;
 		}
 
@@ -129,6 +129,16 @@ public class ResponseType {
 					continue;
 				}
 				pd.getWriteMethod().invoke(t, obj);
+			}else if(typename.equals(Integer.class.getName())){
+				PropertyDescriptor pd;
+				try {
+					System.out.println(field.getName());
+					pd = new PropertyDescriptor(field.getName(), clazz);
+				} catch (IntrospectionException e) {
+					continue;
+				}
+				
+				pd.getWriteMethod().invoke(t, Integer.parseInt((String)obj));
 			}
 		}
 		return t;

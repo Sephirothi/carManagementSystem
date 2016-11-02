@@ -34,7 +34,9 @@ public class CarChargeServiceImpl extends ResponseType implements CarChargeServi
 		try {
 			// 按条件查询的json传输要求为一个对象,即{name:..}
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
+			System.out.println(1123);
 			CarCharge cc = getMaptoObject(map, CarCharge.class);
+			System.out.println(cc);
 			Car c = new Car();
 			c.setId(map.get("car_id"));
 			cc.setCar(c);
@@ -85,6 +87,7 @@ public class CarChargeServiceImpl extends ResponseType implements CarChargeServi
 			Car c = new Car();
 			c.setId(map.get("car_id"));
 			cc.setCar(c);
+			cc.setPay_time(StringToDate(map.get("pay_time")));
 			result=baseDao.update(cc)?rr.extracted(0, "修改失败"):rr.extracted(1,"修改成功");
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化失败");

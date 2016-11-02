@@ -1,5 +1,7 @@
 package com.carManage.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +38,12 @@ public class CarUserServiceImpl extends ResponseType implements CarUserService {
 		try {
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarUser cu = getMaptoObject(map, CarUser.class);
+			Date o1 = StringToDate(map.get("starttime"));
+			Date o2 = StringToDate(map.get("endtime"));
 			List<CarUser> list = baseDao.query(cu, stringToInteger(map.get("start")), stringToInteger(map.get("count")),
-					StringToDate(map.get("starttime")), StringToDate(map.get("endtime")));
-			result = (list == null) ? rr.extracted(0, "没有要查询的数据") : rr.extracted(1, list, baseDao.getDataCount(cu));
+					o1, o2);
+			result = (list == null) ? rr.extracted(0, "没有要查询的数据")
+					: rr.extracted(1, list, baseDao.getDataCountWithLimit(cu, o1, o2));
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化错误");
 		} catch (Exception e) {
@@ -69,14 +74,15 @@ public class CarUserServiceImpl extends ResponseType implements CarUserService {
 		String result = null;
 		ReturnResponse<CarUser> rr = new ReturnResponse<>();
 		try {
-			List<CarUser> list = GsonUtils.jsonToList(json,CarUser.class);
-			if(list.size()!=1){
-				result= rr.extracted(0, "没有数据过来");
-			}else{
-				List<CarUser> cu= baseDao.query(list.get(0));
-				result=(cu==null||cu.size()!=1)?rr.extracted(0, "传输数据有误"):rr.extracted(1, list.get(0), null);
+			List<CarUser> list = GsonUtils.jsonToList(json, CarUser.class);
+			if (list.size() != 1) {
+				result = rr.extracted(0, "没有数据过来");
+			} else {
+				List<CarUser> cu = baseDao.query(list.get(0));
+				result = (cu == null || cu.size() != 1) ? rr.extracted(0, "传输数据有误")
+						: rr.extracted(1, list.get(0), null);
 			}
-		
+
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化错误");
 		}
@@ -88,16 +94,29 @@ public class CarUserServiceImpl extends ResponseType implements CarUserService {
 		String result = null;
 		ReturnResponse<CarUser> rr = new ReturnResponse<>();
 		try {
-			List<CarUser> list = GsonUtils.jsonToList(json,CarUser.class);
-			if(list.size()!=1){
-				result= rr.extracted(0, "没有数据过来");
-			}else{
-				
-				result=baseDao.update(list.get(0))?rr.extracted(1, "更新成功"):rr.extracted(0, "更新失败");
-			}
-		
+			Map<String, String> map = GsonUtils.jsonToMaps(json);
+			CarUser cu = getMaptoObject(map, CarUser.class);
+			cu.setBirthday(StringToDate(map.get("birthday")));
+			cu.setCreate_time(StringToDate(map.get("create_time")));
+			result = baseDao.update(cu) ? rr.extracted(1, "更新成功") : rr.extracted(0, "更新失败");
+
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化错误");
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -107,14 +126,10 @@ public class CarUserServiceImpl extends ResponseType implements CarUserService {
 		String result = null;
 		ReturnResponse<CarUser> rr = new ReturnResponse<>();
 		try {
-			List<CarUser> list = GsonUtils.jsonToList(json,CarUser.class);
-			if(list.size()!=1){
-				result= rr.extracted(0, "没有数据过来");
-			}else{
-				
-				result=baseDao.insert(list.get(0))?rr.extracted(1, "添加成功"):rr.extracted(0, "添加失败");
-			}
-		
+			CarUser cu = GsonUtils.jsonToObject(json, CarUser.class);
+
+			result = baseDao.insert(cu) ? rr.extracted(1, "添加成功") : rr.extracted(0, "添加失败");
+
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化错误");
 		}

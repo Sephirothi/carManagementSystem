@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.zip.DataFormatException;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -20,7 +21,8 @@ public class GsonUtils {
 	}
 
 	private static class InstanceHolder {
-		public static Gson gson = new Gson();
+//		public static Gson gson = new Gson();
+		public static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	}
 
 	private static Gson gson = InstanceHolder.gson;
@@ -82,6 +84,7 @@ public class GsonUtils {
 			try {
 				result = gson.fromJson(json, cls);
 			} catch (Exception e) {
+				e.printStackTrace();
 				throw new DataFormatException("解析json时出错");
 			}
 		}
