@@ -13,8 +13,7 @@ import javax.persistence.ManyToOne;
 public class CarCharge {
 	@Id
 	private String recript_id;//PK,收据号
-	@ManyToOne(fetch=FetchType.LAZY,
-			targetEntity=Car.class,
+	@ManyToOne(targetEntity=Car.class,
 			cascade=CascadeType.ALL
 		)
 	@JoinColumn(name="car_id")

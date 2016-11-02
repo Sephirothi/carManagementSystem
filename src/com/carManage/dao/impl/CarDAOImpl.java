@@ -1,5 +1,6 @@
 package com.carManage.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -157,26 +158,28 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 	@Override
 	public List<Car> query(Car car) {
 		Session session = sessionFactory.openSession();
-		List<Car> resultList = new LinkedList();
+//		List<Car> resultList = new LinkedList();
 		// 获取到车牌号，并添加条件
 		String carId = car.getId();
 		if (carId == null || carId.equals("")) {
 			System.out.println("======>传入的car未告知车牌号");
-			return resultList;
+			return null;
 		}
 		try {
 			Car tempCar = (Car) session.get(Car.class, carId);
 			if (tempCar != null) {
-				resultList.add(tempCar);
+//				session.evict(tempCar);
+				List<Car> list = new ArrayList<Car>();
+				list.add(tempCar);
+				return list;
 			}
-			return resultList;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("======>在查询时出现了异常");
-			return resultList;
 		} finally {
 			session.close();
 		}
+		return null;
 
 	}
 

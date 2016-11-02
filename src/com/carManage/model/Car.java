@@ -19,10 +19,9 @@ public class Car {
 //	@GenericGenerator(name = "generator", strategy = "assigned")
 	@Id
 	private String id;// 车牌号,主键,必填
-	
-	@ManyToOne(fetch=FetchType.LAZY,
-				targetEntity=CarUser.class,
-				cascade=CascadeType.ALL
+	@ManyToOne(
+			targetEntity=CarUser.class,
+			cascade=CascadeType.ALL
 			)
 	@JoinColumn(name="car_user_id")
 	private CarUser user ;// 车主外键,必填
