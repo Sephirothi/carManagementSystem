@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.TransientObjectException;
@@ -15,6 +16,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.carManage.dao.BaseDAO;
+import com.carManage.dao.BaseDAO.NULL;
+import com.carManage.model.Car;
 import com.carManage.model.CarUser;
 import com.carManage.model.User;
 
@@ -31,6 +34,9 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
 
+	@Resource(name = "carDAOImpl")
+	BaseDAO<Car, NULL> carDAOImpl;
+
 	@Override
 	public boolean update(CarUser cu) {
 		Session session = null;
@@ -46,20 +52,15 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 			session.beginTransaction();
 
 			// 查询库中是否有这个用户
-//			String hql = "from CarUser cu where cu.id = ?";
-//			Query query = session.createQuery(hql);
-//			query.setParameter(0, userId);
-//			CarUser carUser = (CarUser) query.uniqueResult();
-			
 			List<CarUser> list = query(cu);
-			if(list == null || list.size() == 0) {
+			if (list == null || list.size() == 0) {
 				System.out.println("[CarUserDaoImpl#update]======>数据库中无此人");
 				return false;
 			}
 			CarUser carUser = list.get(0);
 			// 更新carUser数据
 			carUser.updateCarUser(cu);
-			
+			session.update(carUser);
 			session.getTransaction().commit();
 
 		} catch (TransientObjectException ex) {
@@ -77,34 +78,38 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 	 */
 	@Override
 	public int delete(List<CarUser> list) {
-		Session session = sessionFactory.openSession();
 
 		int successCount = 0;
 		// 对集合中的User进行循环删除
+		Session session = null;
 		for (CarUser carUser : list) {
-
 			try {
+				session = sessionFactory.openSession();
 				session.beginTransaction();
 				// 查询
-//				String hql = "from CarUser cu where cu.id = ?";
-//				Query query = session.createQuery(hql);
-//				query.setParameter(0, carUser.getId());
-//				CarUser tempUser = (CarUser) query.uniqueResult();
-				
 				List<CarUser> tList = query(carUser);
-				if(tList == null || tList.size() == 0) {
+				if (tList == null || tList.size() == 0) {
 					System.out.println("[CarUserDaoImpl#update]======>数据库中无此人");
-					return 0;
+					return 0 ;
 				}
 				CarUser tempUser = tList.get(0);
 				if (tempUser == null) {
 					// 表示表中并没有这个数据
 					System.out.println("======>出现一条并不存在与数据库的数据,跳过");
-					continue;
+					return 0;
 				}
-				session.delete(tempUser);
+				String sql1 = "UPDATE car c set c.car_user_id = NULL where c.car_user_id = ?";
+				SQLQuery query = session.createSQLQuery(sql1);
+				query.setParameter(0, tempUser.getId());
+				query.executeUpdate();
+
+				String sql2 = "delete from CarUser where id = ?";
+				SQLQuery query2 = session.createSQLQuery(sql2);
+				query2.setParameter(0, tempUser.getId());
+				query2.executeUpdate();
+				
 				session.getTransaction().commit();
-				// commit之后并且没有出异常表示成功删除一个数据 
+				// commit之后并且没有出异常表示成功删除一个数据
 				successCount++;
 			} catch (Exception e) {
 				System.out.println("======>删除失败：" + carUser.getName());
@@ -164,9 +169,9 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 	 * 查询多个，分页查询的时候对应的方法 不会返回null
 	 */
 	@Override
-	public List<CarUser> query(CarUser cu, Integer start, Integer count, Date o1,
-			Date o2) {
-		if(start == null || count == null) {
+	public List<CarUser> query(CarUser cu, Integer start, Integer count,
+			Date o1, Date o2) {
+		if (start == null || count == null) {
 			System.out.println("传入的start | count为空");
 			return null;
 		}

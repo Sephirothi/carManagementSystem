@@ -1,6 +1,7 @@
 package com.carManage.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -33,6 +34,10 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
+	
+	
+	@Resource(name = "carUserDAOImpl")
+	BaseDAO<CarUser, Date> carUserDAOImpl;
 
 	@Override
 	public boolean update(Car car) {
@@ -68,8 +73,9 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 			}
 			// 更新carUser数据
 			oldCar.update(car);
-			System.out.println("更新数据");
+//			session.update(oldCar);
 			session.getTransaction().commit();
+			System.out.println("更新数据");
 
 		} catch (TransientObjectException ex) {
 			System.out.println("===============>发生异常，添加失败");
@@ -101,6 +107,8 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 					System.out.println("======>出现一条并不存在与数据库的数据,跳过");
 					continue;
 				}
+				
+				
 				session.delete(tempCar);
 			} catch (Exception e) {
 				System.out.println("======>删除失败：" + car.getId());
