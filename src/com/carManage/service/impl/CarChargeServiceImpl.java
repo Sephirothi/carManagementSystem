@@ -34,12 +34,9 @@ public class CarChargeServiceImpl extends ResponseType implements CarChargeServi
 		try {
 			// 按条件查询的json传输要求为一个对象,即{name:..}
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
-			System.out.println(1123);
 			CarCharge cc = getMaptoObject(map, CarCharge.class);
-			System.out.println(cc);
-			Car c = new Car();
-			c.setId(map.get("car_id"));
-			cc.setCar(c);
+			
+			cc.setCarId(map.get("car_id"));
 			List<CarCharge> list = baseDao.query(cc, stringToInteger(map.get("start")), stringToInteger(map.get("count")),
 					map.get("starttime"), map.get("endtime"));
 			if (list == null || list.size() == 0) {
@@ -84,9 +81,7 @@ public class CarChargeServiceImpl extends ResponseType implements CarChargeServi
 			//此处的car_id是错误值,不需要取,即无效值
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarCharge cc = getMaptoObject(map, CarCharge.class);
-			Car c = new Car();
-			c.setId(map.get("car_id"));
-			cc.setCar(c);
+			cc.setCarId(map.get("car_id"));
 			cc.setPay_time(StringToDate(map.get("pay_time")));
 			result=baseDao.update(cc)?rr.extracted(0, "修改失败"):rr.extracted(1,"修改成功");
 		} catch (DataFormatException e) {
@@ -107,9 +102,7 @@ public class CarChargeServiceImpl extends ResponseType implements CarChargeServi
 			//此处的car_id是错误值,不需要取,即无效值
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarCharge cc = getMaptoObject(map, CarCharge.class);
-			Car c = new Car();
-			c.setId(map.get("car_id"));
-			cc.setCar(c);
+			cc.setCarId(map.get("car_id"));
 			result=baseDao.insert(cc)?rr.extracted(0, "添加失败"):rr.extracted(1, "添加成功");
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化失败");

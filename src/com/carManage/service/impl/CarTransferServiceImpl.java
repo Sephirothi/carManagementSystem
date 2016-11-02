@@ -33,9 +33,7 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 		try {
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarTransfer ct = getMaptoObject(map, CarTransfer.class);
-			Car car = new Car();
-			car.setId(map.get("car_id"));
-			ct.setCar(car);
+			ct.setCarId(map.get("car_id"));
 			Date o1 = StringToDate(map.get("starttime"));
 			Date o2 = StringToDate(map.get("endtime"));
 			List<CarTransfer> list = baseDao.query(ct, stringToInteger(map.get("start")),
@@ -70,9 +68,7 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 		try {
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarTransfer ct = getMaptoObject(map, CarTransfer.class);
-			Car c = new Car();
-			c.setId(map.get("car_id"));
-			ct.setCar(c);
+			ct.setCarId(map.get("car_id"));
 			if(baseDao.insert(ct)){
 				result = rr.extracted(1, "添加成功");
 			}else{
