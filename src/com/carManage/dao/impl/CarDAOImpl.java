@@ -105,6 +105,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 			} catch (Exception e) {
 				System.out.println("======>删除失败：" + car.getId());
 				e.printStackTrace();
+				continue;
 			}
 			successCount++;
 			session.getTransaction().commit();
@@ -168,7 +169,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 		try {
 			Car tempCar = (Car) session.get(Car.class, carId);
 			if (tempCar != null) {
-//				session.evict(tempCar);
+				session.evict(tempCar);
 				List<Car> list = new ArrayList<Car>();
 				list.add(tempCar);
 				return list;

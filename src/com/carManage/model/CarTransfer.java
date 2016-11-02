@@ -18,14 +18,11 @@ public class CarTransfer {
 	@GeneratedValue(generator = "CarTransfer")
 	@GenericGenerator(name = "CarTransfer", strategy = "increment")
 	private Integer id;//表示唯一实体,无实际意义
-	@ManyToOne(fetch=FetchType.LAZY,
-			targetEntity=Car.class,
-			cascade=CascadeType.ALL
-		)
-	@JoinColumn(name="car_id")
-	private Car car = new Car();//外键,连接car表
+//	@ManyToOne(targetEntity=Car.class)
+//	private Car car;//外键,连接car表
 //	@JoinColumn(name="car_id")
 //	private Car car = new Car();//外键,连接car表
+	private String carId;// 车辆的外键
 	private String comment;//备注
 	private String transfer_fee;//过户费用
 	
@@ -36,10 +33,10 @@ public class CarTransfer {
 	public CarTransfer(){
 		
 	}
-	public CarTransfer(Integer id, Car car, String comment, String transfer_fee, String new_user_id,Date transfer_time) {
+	public CarTransfer(Integer id, String carId, String comment, String transfer_fee, String new_user_id,Date transfer_time) {
 		super();
 		this.id = id;
-		this.car = car;
+		this.carId = carId;
 		this.comment = comment;
 		this.transfer_fee = transfer_fee;
 		this.new_user_id = new_user_id;
@@ -57,11 +54,13 @@ public class CarTransfer {
 	public void setOld_user_id(String old_user_id) {
 		this.old_user_id = old_user_id;
 	}
-	public Car getCar() {
-		return car;
+	
+	
+	public String getCarId() {
+		return carId;
 	}
-	public void setCar(Car car) {
-		this.car = car;
+	public void setCarId(String carId) {
+		this.carId = carId;
 	}
 	public String getComment() {
 		return comment;
@@ -83,7 +82,7 @@ public class CarTransfer {
 	}
 	@Override
 	public String toString() {
-		return "CarTransfer [id=" + id + ", car=" + car + ", comment=" + comment + ", transfer_fee=" + transfer_fee
+		return "CarTransfer [id=" + id + ", car=" + carId + ", comment=" + comment + ", transfer_fee=" + transfer_fee
 				+ ", new_user_id=" + new_user_id + "]";
 	}
 	public Date getTransfer_time() {

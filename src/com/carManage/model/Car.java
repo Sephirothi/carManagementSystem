@@ -15,16 +15,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Car {
-//	@GeneratedValue(generator = "generator")
-//	@GenericGenerator(name = "generator", strategy = "assigned")
+	// @GeneratedValue(generator = "generator")
+	// @GenericGenerator(name = "generator", strategy = "assigned")
 	@Id
 	private String id;// 车牌号,主键,必填
-	@ManyToOne(
-			targetEntity=CarUser.class,
-			cascade=CascadeType.ALL
-			)
-	@JoinColumn(name="car_user_id")
-	private CarUser user ;// 车主外键,必填
+//	@ManyToOne(targetEntity = CarUser.class, cascade = CascadeType.)
+	@ManyToOne(targetEntity = CarUser.class)
+	@JoinColumn(name = "car_user_id")
+	private CarUser user;// 车主外键,必填
 	@Column(nullable = false)
 	private String car_type;// 车辆类型,不能为空
 	@Column(nullable = false)
@@ -44,9 +42,10 @@ public class Car {
 	public Car() {
 	}
 
-	public Car(String id, CarUser user, String car_type, String brand, String engine_number, String drive_number,
-			String fuel_type, String seat_count, String car_state, String car_color, Date create_time, String comment,
-			String pic_urls) {
+	public Car(String id, CarUser user, String car_type, String brand,
+			String engine_number, String drive_number, String fuel_type,
+			String seat_count, String car_state, String car_color,
+			Date create_time, String comment, String pic_urls) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -169,9 +168,11 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [id=" + id + ", user=" + user + ", car_type=" + car_type + ", brand=" + brand + ", engine_number="
-				+ engine_number + ", drive_number=" + drive_number + ", fuel_type=" + fuel_type + ", seat_count="
-				+ seat_count + ", car_state=" + car_state + ", car_color=" + car_color + ", create_time=" + create_time
+		return "Car [id=" + id + ", user=" + user + ", car_type=" + car_type
+				+ ", brand=" + brand + ", engine_number=" + engine_number
+				+ ", drive_number=" + drive_number + ", fuel_type=" + fuel_type
+				+ ", seat_count=" + seat_count + ", car_state=" + car_state
+				+ ", car_color=" + car_color + ", create_time=" + create_time
 				+ ", comment=" + comment + ", pic_urls=" + pic_urls + "]";
 	}
 
@@ -179,13 +180,17 @@ public class Car {
 		this.user = car.user == null ? this.user : car.user;
 		this.car_type = car.car_type == null ? this.car_type : car.car_type;
 		this.brand = car.brand == null ? this.brand : car.brand;
-		this.engine_number = car.engine_number == null ? this.engine_number : car.engine_number;
-		this.drive_number = car.drive_number == null ? this.drive_number : car.drive_number;
+		this.engine_number = car.engine_number == null ? this.engine_number
+				: car.engine_number;
+		this.drive_number = car.drive_number == null ? this.drive_number
+				: car.drive_number;
 		this.fuel_type = car.fuel_type == null ? this.fuel_type : car.fuel_type;
-		this.seat_count = car.seat_count == null ? this.seat_count : car.seat_count;
+		this.seat_count = car.seat_count == null ? this.seat_count
+				: car.seat_count;
 		this.car_state = car.car_state == null ? this.car_state : car.car_state;
 		this.car_color = car.car_color == null ? this.car_color : car.car_color;
-		this.create_time = car.create_time == null ? this.create_time : car.create_time;
+		this.create_time = car.create_time == null ? this.create_time
+				: car.create_time;
 		this.comment = car.comment == null ? this.comment : car.comment;
 		this.pic_urls = car.pic_urls == null ? this.pic_urls : car.pic_urls;
 	}

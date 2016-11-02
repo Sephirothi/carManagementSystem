@@ -46,17 +46,20 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 			session.beginTransaction();
 
 			// 查询库中是否有这个用户
-			String hql = "from CarUser cu where cu.id = ?";
-			Query query = session.createQuery(hql);
-			query.setParameter(0, userId);
-			CarUser carUser = (CarUser) query.uniqueResult();
-			if (carUser == null) {
-				System.out.println("======>数据库中查询没有此车主");
+//			String hql = "from CarUser cu where cu.id = ?";
+//			Query query = session.createQuery(hql);
+//			query.setParameter(0, userId);
+//			CarUser carUser = (CarUser) query.uniqueResult();
+			
+			List<CarUser> list = query(cu);
+			if(list == null || list.size() == 0) {
+				System.out.println("[CarUserDaoImpl#update]======>数据库中无此人");
 				return false;
 			}
+			CarUser carUser = list.get(0);
 			// 更新carUser数据
 			carUser.updateCarUser(cu);
-			System.out.println("更新数据");
+			
 			session.getTransaction().commit();
 
 		} catch (TransientObjectException ex) {
@@ -79,26 +82,36 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 		int successCount = 0;
 		// 对集合中的User进行循环删除
 		for (CarUser carUser : list) {
-			session.beginTransaction();
 
 			try {
+				session.beginTransaction();
 				// 查询
-				String hql = "from CarUser cu where cu.id = ?";
-				Query query = session.createQuery(hql);
-				query.setParameter(0, carUser.getId());
-				CarUser tempUser = (CarUser) query.uniqueResult();
+//				String hql = "from CarUser cu where cu.id = ?";
+//				Query query = session.createQuery(hql);
+//				query.setParameter(0, carUser.getId());
+//				CarUser tempUser = (CarUser) query.uniqueResult();
+				
+				List<CarUser> tList = query(carUser);
+				if(tList == null || tList.size() == 0) {
+					System.out.println("[CarUserDaoImpl#update]======>数据库中无此人");
+					return 0;
+				}
+				CarUser tempUser = tList.get(0);
 				if (tempUser == null) {
 					// 表示表中并没有这个数据
 					System.out.println("======>出现一条并不存在与数据库的数据,跳过");
 					continue;
 				}
 				session.delete(tempUser);
+				session.getTransaction().commit();
+				// commit之后并且没有出异常表示成功删除一个数据 
+				successCount++;
 			} catch (Exception e) {
 				System.out.println("======>删除失败：" + carUser.getName());
 				e.printStackTrace();
+			} finally {
+				session.close();
 			}
-			successCount++;
-			session.getTransaction().commit();
 		}
 		return successCount;
 	}

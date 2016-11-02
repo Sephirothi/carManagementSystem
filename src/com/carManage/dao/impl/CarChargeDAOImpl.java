@@ -93,7 +93,7 @@ public class CarChargeDAOImpl extends BaseDAO<CarCharge, Integer> {
 			if (gatherPerson != null && !gatherPerson.equals("")) {
 				User u = new User();
 				// 通过用户名查询
-				u.setName(gatherPerson);
+				u.setUsername(gatherPerson);
 				List<User> list = userDao.query(u);
 				if (list == null || list.size() == 0) {
 					System.out.println("并无此收款人");
@@ -102,15 +102,13 @@ public class CarChargeDAOImpl extends BaseDAO<CarCharge, Integer> {
 			}
 
 			// 判断车辆是否存在
-			List<Car> list = carDao.query(t.getCar());
+			Car tCar = new Car();
+			tCar.setId(t.getCarId());
+			List<Car> list = carDao.query(tCar);
 			if (list == null || list.size() == 0) {
 				System.out.println("并无此车");
 				return false;
-			} else {
-				Car car = list.get(0);
-				t.setCar(car);
 			}
-
 			session.save(t);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -148,7 +146,7 @@ public class CarChargeDAOImpl extends BaseDAO<CarCharge, Integer> {
 	@Override
 	public List<CarCharge> query(CarCharge t, Integer start, Integer count, Integer o1,
 			Integer o2) {
-		if(start == null || count == null || o1 == null || o2 == null) {
+		if(start == null || count == null) {
 			System.out.println("======>传入参数为null");
 			return null;
 		}
@@ -191,13 +189,13 @@ public class CarChargeDAOImpl extends BaseDAO<CarCharge, Integer> {
 
 		if (t != null) {
 			// 添加车牌查询条件
-			Car car = t.getCar();
-			if (car != null && car.getId() != null && !car.getId().equals("")) {
+			String carId = t.getCarId();
+			if (carId != null && !carId.equals("")) {
 				// List<Car> list = carDao.query(car);
 				// if(list != null || list.size() != 0) {
 				// criteria.add(Restrictions.eq("car", list.get(0)));
 				// }
-				criteria.add(Restrictions.eq("car", car));
+				criteria.add(Restrictions.eq("carId", carId));
 			}
 
 			// 根据年份来

@@ -36,7 +36,7 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 		Session session = sessionFactory.openSession();
 
 		// 获取到车牌号
-		String carId = carTransfer.getCar().getId();
+		String carId = carTransfer.getCarId();
 		// 获取到新车主身份证
 		String newUserId = carTransfer.getNew_user_id();
 		// String oldUserId = carTransfer.getOld_user_id();
@@ -58,8 +58,8 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 				return false;
 			}
 			car.setUser(newUser);
-			// 将改变后的车赋值给转换订单
-			carTransfer.setCar(car);
+//			 将改变后的车赋值给转换订单
+//			carTransfer.setCar(car);
 
 			session.save(carTransfer);
 			session.getTransaction().commit();
@@ -84,11 +84,9 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 		Criteria criteria = session.createCriteria(CarTransfer.class);
 
 		// 获取到车牌号，并添加条件
-		if (carTransfer.getCar() != null) {
-			String carId = carTransfer.getCar().getId();
-			Car car = new Car();
-			car.setId(carId);
-			criteria.add(Restrictions.eq("car", car));
+		if (carTransfer.getCarId() != null && !carTransfer.getCarId().equals("")) {
+			String carId = carTransfer.getCarId();
+			criteria.add(Restrictions.eq("carId", carId));
 		}
 
 		String newUserId = carTransfer.getNew_user_id();
@@ -165,10 +163,10 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 	 */
 	@Override
 	protected void doBussiness(CarTransfer carTransfer, Criteria criteria) {
-		// 获取到车牌号，并添加条件
 		if (carTransfer != null) {
-			if (carTransfer.getCar() != null) {
-				String carId = carTransfer.getCar().getId();
+			// 获取到车牌号，并添加条件
+			if (carTransfer.getCarId() != null && !carTransfer.getCarId().equals("")) {
+				String carId = carTransfer.getCarId();
 				Car car = new Car();
 				car.setId(carId);
 				criteria.add(Restrictions.eq("car", car));
