@@ -23,7 +23,7 @@ import com.carManage.utils.GsonUtils;
 public class CarTransferServiceImpl extends ResponseType implements CarTransferService {
 	@Resource(name = "carTransferDAOImpl")
 	private BaseDAO<CarTransfer, Date> baseDao;
-	@Resource(name = "CarDAOImpl")
+	@Resource(name = "carDAOImpl")
 	private BaseDAO<Car, NULL> cardao;
 
 	@Override
@@ -33,17 +33,15 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 		try {
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarTransfer ct = getMaptoObject(map, CarTransfer.class);
-			// System.out.println(ct);
+			System.out.println(ct);
 			Car car = new Car();
 			car.setId(map.get("id"));
-			// System.out.println(car);
-			// Integer start = Integer.parseInt();//起始页数
-			// Integer count = Integer.parseInt(map.get("count"));//每页长度
 			Date o1 = StringToDate(map.get("starttime"));
 			Date o2 = StringToDate(map.get("endtime"));
 			List<CarTransfer> list = baseDao.query(ct, stringToInteger(map.get("start")),
 					stringToInteger(map.get("count")), o1, o2);
 			// List<CarTransfer> list= null;
+			System.out.println(list);
 			if (list == null) {
 				result = rr.extracted(0, "没有符合条件的数据");
 			} else {
