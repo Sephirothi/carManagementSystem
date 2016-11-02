@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.carManage.dao.BaseDAO;
+import com.carManage.dao.BaseDAO.NULL;
 import com.carManage.model.Car;
 import com.carManage.model.CarTransfer;
 import com.carManage.model.CarUser;
@@ -28,6 +29,9 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
 
+	@Resource(name = "carDAOImpl")
+	BaseDAO<Car, NULL> carDAOImpl;
+	
 	/**
 	 * 将数据插入数据库
 	 */
@@ -43,13 +47,17 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 
 		try {
 			session.beginTransaction();
-			// 获取到车辆
+			// 获取到车辆，判断是否在数据库中
 			System.out.println("======>开始获取转换订单中的车辆...");
-			Car car = (Car) session.get(Car.class, carId);
-			if (car == null) {
+//			Car car = (Car) session.get(Car.class, carId);
+			Car car = new Car();
+			car.setId(carId);
+			List<Car> list = carDAOImpl.query(car);
+			if (list == null || list.size() == 0) {
 				System.out.println("======>当前车辆没在数据库中");
 				return false;
 			}
+			
 			// 改变车辆的车主
 			System.out.println("======>开始从数据库获取新车主对象...");
 			CarUser newUser = (CarUser) session.get(CarUser.class, newUserId);
@@ -57,7 +65,8 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 				System.out.println("======>新车主没在数据库中");
 				return false;
 			}
-			car.setUser(newUser);
+			
+			list.get(0).setUser(newUser);
 //			 将改变后的车赋值给转换订单
 //			carTransfer.setCar(car);
 

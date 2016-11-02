@@ -48,6 +48,7 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 			List<User> tList = query(t);
 			if(tList == null || tList.size() == 0) {
 				System.out.println("======>数据库中查询没有此用户");
+				return false;
 			}
 			User user = tList.get(0);
 //			String hql = "from User u where u.username = ?";
@@ -60,7 +61,7 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 //			}
 			// 更新User数据
 			user.updateUser(t);
-
+			session.update(user);
 			session.getTransaction().commit();
 
 		} catch (TransientObjectException ex) {
