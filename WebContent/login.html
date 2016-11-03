@@ -38,32 +38,29 @@
                    <input type="checkbox" value="remember-me" name=""> 记住我
                    <span class="pull-right"> <a href="#"> 忘记密码?</a></span>
                </label> -->
-                <button class="btn btn-lg btn-login btn-block">登录</button>
+                <button class="btn btn-lg btn-login btn-block" onclick="login()">登录</button>
             </div>
         </form>
     </div>
     <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/json2.js"></script>
     <script type="text/javascript">
-        $(function() {
+        function login() {
            var userId = $('.userId').val(),
                password = $('.password').val();
-           var datalist = {
+           var datalist = [{
                username: userId,
                password: password
-           };
-  
-           //loginInfo.push(JSON.stringify(datalist));
+           }];
+           var t=JSON.stringify(datalist);
            $.ajax({
                url: 'user_login.action',
                type: 'POST',
                dataType: 'json',
-               data:JSON.stringify(datalist),
-               success: function(data) {
-                  console.log('success');
-                  window.location.href = 'index.html';
-               }
+               data: "data="+t,
+               
            })
-        })
+        }
     </script>
 
     </body>

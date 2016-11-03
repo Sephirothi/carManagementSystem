@@ -71,7 +71,7 @@
                   <li class="">
                       <a class="" href="index.html">
                           <i class="icon-dashboard"></i>
-                          <span>index</span>
+                          <span>首页</span>
                       </a>
                   </li>
                   <li class="sub-menu">
@@ -151,7 +151,29 @@
                           <header class="panel-heading">
                              用户管理
                           </header>
-                          <table class="table table-striped border-top" id="sample_1">
+                           <div class="panel-body bio-graph-info">
+                             <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label" for="carNumber">姓名</label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                    </div>
+                                    <label class="col-lg-1 control-label" for="carNumber">状态</label>
+                                    <div class="col-lg-2">
+                                          <select name="sample_1_length" aria-controls="sample_1" class="form-control">
+                                          <option value="全部" selected="selected">全部</option>
+                                          <option value="可用">可用</option>
+                                          <option value="禁用">禁用</option>
+                                          </select>
+                                      </div>
+                                     <div class="col-lg-5">
+                                     <button class="btn btn-shadow btn-primary">查询</button>
+                                </div>
+                                </div>
+                          </form>
+                          </div>
+                          
+                         <table class="table table-striped border-top" id="sample_1"><!--id="sample_1" -->
                           <thead>
                           <tr>
                               <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>

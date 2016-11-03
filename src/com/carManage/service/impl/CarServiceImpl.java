@@ -40,7 +40,7 @@ public class CarServiceImpl extends ResponseType implements CarService {
 			Car car = getMaptoObject(map, Car.class);
 			List<Car> list = baseDao.query(car, stringToInteger(map.get("start")), stringToInteger(map.get("count")),
 					null, null);
-			System.out.println(list.size());
+			//System.out.println(list.size());
 			if (list == null || list.size() == 0) {
 				result = rr.extracted(0, "没有查到符合条件的数据");
 			} else {
@@ -49,6 +49,7 @@ public class CarServiceImpl extends ResponseType implements CarService {
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化失败");
 		} catch (Exception e) {
+			e.printStackTrace();
 			result = rr.extracted(0, "反射出问题");
 		}
 		return result;

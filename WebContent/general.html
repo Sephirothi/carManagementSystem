@@ -28,120 +28,6 @@
 
   <body>
 
-  <section id="container" class="">
-      <!--header start-->
-      <header class="header white-bg">
-          <div class="sidebar-toggle-box">
-              <div data-original-title="" data-placement="right" class="icon-reorder tooltips"></div>
-          </div>
-          <!--logo start-->
-          <a href="#" class="logo">车辆<span>管理系统</span></a>
-          <!--logo end-->
-         
-          <div class="top-nav ">
-              <ul class="nav pull-right top-menu">
-                  <li>
-                      <input type="text" class="form-control search" placeholder="Search">
-                  </li>
-                  <!-- user login dropdown start-->
-                  <li class="dropdown">
-                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <img alt="" src="img/avatar1_small.jpg">
-                          <span class="username">嘿嘿</span>
-                          <b class="caret"></b>
-                      </a>
-                      <ul class="dropdown-menu extended logout">
-                          <div class="log-arrow-up"></div>
-                          <li><a href="#"><i class=" icon-suitcase"></i>个人资料</a></li>
-                          <li><a href="#"><i class="icon-cog"></i>设置</a></li>
-                          <li><a href="#"><i class="icon-bell-alt"></i> 通知</a></li>
-                          <li><a href="login.html"><i class="icon-key"></i> 退出</a></li>
-                      </ul>
-                  </li>
-                  <!-- user login dropdown end -->
-              </ul>
-          </div>
-      </header>
-      <!--header end-->
-      <!--sidebar start-->
-      <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu">
-                  <li class="">
-                      <a class="" href="index.html">
-                          <i class="icon-dashboard"></i>
-                          <span>首页</span>
-                      </a>
-                  </li>
-                  <li class="sub-menu active">
-                      <a href="javascript:;" class="">
-                          <i class="icon-book"></i>
-                          <span>车辆基本信息管理</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li class="active"><a class="" href="general.html">车辆列表</a></li>
-                          <li><a class="" href="buttons.html">新增车辆</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon-cogs"></i>
-                          <span>车主信息管理</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="grids.html">车主列表</a></li>
-                          <li><a class="" href="calendar.html">新增车主</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon-tasks"></i>
-                          <span>车辆管理费</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="form_component.html">费用列表</a></li>
-                          <li><a class="" href="form_wizard.html">收取管理费</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon-th"></i>
-                          <span>车辆变更管理</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="basic_table.html">车辆变更列表</a></li>
-                          <li><a class="" href="dynamic_table.html">新增车辆变更</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon-glass"></i>
-                          <span>系统管理</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="blank.html">用户管理</a></li>
-                          <li><a class="" href="profile.html">修改密码</a></li>
-                          <li><a class="" href="invoice.html">安全退出</a></li>
-                        
-                      </ul>
-                  </li>
-                  <li>
-                      <a class="" href="login.html">
-                          <i class="icon-user"></i>
-                          <span>登录</span>
-                      </a>
-                  </li>
-              </ul>
-              <!-- sidebar menu end-->
-          </div>
-      </aside>
-      <!--sidebar end-->
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
@@ -152,11 +38,47 @@
                           <header class="panel-heading">
                               车辆列表
                           </header>
+                          <div class="panel-body bio-graph-info">
+                             <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label" for="carNumber">车牌号</label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                    </div>
+                                    <label class="col-lg-1 control-label" for="style">类型</label>
+                                    <div class="col-lg-2">
+                                          <select name="sample_1_length" aria-controls="sample_1" class="form-control" id="style">
+                                          <option value="全部" selected="selected">全部</option>
+                                          <option value="小汽车">小汽车</option>
+                                          <option value="卡车">卡车</option>
+                                          <option value="毛驴车">毛驴车</option></select>
+                                      </div>
+                                    <label class="col-lg-1 control-label" for="carOwner">车主</label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" id="carOwner" /><!--  -->
+                                    </div>  
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label" for="seating">座位数</label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" id="seating" /><!--  -->
+                                    </div>
+                                    <label class="col-lg-1 control-label" for="color">颜色</label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" id="color" /><!--  -->
+                                    </div>  
+                                
+                                <div class="col-lg-5">
+                                      <button class="btn btn-shadow btn-primary" onclick="o()">查询</button>
+                                </div>
+                                </div>
+                          </form>
+                          </div>
                           <table class="table table-striped border-top" id="sample_1">
                             <thead>
                               <tr>
                                   <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
-                                  <th>车牌号</th>
+                                  <th class="hidden-phone">车牌号</th>
                                   <th class="hidden-phone">颜色</th>
                                   <th class="hidden-phone">类型</th>
                                   <th class="hidden-phone">品牌</th>
@@ -166,121 +88,9 @@
                                   <th class="hidden-phone">操作</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr class="odd gradeX">
-                                <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                <td class="hidden-phone">33</td>
-                                <td class="hidden-phone">33</td>
-                                <td class="hidden-phone">33</td>
-                                <td class="hidden-phone">33</td>
-                                <td class="hidden-phone">33</td>
-                                <td class="hidden-phone">33</td>
-                               
-                                <td class="hidden-phone">33</td>
-                                <td class="hidden-phone">
-                                <button class="btn btn-success btn-xs"><i class="icon-ok"></i>
-                                </button>
-                                        <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                        <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
-                              </tr>
-                              <tr class="odd gradeX">
-                                  <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                 
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-                                          <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                          <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
-                              </tr>
-                              <tr class="odd gradeX">
-                                  <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                 
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-                                          <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                          <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
-                              </tr>
-                              <tr class="odd gradeX">
-                                  <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                 
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-                                          <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                          <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
-                              </tr>
-                              <tr class="odd gradeX">
-                                  <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                 
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-                                          <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                          <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
-                              </tr>
-                              <tr class="odd gradeX">
-                                  <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                 
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-                                          <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                          <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
-                              </tr>
-                              <tr class="odd gradeX">
-                                  <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                 
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-                                          <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                          <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
-                              </tr>                        
-                              <tr class="odd gradeX">
-                                  <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone">33</td>
-                                 
-                                  <td class="hidden-phone">33</td>
-                                  <td class="hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-                                          <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                          <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
-                              </tr>
+                            <tbody id="content">
+                              
+                              <!--填充内容-->
                             </tbody>
                           </table>
                       </section>
@@ -344,28 +154,62 @@
     <script src="js/common-scripts.js"></script>
     <!--script for this page only-->
     <script src="js/dynamic-table.js"></script>
-    
+    <script src="js/Underscore.js"></script>
+     <!--请求数据 从这里开始-->
+    <script src="js/json2.js"></script>
     <script type="text/javascript">
-       $(function() {
-           var userId = $('.userId').val(),
-               password = $('.password').val();
-           var datalist = {
-               id: userId,
-               password: password
-           };
-  
-           loginInfo.push(JSON.stringify(datalist));
-           $.ajax({
-               url: '',
-               type: 'POST',
-               dataType: 'json',
-               data: ,
-               success: function(data) {
-                  console.log('success');
-                  
-               }
-           })
-        })
+              function o(){
+                var carNumber=$('#carNumber').val(),
+                    style=$('#style').val(),
+                    carOwner=$('#carOwner').val(),
+                    seating=$('#seating').val(),
+                    color=$('#color').val();
+                var datalist = {
+                    'id': carNumber,
+                    'car_type': style,
+                    'car_user_id': carOwner,
+                    'seat_count': seating,
+                    'car_color': color,
+                    'start':0,
+                    'count':10
+                  };
+                 var dd=JSON.stringify(datalist);
+                 $.ajax({
+                   url: 'car_querys.action',      // 请求的地址
+                   type: 'POST',
+                   dataType: 'json',
+                   data:"data="+dd,
+                   success: function(datas) {
+                	   alert(datas);
+                      var t =_.template($("#t1").html());
+                      $('#content').html(t({"data":datas}));
+                      
+                   },
+                   error: function() {
+                      console.log('请求出错');
+                   }
+               })
+              }
     </script>
+         <script type="text/template" id="t1">
+          <% _.each(data, function (item) { %>
+                                <tr class="odd gradeX">
+                                <td><input type="checkbox" class="checkboxes" value="1" /></td>
+                                <td class="hidden-phone"><%=item.data.id %></td>
+                                <td class="hidden-phone"><%=item.car_color %></td>
+                                <td class="hidden-phone"><%=item.car_type %></td>
+                                <td class="hidden-phone"><%=item.brand %></td>
+                                <td class="hidden-phone"><%=item.user.id %></td>
+                                <td class="hidden-phone"><%=item.seat_count %></td>
+                                <td class="hidden-phone"><%=item.create_time %></td>
+                                <td class="hidden-phone">
+                                <button class="btn btn-success btn-xs"><i class="icon-ok"></i>
+                                </button>
+                                        <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                        <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></td>
+                              </tr>
+          <% }); %>
+
+        </script>
   </body>
 </html>
