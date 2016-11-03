@@ -1,6 +1,8 @@
 package com.carManage.web.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.annotation.Resource;
 
@@ -18,9 +20,9 @@ public class CarTransferAction extends ActionSupport {
 
 	@Resource(name = "carTransferServiceImpl")
 	private CarTransferService ctfs;
-	
+
 	private String data;
-	
+
 	public void setData(String data) {
 		this.data = data;
 	}
@@ -29,6 +31,15 @@ public class CarTransferAction extends ActionSupport {
 		return data;
 	}
 
+	private InputStream inputStream;
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
 
 	/*
 	 * String queryCarTransfers(String json); String addCarTransfers(String
@@ -36,35 +47,20 @@ public class CarTransferAction extends ActionSupport {
 	 */
 
 	public String add() {
-		String result = ctfs.addCarTransfers(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "error";
-		}
-		return "";
+		String json = ctfs.addCarTransfers(data);
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 	public String query() {
-		String result = ctfs.querySingle(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "error";
-		}
-		return "";
+		String json = ctfs.querySingle(data);
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 	public String querys() {
-		String result = ctfs.queryCarTransfers(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "error";
-		}
-		return "";
+		String json = ctfs.queryCarTransfers(data);
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 }

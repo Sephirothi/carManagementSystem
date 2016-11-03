@@ -184,7 +184,14 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		// 设置分页
 		criteria.setFirstResult(start);
 		criteria.setMaxResults(count);
-		return criteria.list();
+		List<User> resultList = null;
+		try {
+			resultList = criteria.list();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("UserD#querys======>查询出错");
+		}
+		return resultList;
 	}
 
 	@Override
