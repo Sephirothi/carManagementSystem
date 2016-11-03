@@ -17,7 +17,7 @@
                    <input type="checkbox" value="remember-me" name=""> 记住我
                    <span class="pull-right"> <a href="#"> 忘记密码?</a></span>
                </label> -->
-	<button class="btn btn-lg btn-login btn-block" onclick="login()">登录</button>
+	<button class="btn btn-lg btn-login btn-block" onclick="o()">登录</button>
 	 <script src="js/jquery-1.8.3.min.js"></script>
     <script src="js/json2.js"></script>
     <script type="text/javascript">
@@ -36,6 +36,42 @@
                dataType:'html'
            })
         }
+    </script>
+     <script type="text/javascript">
+              function o(){
+               /*  var carNumber=$('#carNumber').val(),
+                    style=$('#style').val(),
+                    carOwner=$('#carOwner').val(),
+                    seating=$('#seating').val(),
+                    color=$('#color').val(); */
+                var datalist = {	
+                    id: "",
+                    car_type: "全部",
+                    car_user_id: "",
+                    seat_count: "",
+                    car_color: "",
+                    start:0,
+                    count:10
+                			
+                  };
+                //alert(datalist);
+                 var dd=JSON.stringify(datalist);
+               $.ajax({
+                   url: 'car_querys.action',      // 请求的地址
+                   type: 'POST',
+                   dataType: 'json',
+                   data:"data="+dd,
+                 success: function(data) {
+                	   alert(data["data"][0]["id"]);
+                      var t =_.template($("#t1").html());
+                      $('#content').html(t({"data":data}));
+                      
+                   },
+                   error: function() {
+                      console.log('请求出错');
+                   }
+               })
+              } 
     </script>
 </body>
 </html>
