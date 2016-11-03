@@ -1,5 +1,6 @@
 package com.carManage.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
@@ -145,5 +146,14 @@ public class GsonUtils {
 			throw new DataFormatException("json解析出错");
 		}
 	}
-
+	
+	public static byte[] getJsonByte(String json) {
+		try {
+			return json.getBytes("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			System.out.println("将json解析为utf-8时编码出错");
+		}
+		return null;
+	}
 }

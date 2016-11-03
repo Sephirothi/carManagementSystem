@@ -51,8 +51,14 @@ public class CarTransferServiceImplTest extends BaseDAOTest{
 		System.out.println(cts.queryCarTransfers(json));
 	}
 	@Test
-	public void testSingleQuery(){
-		System.out.println(cts.querySingle(json));
+	public void test(){
+		List<CarTransfer> list = new ArrayList<>();
+		CarTransfer ct = new CarTransfer();
+		ct.setId(1235);
+		Car c=new Car();
+		c.setId("2368");
+//		ct.setCar(c);
+		list.add(ct);
 	}
 	@Test
 	public void testadd(){
