@@ -80,7 +80,7 @@ public class CarUserServiceImpl extends ResponseType implements CarUserService {
 			} else {
 				List<CarUser> cu = baseDao.query(list.get(0));
 				result = (cu == null || cu.size() != 1) ? rr.extracted(0, "传输数据有误")
-						: rr.extracted(1, list.get(0), null);
+						: rr.extracted(1, cu.get(0), null);
 			}
 
 		} catch (DataFormatException e) {
