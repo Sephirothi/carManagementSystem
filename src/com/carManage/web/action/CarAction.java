@@ -79,7 +79,7 @@ public class CarAction extends ActionSupport {
 			ServletActionContext.getResponse().getOutputStream().print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return "error";
+			return ERROR;
 		}
 		return "";
 	}

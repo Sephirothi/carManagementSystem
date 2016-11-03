@@ -40,8 +40,7 @@ public class UserAction extends ActionSupport {
 	 */
 
 	public String login() {
-		String result = us.querySingleUser(data);
-		
-		return "success";
+		System.out.println("ok");
+		return "ok";
 	}
 }

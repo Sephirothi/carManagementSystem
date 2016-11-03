@@ -8,7 +8,7 @@
 		<!-- User的Action -->
 		<action name="user_*" class="com.carManage.web.action.UserAction"
 			method="{1}">
-			<result name="success">/success.jsp</result>
+			<result name="ok">/index.html</result>
 			<result name="error">/login.jsp</result>
 		</action>
 
