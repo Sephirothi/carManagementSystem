@@ -149,11 +149,10 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 	@Override
 	public List<CarUser> query(CarUser t) {
 		Session session = sessionFactory.openSession();
-		List<CarUser> resultList = null;
+		List<CarUser> resultList = new LinkedList();;
 		try {
 			CarUser r = (CarUser) session.get(CarUser.class, t.getId());
 			if (r != null) {
-				resultList = new LinkedList();
 				resultList.add(r);
 			}
 		} catch (Exception e) {
