@@ -136,7 +136,7 @@ public class CarServiceImpl extends ResponseType implements CarService {
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			Car car = getMaptoObject(map, Car.class);
 			CarUser cu  = new CarUser();
-			cu.setId(map.get("car_user"));
+			cu.setId(map.get("car_user_id"));
 			car.setUser(cu);
 			result = baseDao.insert(car) ? rr.extracted(1, "添加成功") : rr.extracted(0, "添加失败");
 		} catch (DataFormatException e) {
