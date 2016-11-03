@@ -1,16 +1,9 @@
 package com.carManage.web.action;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
-import java.util.Scanner;
 
 import javax.annotation.Resource;
-
-import org.apache.struts2.ServletActionContext;
-import org.hibernate.lob.ReaderInputStream;
 
 import com.carManage.model.User;
 import com.carManage.service.UserService;
@@ -45,7 +38,7 @@ public class UserAction extends ActionSupport {
 		this.inputStream = inputStream;
 	}
 
-	public String login() {
+	/*public String login() {
 		User u = us.checklogin(data);
 		if (u == null) {
 			System.out.println("====error");
@@ -53,8 +46,12 @@ public class UserAction extends ActionSupport {
 		}
 		System.out.println("====success");
 		return "ok";
+	}*/
+	public String login(){
+		String json = us.querySingleUser(data);
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
+		return SUCCESS;
 	}
-
 	public String insert() {
 		String json = us.insertUser(data);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));

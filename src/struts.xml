@@ -4,12 +4,13 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
 	<package name="user" namespace="/" extends="struts-default">
 		<!-- User的Action -->
 		<action name="user_*" class="com.carManage.web.action.UserAction"
 			method="{1}">
-			<result name="ok">/index.html</result>
-			<result name="error">/error.html</result>
+			<result name="ok">/main.html</result>
+			<result name="error">/login.html</result>
 			<result type="stream" name="success">
 				<param name="contentType">application/json</param>
 				<param name="inputName">inputStream</param>

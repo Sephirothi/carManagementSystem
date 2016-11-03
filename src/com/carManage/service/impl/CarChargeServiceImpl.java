@@ -102,8 +102,9 @@ public class CarChargeServiceImpl extends ResponseType implements CarChargeServi
 			//此处的car_id是错误值,不需要取,即无效值
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarCharge cc = getMaptoObject(map, CarCharge.class);
+			cc.setPay_time(StringToDate(map.get("pay_time")));
 			cc.setCarId(map.get("car_id"));
-			result=baseDao.insert(cc)?rr.extracted(0, "添加失败"):rr.extracted(1, "添加成功");
+			result=!baseDao.insert(cc)?rr.extracted(0, "添加失败"):rr.extracted(1, "添加成功");
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化失败");
 		} catch (Exception e) {

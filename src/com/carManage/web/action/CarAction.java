@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletInputStream;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -47,7 +48,19 @@ public class CarAction extends ActionSupport {
 	 */
 
 	public String querys() {
+//		String temp = "";
 		
+			//ServletInputStream sis = 
+			/*String str =ServletActionContext.getRequest().getParameter("id");
+			byte[] buff = new byte[1024];
+			int len = 0;*/
+			
+//			while((len=sis.read(buff))!=-1){
+//				temp= temp + new String(buff,0,len);
+//			}
+//			System.out.println("str=="+str);
+		
+		System.out.println("start:"+System.currentTimeMillis());
 		String json = cs.queryCars(data);
 		System.out.println(data);
 		System.out.println(json);
@@ -56,6 +69,7 @@ public class CarAction extends ActionSupport {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+		System.out.println(System.currentTimeMillis());
 		return SUCCESS;
 	}
 

@@ -108,6 +108,7 @@ public class GsonUtils {
 						new TypeToken<Map<String, String>>() {
 						}.getType());
 			} catch (Exception e) {
+				e.printStackTrace();
 				throw new DataFormatException("解析json时出错");
 			}
 		}
