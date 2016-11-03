@@ -1,6 +1,8 @@
 package com.carManage.web.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
@@ -27,6 +29,16 @@ public class CarUserAction extends ActionSupport {
 		return data;
 	}
 
+	private InputStream inputStream;
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
 	/*
 	 * String queryCarUsers(String json); String deleteCarUsers(String json);
 	 * String queryCarUser(String json); String updateCar(String json); String
@@ -34,58 +46,33 @@ public class CarUserAction extends ActionSupport {
 	 */
 
 	public String querys() {
-		String result = cus.queryCarUsers(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "error";
-		}
-		return "";
+		String json = cus.queryCarUsers(data);
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 	public String delete() {
-		String result = cus.deleteCarUsers(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "error";
-		}
-		return "";
+		String json = cus.deleteCarUsers(data);
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 	public String query() {
-		String result = cus.queryCarUser(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "error";
-		}
-		return "";
+		String json = cus.queryCarUser(data);
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 	public String update() {
-		String result = cus.updateCar(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "error";
-		}
-		return "";
+		String json = cus.updateCar(data);
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 	public String insert() {
-		String result = cus.insert(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "error";
-		}
-		return "";
+		String json = cus.insert(data);
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 }

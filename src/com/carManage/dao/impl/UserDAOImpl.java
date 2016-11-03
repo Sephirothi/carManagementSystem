@@ -140,23 +140,21 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 			return null;
 		}
 		Session session = sessionFactory.openSession();
-//		Criteria criteria = session.createCriteria(User.class);
+		Criteria criteria = session.createCriteria(User.class);
 		List<User> resultList = null;
 		// 判断是否有UserName
 		if (t.getUsername() != null && !t.getUsername().equals("")) {
-			// // 此时表示查询多个
-			// if (t.getName() != null && !t.getName().equals(""))
-			// criteria.add(Restrictions.eq("name", t.getName()));
-			// if (t.getState() != null && !t.getState().equals("全部"))
-			// criteria.add(Restrictions.eq("state", t.getState()));
-			// } else {
-			// 此时表示查询单个
-			// 查询
-			String hql = "from User u where u.username = ?";
-			Query query = session.createQuery(hql);
-			query.setParameter(0, t.getUsername());
+			criteria.add(Restrictions.eq("username", t.getUsername()));
+			// 添加密码条件
+			if(t.getPassword() != null) {
+				if(t.getPassword().equals("")) {
+					//是在登录，但是没有输入密码的情况
+					return null;
+				}
+				criteria.add(Restrictions.eq("password", t.getPassword()));
+			}
 			try {
-				resultList = query.list();
+				resultList = criteria.list();
 			} catch(Exception e) {
 				e.printStackTrace();
 				System.out.println("[UserDao#query]======>查询出错");
@@ -186,7 +184,14 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		// 设置分页
 		criteria.setFirstResult(start);
 		criteria.setMaxResults(count);
-		return criteria.list();
+		List<User> resultList = null;
+		try {
+			resultList = criteria.list();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("UserD#querys======>查询出错");
+		}
+		return resultList;
 	}
 
 	@Override

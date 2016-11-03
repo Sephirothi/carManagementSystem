@@ -26,6 +26,14 @@ public class UserAction extends ActionSupport {
 
 	private String data;
 
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getData() {
+		return data;
+	}
+
 	private InputStream inputStream;
 
 	public InputStream getInputStream() {
@@ -36,53 +44,26 @@ public class UserAction extends ActionSupport {
 		this.inputStream = inputStream;
 	}
 
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	/*
-	 * String insertUser(String json); String deleteUser(String json); String
-	 * updateUser(String json); String queryAllUsers(String json); String
-	 * querySingleUser(String json); User checklogin(String json);
-	 */
-
 	public String login() {
-		// System.out.println(data);
 		User u = us.checklogin(data);
 		if (u == null) {
 			System.out.println("====error");
-			return "error";
+			return ERROR;
 		}
-		// ServletActionContext.getRequest().getSession().setAttribute("user",
-		// u.getName());
 		System.out.println("====success");
 		return "ok";
 	}
 
 	public String insert() {
 		String json = us.insertUser(data);
-		try {
-			ServletActionContext.getResponse().getWriter().print(json);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return ERROR;
-		}
-		return "";
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 	public String querys() {
 		String json = us.queryAllUsers(data);
-		try {
-			ServletActionContext.getResponse().getWriter().println(json);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return ERROR;
-		}
-		return "";
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 	public String query() {
@@ -93,13 +74,8 @@ public class UserAction extends ActionSupport {
 
 	public String update() {
 		String json = us.updateUser(data);
-		try {
-			ServletActionContext.getResponse().getOutputStream().print(json);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return ERROR;
-		}
-		return "";
+		inputStream = new ByteArrayInputStream(json.getBytes());
+		return SUCCESS;
 	}
 
 }

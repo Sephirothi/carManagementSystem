@@ -1,9 +1,9 @@
 /build/
-
 *.class
 src/test/
 .settings/
 .project
 .tern-project
 .classpath
-/WebContent/
+.classpath
+/.gitignore

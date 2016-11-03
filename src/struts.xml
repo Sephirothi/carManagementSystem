@@ -10,34 +10,50 @@
 			method="{1}">
 			<result name="ok">/index.html</result>
 			<result name="error">/error.html</result>
-		<result type="stream" name="success">  
-            <param name="contentType">text/html</param>  
-            <param name="inputName">inputStream</param>  
-        </result>
+			<result type="stream" name="success">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
 
 		<!-- CarUser的action -->
 		<action name="caruser_*" class="com.carManage.web.action.CarUserAction"
 			method="{1}">
 			<result name="error">/error.html</result>
+			<result type="stream" name="success">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
 
 		<!-- CarTransfer的Action -->
 		<action name="cartransfer_*" class="com.carManage.web.action.CarTransferAction"
 			method="{1}">
 			<result name="error">/error.jsp</result>
+			<result type="stream" name="success">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
-		
+
 		<!-- Car的Action -->
 		<action name="car_*" class="com.carManage.web.action.CarAction"
 			method="{1}">
 			<result name="error">/error.html</result>
+			<result type="stream" name="success">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
 
 		<!-- CarCharge的Action -->
 		<action name="carcharge_*" class="com.carManage.web.action.CarChargeAction"
 			method="{1}">
 			<result name="error">/error.html</result>
+			<result type="stream" name="success">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
 	</package>
 </struts>    
