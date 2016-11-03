@@ -150,7 +150,6 @@ public class UserServiceImpl extends ResponseType implements UserService {
 		try {
 			// 将前端传过来的数据转化为
 			List<User> user = GsonUtils.jsonToList(json, User.class);
-			System.out.println(123);
 			if (user.size() == 1) {
 				List<User> list = baseDao.query(user.get(0));
 				if (list==null||list.size() != 1) {
@@ -170,11 +169,11 @@ public class UserServiceImpl extends ResponseType implements UserService {
 	}
 
 	@Override
-	public String checklogin(String json) {
+	public User checklogin(String json) {
 		String result = null;
 		// 返回json包装类
 		// ResponseBody<String> rb = new ResponseBody<>();
-		ReturnResponse<String> rr = new ReturnResponse<>();
+		//ReturnResponse<String> rr = new ReturnResponse<>();
 		try {
 			// 将前端传过来的数据转化为
 			List<User> user = GsonUtils.jsonToList(json, User.class);
@@ -182,30 +181,29 @@ public class UserServiceImpl extends ResponseType implements UserService {
 			if (user.size() == 1) {
 				User u = user.get(0);
 				if (u.getUsername().trim().equals("") || u.getPassword().trim().equals("")) {
-					// rb.code = 0;// 表示认证失败
-					// rb.data = "帐号或密码错误,请重试";
-					result = rr.extracted(0, "帐号或密码错误");
+					return null;
 				} else {
 					// 查询数据库判断是否有这个人
-					if (baseDao.query(u)==null||baseDao.query(u).size()!= 1) {
+					List<User> list  = baseDao.query(u);
+					if (list==null||list.size()!= 1) {
 						// rb.code = 1;// 表示认证成功
 						// rb.data = "登录成功";
-						result = rr.extracted(0, "帐号或密码错误");
+						return null;
 					} else {
-						result = rr.extracted(1, "登录成功");
+						return list.get(0);
 					}
 				}
 			} else {
 				// 数据不唯一,返回错误码
 				// rb.code=0;
 				// rb.data="user不唯一";
-				result = rr.extracted(0, "user不唯一");
+				return  null;
 			}
 			// result = GsonUtils.objectToJson(rb);
 		} catch (DataFormatException e) {
-			result = rr.extracted(0, "json转化失败");
+			return null;
 		}
-		return result;
+		
 	}
 
 }
