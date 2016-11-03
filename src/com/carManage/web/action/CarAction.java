@@ -3,6 +3,7 @@ package com.carManage.web.action;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import javax.annotation.Resource;
 
@@ -46,8 +47,15 @@ public class CarAction extends ActionSupport {
 	 */
 
 	public String querys() {
+		
 		String json = cs.queryCars(data);
-		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
+		System.out.println(data);
+		System.out.println(json);
+		try {
+			inputStream = new ByteArrayInputStream(json.getBytes("utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		return SUCCESS;
 	}
 
