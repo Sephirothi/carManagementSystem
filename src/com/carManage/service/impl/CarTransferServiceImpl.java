@@ -69,6 +69,7 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarTransfer ct = getMaptoObject(map, CarTransfer.class);
 			ct.setCarId(map.get("car_id"));
+			ct.setTransfer_time(StringToDate(map.get("transfer_time")));
 			if(baseDao.insert(ct)){
 				result = rr.extracted(1, "添加成功");
 			}else{
@@ -84,6 +85,9 @@ public class CarTransferServiceImpl extends ResponseType implements CarTransferS
 			result = rr.extracted(0, "CarTransferServiceImpl--反射错误3");
 		} catch (InvocationTargetException e) {
 			result = rr.extracted(0, "CarTransferServiceImpl--反射错误4");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return result;
 	}

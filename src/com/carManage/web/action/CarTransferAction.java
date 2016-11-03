@@ -47,7 +47,7 @@ public class CarTransferAction extends ActionSupport {
 	 * json); String querySingle(String json);
 	 */
 
-	public String add() {
+	public String insert() {
 		String json = ctfs.addCarTransfers(data);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;

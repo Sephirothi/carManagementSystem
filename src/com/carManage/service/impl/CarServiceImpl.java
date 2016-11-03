@@ -1,6 +1,7 @@
 package com.carManage.service.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.DataFormatException;
@@ -136,7 +137,8 @@ public class CarServiceImpl extends ResponseType implements CarService {
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			Car car = getMaptoObject(map, Car.class);
 			CarUser cu  = new CarUser();
-			cu.setId(map.get("car_user"));
+			car.setCreate_time(StringToDate(map.get("create_time")));
+			cu.setId(map.get("car_user_id"));
 			car.setUser(cu);
 			result = baseDao.insert(car) ? rr.extracted(1, "添加成功") : rr.extracted(0, "添加失败");
 		} catch (DataFormatException e) {
@@ -149,6 +151,8 @@ public class CarServiceImpl extends ResponseType implements CarService {
 			result = rr.extracted(0, "FS解析出错");
 		} catch (InvocationTargetException e) {
 			result = rr.extracted(0, "FS解析出错");
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 		return result;
 	}
