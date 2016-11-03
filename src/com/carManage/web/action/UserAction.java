@@ -1,12 +1,16 @@
 package com.carManage.web.action;
 
-import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-import com.carManage.model.User;
+import javax.annotation.Resource;
+import javax.servlet.ServletInputStream;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.carManage.service.UserService;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 public class UserAction extends ActionSupport {
 	/**
@@ -15,21 +19,29 @@ public class UserAction extends ActionSupport {
 	private static final long serialVersionUID = 571641429426477845L;
 	@Resource(name = "userServiceImpl")
 	private UserService us;
-	private User user;
-
-	public User getUser() {
-		return user;
+	
+	private String data ;
+	public void setData(String data) {
+		this.data = data;
+	}
+	
+	public String getData() {
+		return data;
 	}
 	
 	
-	public void setUser(User user) {
-		this.user = user;
-	}
+	/*
+	 * 	String insertUser(String json);
+	String deleteUser(String json);
+	String updateUser(String json);
+	String queryAllUsers(String json);
+	String querySingleUser(String json);
+	String checklogin(String json);
+	 */
 
 	public String login() {
-		return null;
+		String result = us.querySingleUser(data);
+		
+		return "success";
 	}
-
-	
-
 }
