@@ -1,0 +1,33 @@
+<script type="text/html" id="demo">
+    	{{if isAdmin}}
+		    <div id="nav">
+		        <div class="menu-main">
+		            {{each list as value i}}
+		                <li class="nav-menu"><a href="javascript:void(0);">{{i}}</a></li>
+		            {{/each}}
+		        </div>
+		    </div>
+		    <div class="sub-nav">
+		        {{each list as value i}}
+		            <ul class="sub-nav-items">
+		                {{each list[i] as value j}}
+		                    <li class="nav-item"><a href="javascript:void(0);">{{j}}</a></li>
+		                {{/each}}
+		            </ul>
+		        {{/each}}
+		    </div>
+		    <div class="filter-content">
+		        <div class="filter-section">
+		            {{each list as value i}}
+		                {{each list[i] as value j}}
+		                    <div class="filter-list">
+		                    {{each list[i][j] as value k}}
+		                        <a href="javascript:void(0);" class="filter-sel">{{value}}</a>
+		                    {{/each}}
+		                    </div>
+		                {{/each}}
+		            {{/each}}
+		        </div>
+		    </div>
+		{{/if}}
+    </script>
