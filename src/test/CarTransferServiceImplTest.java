@@ -57,7 +57,7 @@ public class CarTransferServiceImplTest extends BaseDAOTest{
 		ct.setId(1235);
 		Car c=new Car();
 		c.setId("2368");
-		ct.setCar(c);
+//		ct.setCar(c);
 		list.add(ct);
 		ReturnResponse<List<CarTransfer>> rr= new ReturnResponse<>();
 		try {

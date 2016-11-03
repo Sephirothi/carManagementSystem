@@ -10,6 +10,7 @@ import javax.servlet.ServletOutputStream;
 import org.apache.struts2.ServletActionContext;
 
 import com.carManage.service.CarUserService;
+import com.carManage.utils.GsonUtils;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CarUserAction extends ActionSupport {
@@ -47,31 +48,31 @@ public class CarUserAction extends ActionSupport {
 
 	public String querys() {
 		String json = cus.queryCarUsers(data);
-		inputStream = new ByteArrayInputStream(json.getBytes());
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
 	public String delete() {
 		String json = cus.deleteCarUsers(data);
-		inputStream = new ByteArrayInputStream(json.getBytes());
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
 	public String query() {
 		String json = cus.queryCarUser(data);
-		inputStream = new ByteArrayInputStream(json.getBytes());
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
 	public String update() {
 		String json = cus.updateCar(data);
-		inputStream = new ByteArrayInputStream(json.getBytes());
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
 	public String insert() {
 		String json = cus.insert(data);
-		inputStream = new ByteArrayInputStream(json.getBytes());
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 

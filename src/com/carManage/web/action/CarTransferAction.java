@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.struts2.ServletActionContext;
 
 import com.carManage.service.CarTransferService;
+import com.carManage.utils.GsonUtils;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CarTransferAction extends ActionSupport {
@@ -48,19 +49,19 @@ public class CarTransferAction extends ActionSupport {
 
 	public String add() {
 		String json = ctfs.addCarTransfers(data);
-		inputStream = new ByteArrayInputStream(json.getBytes());
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
 	public String query() {
 		String json = ctfs.querySingle(data);
-		inputStream = new ByteArrayInputStream(json.getBytes());
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
 	public String querys() {
 		String json = ctfs.queryCarTransfers(data);
-		inputStream = new ByteArrayInputStream(json.getBytes());
+		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 }
