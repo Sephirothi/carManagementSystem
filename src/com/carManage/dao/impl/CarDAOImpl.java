@@ -257,12 +257,12 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 			}
 			// 添加座位数限制
 			String seatCount = t.getSeat_count();
-			if (seatCount != null) {
+			if (seatCount != null && !seatCount.equals("")) {
 				criteria.add(Restrictions.eq("seat_count", seatCount));
 			}
 			// 添加颜色限制
 			String carColor = t.getCar_color();
-			if (carColor != null) {
+			if (carColor != null && !carColor.equals("")) {
 				criteria.add(Restrictions.eq("car_color", carColor));
 			}
 		}
