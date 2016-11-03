@@ -1,5 +1,4 @@
 /build/
-
 *.class
 src/test/
 .settings/
@@ -7,3 +6,4 @@ src/test/
 .tern-project
 .classpath
 .classpath
+/.gitignore
