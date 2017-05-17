@@ -74,7 +74,9 @@ public class CarAction extends ActionSupport {
 	}
 
 	public String delete() {
+		System.out.println(data);
 		String json = cs.deleteCars(data);
+		System.out.println(json);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
@@ -86,13 +88,15 @@ public class CarAction extends ActionSupport {
 	}
 
 	public String update() {
-
+		System.out.println(data);
 		String json = cs.updateCar(data);
+		System.out.println(json);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
 	public String insert() {
+		System.out.println(data);
 		String json = cs.addCar(data);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;

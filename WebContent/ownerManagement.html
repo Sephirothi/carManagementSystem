@@ -31,37 +31,35 @@
   <section id="container" class="">
       <!--header start-->
       <header class="header white-bg">
-          <div class="sidebar-toggle-box">
-              <div data-original-title="" data-placement="right" class="icon-reorder tooltips"></div>
-          </div>
-          <!--logo start-->
-          <a href="#" class="logo">车辆<span>管理系统</span></a>
-          <!--logo end-->
-         
-          <div class="top-nav ">
-              <ul class="nav pull-right top-menu">
-                  <li>
-                      <input type="text" class="form-control search" placeholder="Search">
-                  </li>
-                  <!-- user login dropdown start-->
-                  <li class="dropdown">
-                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <img alt="" src="img/avatar1_small.jpg">
-                          <span class="username">嘿嘿</span>
-                          <b class="caret"></b>
-                      </a>
-                      <ul class="dropdown-menu extended logout">
-                          <div class="log-arrow-up"></div>
-                          <li><a href="#"><i class=" icon-suitcase"></i>个人资料</a></li>
-                          <li><a href="#"><i class="icon-cog"></i>设置</a></li>
-                          <li><a href="#"><i class="icon-bell-alt"></i> 通知</a></li>
-                          <li><a href="login.html"><i class="icon-key"></i> 退出</a></li>
-                      </ul>
-                  </li>
-                  <!-- user login dropdown end -->
-              </ul>
-          </div>
-      </header>
+              <div class="sidebar-toggle-box">
+                  <div data-original-title="" data-placement="right" class="icon-reorder tooltips"></div>
+              </div>
+              <!--logo start-->
+              <a href="#" class="logo">车辆<span>管理系统</span></a>
+              <!--logo end-->
+             
+              <div class="top-nav ">
+                  <ul class="nav pull-right top-menu">
+                     <!--  <li>
+                         <input type="text" class="form-control search" placeholder="搜索">
+                     </li> -->
+                      <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="img/avatar1_small.jpg">
+                            <span id="name" class="username"></span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <!-- <li><a href="#"><i class=" icon-suitcase"></i>个人资料</a></li> -->
+                            <!-- <li><a href="ownerManagement.html"><i class="icon-cog"></i>设置</a></li> -->
+                            <!-- <li><a href="#"><i class="icon-bell-alt"></i> 通知</a></li> -->
+                            <li><a href="login.html"><i class="icon-key"></i> 退出</a></li>
+                        </ul>
+                    </li>
+                  </ul>         
+              </div>
+        </header>
       <!--header end-->
       <!--sidebar start-->
       <aside>
@@ -81,8 +79,8 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="general.html">车辆列表</a></li>
-                          <li><a class="" href="buttons.html">新增车辆</a></li>
+                          <li><a class="" href="carList.html">车辆列表</a></li>
+                          <li><a class="" href="addCar.html">新增车辆</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -92,8 +90,8 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="grids.html">车主列表</a></li>
-                          <li><a class="" href="calendar.html">新增车主</a></li>  
+                          <li><a class="" href="carOwnerList.html">车主列表</a></li>
+                          <li><a class="" href="addCarOwner.html">新增车主</a></li>  
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -103,8 +101,8 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">费用列表</a></li>
-                          <li><a class="" href="form_wizard.html">收取管理费</a></li>
+                          <li><a class="" href="feeList.html">费用列表</a></li>
+                          <li><a class="" href="chargeMoney.html">收取管理费</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -114,8 +112,8 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="basic_table.html">车辆变更列表</a></li>
-                          <li><a class="" href="dynamic_table.html">新增车辆变更</a></li>
+                          <li><a class="" href="carTransferList.html">车辆变更列表</a></li>
+                          <li><a class="" href="addCarTransfer.html">新增车辆变更</a></li>
                       </ul>
                   </li>
                
@@ -126,9 +124,9 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="blank.html">用户管理</a></li>
-                          <li class="active"><a class="" href="profile.html">修改密码</a></li>
-                          <li><a class="" href="invoice.html">安全退出</a></li>
+                          <li><a class="" href="queryOwner.html">查看用户</a></li>
+                          <li class="active"><a class="" href="ownerManagement.html">用户管理</a></li>
+                          <li><a class="" href="quit.html">安全退出</a></li>
                       </ul>
                   </li>
                   <li>
@@ -153,14 +151,14 @@
                               <a href="#">
                                   <img src="img/profile-avatar.jpg" alt="">
                               </a>
-                              <h1>Jonathan Smith</h1>
-                              <p>jsmith@flatlab.com</p>
+                              <h1 id="name">Jonathan Smith</h1>
+                              <p>欢迎来到个人中心</p>
                           </div>
 
                           <ul class="nav nav-pills nav-stacked">
-                              <li class="active"><a href="profile.html"> <i class="icon-user"></i> Profile</a></li>
-                              <li><a href="profile-activity.html"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
-                              <li><a href="profile-edit.html"> <i class="icon-edit"></i> Edit profile</a></li>
+                              <li class="active"><a href="ownerManagement.html"> <i class="icon-user"></i> 个人信息修改</a></li>
+                              <li><a href="#"> <i class="icon-calendar"></i> 近期活动 <span class="label label-danger pull-right r-activity">9</span></a></li>
+                              <li><a href="profile-edit.html"> <i class="icon-edit"></i> 添加新用户</a></li>
                           </ul>
 
                       </section>
@@ -176,38 +174,38 @@
                               <form role="form" class="form-horizontal" style="margin:20px">
                            
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="carNumber">用户名</label>
+                                    <label class="col-lg-2 control-label" for="username">用户名</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                        <input type="text" class="form-control" id="username" required="required"/><!--  -->
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="carNumber">原密码</label>
+                                    <label class="col-lg-2 control-label" for="oldpassword">原密码</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                        <input type="password" class="form-control" id="oldpassword" required="required"/><!--  -->
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="carNumber">新密码</label>
+                                    <label class="col-lg-2 control-label" for="newpassword">新密码</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                        <input type="password" class="form-control" id="newpassword" required="required"/><!--  -->
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="carNumber">再输入一次</label>
+                                    <label class="col-lg-2 control-label" for="checkpassword">再输入一次</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                        <input type="password" class="form-control" id="checkpassword" required="required"/><!--  -->
                                     </div>  
                                 </div>
 
                                 <div class="form-group">
                                   
                                     <div class="col-lg-6">
-                                       <button class="btn btn-primary">新增</button>
+                                       <button class="btn btn-primary" id="sub">修改</button>
                                     </div>
                                    
                                     <div class="col-lg-6">
-                                      <button class="btn btn-default">返回</button>
+                                      <button class="btn btn-default" type="reset">返回</button>
                                     </div>
                                 </div>
                             </form>
@@ -234,32 +232,78 @@
     <!--common script for all pages-->
     <script src="js/common-scripts.js"></script>
 
-  <script>
+  <script type="text/javascript">
+
+       //插入后台返回的用户名
+	    $(document).ready(function(){
+	    	var data = JSON.parse(sessionStorage.getItem("mess"));
+	    	$("#name").html(data.name);
+		}) 
 
       //knob
       $(".knob").knob();
+       	   	    
+		$("#sub").click(function(){
+			 var username = $('#username').val(),
+			    oldpassword = $('#oldpassword').val(),
+			    newpassword = $('#newpassword').val(),
+			    checkpassword = $('#checkpassword').val();
+			 
+			if(newpassword != checkpassword){
+				alert("两次输入的密码不一致，请重新输入！");
+				$("input[id='newpassword']").val("");
+				$("input[id='checkpassword']").val("");
+				return false;
+			}else{
+				var datalist = [{
+						username: username,
+						password: oldpassword
+					}];
+				var t = JSON.stringify(datalist);
+				$.ajax({
+					async: false,
+					url: 'user_query.action',
+					type: 'POST',
+					dataType: 'json',
+					data: "data=" + t,
 
-       $(function() {
-           var userId = $('.userId').val(),
-               password = $('.password').val();
-           var datalist = {
-               id: userId,
-               password: password
-           };
-  
-           loginInfo.push(JSON.stringify(datalist));
-           $.ajax({
-               url: '',
-               type: 'POST',
-               dataType: 'json',
-               data: ,
-               success: function(data) {
-                  console.log('success');
-                  
-               }
-           })
-        })
+					success: function(data) {
+						if(data.code ==  1){
+							var datalist = [{
+									username: username,
+									password: newpassword
+								}];
+							var t = JSON.stringify(datalist);
+							$.ajax({
+								async: false,
+								url: 'user_update.action',
+								type: 'POST',
+								dataType: 'json',
+								data: "data=" + t,
 
+								success: function(data) {
+									alert(data.data);
+									console.log('success');
+									return false;
+								},
+
+								error: function(data) {
+									alert(data.data);
+									return false;
+								}
+							})							
+						}else{
+							alert("用户名密码不匹配！");
+							return false;
+						}
+						
+					}
+
+				})
+			}
+		});
+	    
+	    
   </script>
 
 

@@ -117,6 +117,8 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 			e.printStackTrace();
 			System.out.println("======>query中查询出错");
 			return null;
+		} finally {
+			session.close();
 		}
 	}
 
@@ -148,6 +150,8 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 			e.printStackTrace();
 			System.out.println("======>query中查询出错");
 			return null;
+		} finally {
+			session.close();
 		}
 	}
 
@@ -164,6 +168,8 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 			e.printStackTrace();
 			System.out.println("======>根据条件查询数据数量出错");
 			return -1;
+		} finally {
+			session.close();
 		}
 	}
 
@@ -176,9 +182,10 @@ public class CarTransferDAOImpl extends BaseDAO<CarTransfer, Date> {
 			// 获取到车牌号，并添加条件
 			if (carTransfer.getCarId() != null && !carTransfer.getCarId().equals("")) {
 				String carId = carTransfer.getCarId();
-				Car car = new Car();
-				car.setId(carId);
-				criteria.add(Restrictions.eq("car", car));
+//				Car car = new Car();
+//				car.setId(carId);
+//				criteria.add(Restrictions.eq("car", car));
+				criteria.add(Restrictions.eq("carId", carId));
 			}
 
 			// 新车主条件

@@ -48,7 +48,9 @@ public class CarTransferAction extends ActionSupport {
 	 */
 
 	public String insert() {
+		System.out.println(data);
 		String json = ctfs.addCarTransfers(data);
+		System.out.println(json);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}

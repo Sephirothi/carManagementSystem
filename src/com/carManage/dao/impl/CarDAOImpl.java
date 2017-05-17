@@ -34,8 +34,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 
 	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
-	
-	
+
 	@Resource(name = "carUserDAOImpl")
 	BaseDAO<CarUser, Date> carUserDAOImpl;
 
@@ -63,8 +62,8 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 				return false;
 			}
 			// 判断是否改变User
-			if(car.getUser() != null) {
-				if(car.getUser().getId() != null &&!car.getUser().getId().equals("")) {
+			if (car.getUser() != null) {
+				if (car.getUser().getId() != null && !car.getUser().getId().equals("")) {
 					CarUser newUser = (CarUser) session.get(CarUser.class, car.getUser().getId());
 					car.setUser(newUser);
 				} else {
@@ -73,7 +72,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 			}
 			// 更新carUser数据
 			oldCar.update(car);
-//			session.update(oldCar);
+			// session.update(oldCar);
 			session.getTransaction().commit();
 			System.out.println("更新数据");
 
@@ -107,8 +106,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 					System.out.println("======>出现一条并不存在与数据库的数据,跳过");
 					continue;
 				}
-				
-				
+
 				session.delete(tempCar);
 			} catch (Exception e) {
 				System.out.println("======>删除失败：" + car.getId());
@@ -117,7 +115,8 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 			}
 			successCount++;
 			session.getTransaction().commit();
-		}
+			session.close();
+		} 
 		return successCount;
 	}
 
@@ -167,7 +166,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 	@Override
 	public List<Car> query(Car car) {
 		Session session = sessionFactory.openSession();
-//		List<Car> resultList = new LinkedList();
+		// List<Car> resultList = new LinkedList();
 		// 获取到车牌号，并添加条件
 		String carId = car.getId();
 		if (carId == null || carId.equals("")) {
@@ -194,7 +193,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 
 	@Override
 	public List<Car> query(Car t, Integer start, Integer count, NULL o1, NULL o2) {
-		if(start == null || count == null) {
+		if (start == null || count == null) {
 			System.out.println("传入的start | count为空");
 			return null;
 		}
@@ -203,7 +202,7 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 		CarUser carUser = t.getUser();
 		if (carUser != null) {
 			String carUserId = carUser.getId();
-			if(carUserId != null && !carUserId.equals(""))
+			if (carUserId != null && !carUserId.equals(""))
 				t.setUser((CarUser) session.get(CarUser.class, carUserId));
 		}
 		Criteria criteria = getCriteria(t, o1, o2, "", session);
@@ -217,6 +216,8 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("======>查询出错");
+		} finally {
+			session.close();
 		}
 		return null;
 	}
@@ -234,6 +235,8 @@ public class CarDAOImpl extends BaseDAO<Car, NULL> {
 			e.printStackTrace();
 			System.out.println("======>根据条件查询数据数量出错");
 			return -1;
+		} finally {
+			session.close();
 		}
 	}
 

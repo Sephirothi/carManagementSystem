@@ -1,221 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Mosaddek">
-    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="img/favicon.html">
 
-    <title>收取管理费用</title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Mosaddek">
+		<meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+		<link rel="shortcut icon" href="img/favicon.html">
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-reset.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
-    <style type="text/css" media="screen">
-       #star{color:#F00;float:left;}
-      .col-lg-3 span{position:relative;margin-left:260px;margin-top:-30px;}
-    </style>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
+		<title>收取管理费用</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap-reset.css" rel="stylesheet">
+		<!--external css-->
+		<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+		<!-- Custom styles for this template -->
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-responsive.css" rel="stylesheet" />
+		<style type="text/css" media="screen">
+			#star {
+				color: #F00;
+				float: left;
+			}
+			
+			.col-lg-3 span {
+				position: relative;
+				margin-left: 260px;
+				margin-top: -30px;
+			}
+		</style>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+		<!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-  </head>
+	</head>
 
-  <body>
+	<body>
 
-  <section id="container" class="">
-      <!--header start-->
-      <header class="header white-bg">
-          <div class="sidebar-toggle-box">
-              <div data-original-title="" data-placement="right" class="icon-reorder tooltips"></div>
-          </div>
-          <!--logo start-->
-           <a href="#" class="logo">车辆<span>管理系统</span></a>
-          <!--logo end-->
-          
-          <div class="top-nav ">
-              <ul class="nav pull-right top-menu">
-                  <li>
-                      <input type="text" class="form-control search" placeholder="Search">
-                  </li>
-                  <!-- user login dropdown start-->
-                  <li class="dropdown">
-                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <img alt="" src="img/avatar1_lgall.jpg">
-                          <span class="username">嘿嘿</span>
-                          <b class="caret"></b>
-                      </a>
-                      <ul class="dropdown-menu extended logout">
-                          <div class="log-arrow-up"></div>
-                          <li><a href="#"><i class=" icon-suitcase"></i>个人资料</a></li>
-                          <li><a href="#"><i class="icon-cog"></i>设置</a></li>
-                          <li><a href="#"><i class="icon-bell-alt"></i> 通知</a></li>
-                          <li><a href="login.html"><i class="icon-key"></i> 退出</a></li>
-                      </ul>
-                  </li>
-                  <!-- user login dropdown end -->
-              </ul>
-          </div>
-      </header>
-      <!--header end-->
-      <!--sidebar start-->
-      <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu">
-                  <li class="">
-                      <a class="" href="index.html">
-                          <i class="icon-dashboard"></i>
-                          <span>首页</span>
-                      </a>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon-book"></i>
-                          <span>车辆基本信息管理</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="general.html">车辆列表</a></li>
-                          <li><a class="" href="buttons.html">新增车辆</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon-cogs"></i>
-                          <span>车主信息管理</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="grids.html">车主列表</a></li>
-                          <li><a class="" href="calendar.html">新增车主</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu active">
-                      <a href="javascript:;" class="">
-                          <i class="icon-tasks"></i>
-                          <span>车辆管理费</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="form_component.html">费用列表</a></li>
-                          <li class="active"><a class="" href="form_wizard.html">收取管理费</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon-th"></i>
-                          <span>车辆变更管理</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="basic_table.html">车辆变更列表</a></li>
-                          <li><a class="" href="dynamic_table.html">新增车辆变更</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon-glass"></i>
-                          <span>系统管理</span>
-                          <span class="arrow"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="blank.html">用户管理</a></li>
-                          <li><a class="" href="profile.html">修改密码</a></li>
-                          <li><a class="" href="invoice.html">安全退出</a></li>
-                      </ul>
-                  </li>
-                  <li>
-                      <a class="" href="login.html">
-                          <i class="icon-user"></i>
-                          <span>登录</span>
-                      </a>
-                  </li>
-              </ul>
-              <!-- sidebar menu end-->
-          </div>
-      </aside>
-      <!--sidebar end-->
-      <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper">
-              <!-- page start-->
-              <div class="row">
-                  <div class="col-lg-12">
-                      <section class="panel">
-                          <div class="bio-graph-heading">
-                              收取管理费
-                          </div>
-                          <div class="panel-body bio-graph-info">
-                             
-                            <form role="form" class="form-horizontal" style="margin:20px">
-                           
-                                <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="carNumber">车牌号:</label>
-                                    <div class="col-lg-5">
-                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
-                                    </div>
-                                    <label class="col-lg-1 control-label" for="upTime">缴费时间:</label>
-                                    <div class="col-lg-5">
-                                        <input type="text" class="form-control" id="upTime" /><!--  -->
-                                    </div>
+		<section id="container" class="">
+			<!--header start-->
+			<header class="header white-bg">
+				<div class="sidebar-toggle-box">
+					<div data-original-title="" data-placement="right" class="icon-reorder tooltips"></div>
+				</div>
+				<!--logo start-->
+				<a href="#" class="logo">车辆<span>管理系统</span></a>
+				<!--logo end-->
+
+				<div class="top-nav ">
+					<ul class="nav pull-right top-menu">
+						<li>
+							<input type="text" class="form-control search" placeholder="Search">
+						</li>
+						<!-- user login dropdown start-->
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<img alt="" src="img/avatar1_lgall.jpg">
+								<span class="username"></span>
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu extended logout">
+								<div class="log-arrow-up"></div>
+								<!-- <li>
+									<a href="#"><i class=" icon-suitcase"></i>个人资料</a>
+								</li>
+								<li>
+									<a href="#"><i class="icon-cog"></i>设置</a>
+								</li>
+								<li>
+									<a href="#"><i class="icon-bell-alt"></i> 通知</a>
+								</li> -->
+								<li>
+									<a href="login.html"><i class="icon-key"></i> 退出</a>
+								</li>
+							</ul>
+						</li>
+						<!-- user login dropdown end -->
+					</ul>
+				</div>
+			</header>
+			<!--header end-->
+			<!--sidebar start-->
+			<aside>
+				<div id="sidebar" class="nav-collapse ">
+					<!-- sidebar menu start-->
+					<ul class="sidebar-menu">
+						<li class="">
+							<a class="" href="index.html">
+								<i class="icon-dashboard"></i>
+								<span>首页</span>
+							</a>
+						</li>
+						<li class="sub-menu">
+							<a href="javascript:;" class="">
+								<i class="icon-book"></i>
+								<span>车辆基本信息管理</span>
+								<span class="arrow"></span>
+							</a>
+							<ul class="sub">
+								<li>
+									<a class="" href="general.html">车辆列表</a>
+								</li>
+								<li>
+									<a class="" href="buttons.html">新增车辆</a>
+								</li>
+							</ul>
+						</li>
+						<li class="sub-menu">
+							<a href="javascript:;" class="">
+								<i class="icon-cogs"></i>
+								<span>车主信息管理</span>
+								<span class="arrow"></span>
+							</a>
+							<ul class="sub">
+								<li>
+									<a class="" href="grids.html">车主列表</a>
+								</li>
+								<li>
+									<a class="" href="calendar.html">新增车主</a>
+								</li>
+							</ul>
+						</li>
+						<li class="sub-menu active">
+							<a href="javascript:;" class="">
+								<i class="icon-tasks"></i>
+								<span>车辆管理费</span>
+								<span class="arrow"></span>
+							</a>
+							<ul class="sub">
+								<li>
+									<a class="" href="form_component.html">费用列表</a>
+								</li>
+								<li class="active">
+									<a class="" href="form_wizard.html">收取管理费</a>
+								</li>
+							</ul>
+						</li>
+						<li class="sub-menu">
+							<a href="javascript:;" class="">
+								<i class="icon-th"></i>
+								<span>车辆变更管理</span>
+								<span class="arrow"></span>
+							</a>
+							<ul class="sub">
+								<li>
+									<a class="" href="basic_table.html">车辆变更列表</a>
+								</li>
+								<li>
+									<a class="" href="dynamic_table.html">新增车辆变更</a>
+								</li>
+							</ul>
+						</li>
+						<li class="sub-menu">
+							<a href="javascript:;" class="">
+								<i class="icon-glass"></i>
+								<span>系统管理</span>
+								<span class="arrow"></span>
+							</a>
+							<ul class="sub">
+								<li>
+									<a class="" href="blank.html">用户管理</a>
+								</li>
+								<li>
+									<a class="" href="profile.html">修改密码</a>
+								</li>
+								<li>
+									<a class="" href="invoice.html">安全退出</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a class="" href="login.html">
+								<i class="icon-user"></i>
+								<span>登录</span>
+							</a>
+						</li>
+					</ul>
+					<!-- sidebar menu end-->
+				</div>
+			</aside>
+			<!--sidebar end-->
+			<!--main content start-->
+			<section id="main-content">
+				<section class="wrapper">
+					<!-- page start-->
+					<div class="row">
+						<div class="col-lg-12">
+							<section class="panel">
+								<div class="bio-graph-heading">
+									收取管理费
+								</div>
+								<div class="panel-body bio-graph-info">
+
+									<form role="form" class="form-horizontal" style="margin:20px">
+
+										<div class="form-group">
+											<label class="col-lg-1 control-label" for="carNumber">车牌号:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control" id="carNumber" />
+												<!--  -->
+											</div>
+											<label class="col-lg-1 control-label" for="upTime">缴费时间:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control" id="upTime" onclick="jeDate({dateCell:'#upTime',isTime:true,format:'YYYY-MM-DD hh:mm:ss'})"/>
+											</div>
+
+										</div>
+										<div class="form-group">
+											<label class="col-lg-1 control-label" for="payType">缴费类型:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control" id="payType" />
+											</div>
+											
+											<label class="col-lg-1 control-label" for="per_money">每小时收费单价(元):</label>
+                                            <div class="col-lg-5">
+                                               <input type="text" class="form-control" id="per_money" />
+                                           </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-lg-1 control-label" for="pay_date_start">车辆入库时间:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control muted" id="pay_date_start" onclick="jeDate({dateCell:'#pay_date_start',isTime:true,isinitVal:true,format:'YYYY-MM-DD hh:mm:ss'})"/>
+											</div>
+											<label class="col-lg-1 control-label" for="pay_date_end">车辆出库时间:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control muted" id="pay_date_end" onclick="jeDate({dateCell:'#pay_date_end',isTime:true,isinitVal:true,format:'YYYY-MM-DD hh:mm:ss'})"/>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-lg-1 control-label" for="payYear">缴费年:</label>
+											<div class="col-lg-5">
+											    <!-- <input input type="text" class="form-control muted" id="payYear" > -->
+												<select name="select2" class="form-control" id="payYear">
+													<option>请选择交款年份用于系统检索---</option>
+													<option>2013年</option>
+													<option>2014年</option>
+													<option>2015年</option>
+													<option>2016年</option>
+													<option>2017年</option>
+												</select>
+											</div>
+											<label class="col-lg-1 control-label" for="aMount">缴费金额:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control" id="aMount" onclick="payMoney()"/>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<!-- 
                                     
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="payType">缴费类型:</label>
+                                    <label class="col-lg-1 control-label" for="pay_fmonth">缴款月:</label>
                                     <div class="col-lg-5">
-                                        <input type="text" class="form-control" id="payType" /><!--  -->
-                                    </div>
-                                    <label class="col-lg-1 control-label" for="ID">身份证号:</label>
-                                    <div class="col-lg-3">
-                                        <input type="text" class="form-control" id="ID" />
-                                    </div>
-                                   
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="payYear">缴费年:</label>
-                                    <div class="col-lg-5">
-                                       <select name="select2" class="form-control" id="select1">
-                                       <option>请选择---</option>
-                                       </select> 
-                                    </div>
-                                    <label class="col-lg-1 control-label" for="aMount">缴费金额:</label>
-                                    <div class="col-lg-5">
-                                        <input type="text" class="form-control" id="aMount" />
-                                    </div>
-                                    </div>
-                                    
-                                     <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="I_Month">缴款月:</label>
-                                    <div class="col-lg-5">
-                                       <select name="select2" class="form-control" id="select1">
-                                       <option>请选择---</option>
-                                       </select> 
-                                    </div>
-                                    <label class="col-lg-1 control-label" for="I_people">收款人:</label>
-                                    <div class="col-lg-5">
-                                        <input type="text" class="form-control" id="I_people" />
-                                    </div></div>
-                                    
-                                     <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="I_people">缴款月:</label>
-                                    <div class="col-lg-3">
-                                       <select name="select2"  id="select1" class="form-control" style="width:100px;float:left">
+                                       <select name="select2"  id="pay_fmonth" class="form-control" style="width:100px;float:left">
                                        <option>请选择---</option>
                                        <option>1</option>
                                        <option>2</option>
                                        <option>3</option>
                                        <option>4</option>
                                        </select>   
-                                         ------- <select name="select2"  class="form-control" style="width:100px;float:right" id="select1">
+                                       <label class="col-lg-1 control-label" for="carNumber">至</label>
+                                       <select name="select2"  id="pay_emonth" class="form-control" style="width:100px;float:right">
                                        <option>请选择---</option>
                                        <option>1</option>
                                        <option>2</option>
@@ -223,101 +272,192 @@
                                        <option>4</option>
                                        </select> 
                                     </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="I_number">收款人:</label>
-                                    <div class="col-lg-5">
-                                        <input type="text" class="form-control muted" id="I_UseeEmail" /> 
-                                    </div>
-                                    <label class="col-lg-1 control-label" for="I_UseeEmail">收据号:</label>
-                                    <div class="col-lg-5">
-                                        <input type="text" class="form-control muted" id="I_UseeEmail" />
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="I_UseeEmail">备注:</label>
-                                    <div class="col-lg-11">
-                                      <textarea name="textarea" id="textarea" class="form-control" cols="50" rows="5"></textarea>
-                                    </div>
-                                </div>
-                                
-                                 <div class="form-group">
-                                  
-                                    <div class="col-lg-6">
-                                       <button class="btn btn-primary">新增</button>
-                                    </div>
-                                   
-                                    <div class="col-lg-6">
-                                      <button class="btn btn-primary">返回</button>
-                                    </div>
-                                </div>
-                            </form>
-                          </div>
-                      </section>
-                  </div>
-                 
-              </div>
+                                    
+                                    -->
+											<label class="col-lg-1 control-label" for="I_Month">缴款月:</label>
+											<div class="col-lg-5">
+												<select name="select2" class="form-control" id="I_Month">
+													<option>请选择交款月份用于系统检索---</option>
+													<option value="1">1月</option>
+													<option value="2">2月</option>
+													<option value="3">3月</option>
+													<option value="4">4月</option>
+													<option value="5">5月</option>
+													<option value="6">6月</option>
+													<option value="7">7月</option>
+													<option value="8">8月</option>
+													<option value="9">9月</option>
+													<option value="10">10月</option>
+													<option value="11">11月</option>
+													<option value="12">12月</option>
+												</select>
+											</div>
 
-           
-              <!-- page end-->
-          </section>
-      </section>
-      <!--main content end-->
-  </section>
+											<!--                  分界线 -->
+											<label class="col-lg-1 control-label" for="I_people">交款人:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control" id="I_people" />
+											</div>
+										</div>
 
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+										<!-- <div class="form-group">
+                                    
+                                </div> -->
 
+										<div class="form-group">
+											<label class="col-lg-1 control-label" for="I_number">收款人:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control muted" id="I_number" placeholder="必须为本系统管理人员"/>
+											</div>
+											<label class="col-lg-1 control-label" for="I_UseeEmail">收据号:</label>
+											<div class="col-lg-5">
+												<input type="text" class="form-control muted" id="I_UseeEmail" />
+											</div>
+										</div>
 
+										<div class="form-group">
+											<label class="col-lg-1 control-label" for="I_UseeEmail">备注:</label>
+											<div class="col-lg-11">
+												<textarea name="textarea" id="textarea" class="form-control" cols="50" rows="5" placeholder="如果费用收取对象为临时停车用户，请备注说明！"></textarea>
+											</div>
+										</div>
+										
+										<div class="form-group">
 
-    <!--common script for all pages-->
-    <script src="js/common-scripts.js"></script>
+											<div class="col-lg-6">
+												<button class="btn btn-primary" onclick="insert();return false;">新增</button>
+											</div>
 
-    <!--script for this page-->
-    <script src="js/jquery.stepy.js"></script>
+											<div class="col-lg-6">
+												<button class="btn btn-shadow.btn-primary">返回</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</section>
+						</div>
 
+					</div>
 
-  <script>
+					<!-- page end-->
+				</section>
+			</section>
+			<!--main content end-->
+		</section>
 
-      //step wizard
+		<!-- js placed at the end of the document so the pages load faster -->
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.scrollTo.min.js"></script>
+		<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+		<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
 
-      $(function() {
-          $('#default').stepy({
-              backLabel: 'Previous',
-              block: true,
-              nextLabel: 'Next',
-              titleClick: true,
-              titleTarget: '.stepy-tab'
-          });
-      });
+		<!--common script for all pages-->
+		<script src="js/common-scripts.js"></script>
 
-       $(function() {
-           var userId = $('.userId').val(),
-               password = $('.password').val();
-           var datalist = {
-               id: userId,
-               password: password
-           };
-  
-           loginInfo.push(JSON.stringify(datalist));
-           $.ajax({
-               url: '',
-               type: 'POST',
-               dataType: 'json',
-               data: ,
-               success: function(data) {
-                  console.log('success');
-                  
-               }
-           })
-        })
-  </script>
+		<!--script for this page-->
+		<script src="js/jquery.stepy.js"></script>
+		<script src="js/Underscore.js"></script>
+		<script src="js/jedate/jedate.js"></script>
+		<!-- <script src="js/jedate/jquery-1.7.2.js"></script>
+		<script src="js/jedate/jquery.jedate.js"></script> -->
 
+		<script src="js/json2.js"></script>
+		<script type="text/javascript">
+			function insert() {
+				var carId = $('#carNumber').val(),
+					pay_time = $('#upTime').val(),
+					pay_type = $('#payType').val(),
+					hand_fee_person = $('#I_people').val(),
+					pay_fee = $('#aMount').val(),
+					pay_year = $('#payYear').val(),
+					pay_month = $('#I_Month').val(),
+					gather_person = $('#I_number').val(),
+					comment = $('#textarea').val(),
+					recript_id = $('#I_UseeEmail').val(),
+				    pay_date_start = $('#pay_date_start').val(),
+			    	pay_date_end = $('#pay_date_end').val();
 
-  </body>
+					var datalist = {
+						carId: carId,
+						pay_time: pay_time,
+						pay_type: pay_type,
+						hand_fee_person: hand_fee_person,
+						pay_fee: pay_fee,
+						pay_year: pay_year,
+						pay_month: pay_month,
+						gather_person: gather_person,
+						comment: comment,
+						recript_id: recript_id,
+						pay_date_start: pay_date_start,
+						pay_date_end: pay_date_end
+					};
+				var t = JSON.stringify(datalist);
+				$.ajax({
+					url: 'carcharge_insert.action',
+					type: 'POST',
+					dataType: 'json',
+					data: "data=" + t,
+
+					success: function(data) {
+						alert(data.data);
+						console.log('success');
+					},
+
+					error: function(data) {
+						alert(data.data);
+					}
+
+				})
+			}
+
+			//计算缴费金额
+			function payMoney(){
+				var per_money = $('#per_money').val();
+				       pay_date_start = new Date($('#pay_date_start').val());
+				       pay_date_end = new Date($('#pay_date_end').val());
+				if(per_money!=""&&pay_date_start!=""&&pay_date_end!=""){
+					var countHours = diffTime(pay_date_start, pay_date_end);
+					if(countHours < 0){
+						$('#aMount').attr("value","出入库时间选择有误，请重新选择!");
+					}else {
+						$('#aMount').attr("value",countHours * per_money+'元');
+					}		
+				}
+                return false;
+			}
+
+			//计算时间差
+				function diffTime(startDate,endDate) {  
+				    var diff=endDate.getTime() - startDate.getTime();//时间差的毫秒数  
+				  
+				    //计算出相差天数  
+				    var days=Math.floor(diff/(24*3600*1000));  
+				       
+				    //计算出小时数  
+				    var leave1=diff%(24*3600*1000);    //计算天数后剩余的毫秒数  
+				    var hours=Math.floor(leave1/(3600*1000));  
+				    //计算相差分钟数  
+				    var leave2=leave1%(3600*1000);        //计算小时数后剩余的毫秒数  
+				    var minutes=Math.floor(leave2/(60*1000));  
+				       
+				    //计算相差秒数  
+				    var leave3=leave2%(60*1000);      //计算分钟数后剩余的毫秒数  
+				    var seconds=Math.round(leave3/1000);  
+				      
+				    var returnStr = hours;  
+				    if(minutes>29) {  
+				    	returnStr = hours+1;  
+				    }  
+				    if(days>0) {  
+				        returnStr = days*24 + hours;  
+				    }
+				    return returnStr;  
+				}  
+
+		</script>
+
+	</body>
+
 </html>

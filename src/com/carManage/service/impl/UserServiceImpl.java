@@ -25,7 +25,7 @@ import com.carManage.utils.GsonUtils;
 @Service("userServiceImpl")
 public class UserServiceImpl extends ResponseType implements UserService {
 	@Resource(name = "userDAOImpl")
-	private BaseDAO<User,NULL> baseDao;
+	private BaseDAO<User, NULL> baseDao;
 
 	@Override
 	public String insertUser(String json) {
@@ -33,13 +33,13 @@ public class UserServiceImpl extends ResponseType implements UserService {
 		ReturnResponse<String> rr = new ReturnResponse<>();
 		try {
 			List<User> list = GsonUtils.jsonToList(json, User.class);
-			if(list.size()!=1){
-				//其实msg可以拿出来==!
+			if (list.size() != 1) {
+				// 其实msg可以拿出来==!
 				result = rr.extracted(0, "传送的数据有误");
-			}else{
-				if(baseDao.insert(list.get(0))){
+			} else {
+				if (baseDao.insert(list.get(0))) {
 					result = rr.extracted(1, "添加数据成功");
-				}else{
+				} else {
 					result = rr.extracted(0, "添加数据失败");
 				}
 			}
@@ -76,7 +76,7 @@ public class UserServiceImpl extends ResponseType implements UserService {
 	private String deleteUsers(List<User> list, ReturnResponse<String> rr) {
 		String result = null;
 		if (list.size() == 0) {
-			result = rr.extracted(0, "没有选择数据");
+			result = rr.extracted(0, "请选择要删除的对象！");
 		} else {
 			if (baseDao.delete(list) != list.size()) {
 				result = rr.extracted(0, "删除数据失败");
@@ -95,13 +95,13 @@ public class UserServiceImpl extends ResponseType implements UserService {
 		ReturnResponse<String> rr = new ReturnResponse<>();
 		try {
 			List<User> list = GsonUtils.jsonToList(json, User.class);
-			if(list.size()!=1){
-				//其实msg可以拿出来==!
+			if (list.size() != 1) {
+				// 其实msg可以拿出来==!
 				result = rr.extracted(0, "传送的数据有误");
-			}else{
-				if(baseDao.update(list.get(0))){
+			} else {
+				if (baseDao.update(list.get(0))) {
 					result = rr.extracted(1, "修改数据成功");
-				}else{
+				} else {
 					result = rr.extracted(0, "修改数据失败");
 				}
 			}
@@ -117,28 +117,30 @@ public class UserServiceImpl extends ResponseType implements UserService {
 		// TODO这个线不写,等待后台确定数据参数
 		String result = null;
 		ReturnResponse<List<User>> rr = new ReturnResponse<>();
-		
-			try {
-				Map<String, String> map = GsonUtils.jsonToMaps(json);
-				User u = getMaptoObject(map,User.class);
-				List<User> users = baseDao.query(u, 0, 0, null, null);
-				if(users==null||users.size()==0){
-					result = rr.extracted(0, "未查到符合的数据");
-				}else{
-					result = rr.extracted(1, users, baseDao.getDataCount(u));
-				}
-			} catch (InstantiationException e) {
-				result=rr.extracted(0, "反射失败1");
-			} catch (IllegalAccessException e) {
-				result=rr.extracted(0, "反射失败2");
-			} catch (IllegalArgumentException e) {
-				result=rr.extracted(0, "反射失败3");
-			} catch (InvocationTargetException e) {
-				result=rr.extracted(0, "反射失败4");
-			} catch (DataFormatException e) {
-				rr.extracted(0, "JSON转化失败");
+
+		try {
+			Map<String, String> map = GsonUtils.jsonToMaps(json);
+			User u = getMaptoObject(map, User.class);
+
+			List<User> users = baseDao.query(u, stringToInteger(map.get("start")), stringToInteger(map.get("count")),
+					null, null);
+			if (users == null || users.size() == 0) {
+				result = rr.extracted(0, "未查到符合的数据");
+			} else {
+				result = rr.extracted(1, users, baseDao.getDataCount(u));
 			}
-		
+		} catch (InstantiationException e) {
+			result = rr.extracted(0, "反射失败1");
+		} catch (IllegalAccessException e) {
+			result = rr.extracted(0, "反射失败2");
+		} catch (IllegalArgumentException e) {
+			result = rr.extracted(0, "反射失败3");
+		} catch (InvocationTargetException e) {
+			result = rr.extracted(0, "反射失败4");
+		} catch (DataFormatException e) {
+			rr.extracted(0, "JSON转化失败");
+		}
+
 		return result;
 	}
 
@@ -151,15 +153,16 @@ public class UserServiceImpl extends ResponseType implements UserService {
 			// 将前端传过来的数据转化为
 			List<User> user = GsonUtils.jsonToList(json, User.class);
 			if (user.size() == 1) {
-				List<User> list = baseDao.query(user.get(0));
-				if (list==null||list.size() != 1) {
-					result = rr.extracted(0, "查询不到数据||传输数据有误");
+				User u = user.get(0);
+				List<User> list = baseDao.query(u);
+				if (list == null || list.size() != 1) {
+					result = rr.extracted(0, "查询不到该用户，请检查用户名和密码！");
 				} else {
 					result = rr.extracted(1, list.get(0), null);
 				}
 			} else {
 				// 如果数据不是唯一的,返回错误不需要查询数据库
-				result = rr.extracted(0, "数据不是唯一性");
+				result = rr.extracted(0, "该用户名和密码存在多个映射！");
 			}
 		} catch (DataFormatException e) {
 			// 转化失败返回的结果
@@ -173,7 +176,7 @@ public class UserServiceImpl extends ResponseType implements UserService {
 		String result = null;
 		// 返回json包装类
 		// ResponseBody<String> rb = new ResponseBody<>();
-		//ReturnResponse<String> rr = new ReturnResponse<>();
+		// ReturnResponse<String> rr = new ReturnResponse<>();
 		try {
 			// 将前端传过来的数据转化为
 			List<User> user = GsonUtils.jsonToList(json, User.class);
@@ -184,8 +187,8 @@ public class UserServiceImpl extends ResponseType implements UserService {
 					return null;
 				} else {
 					// 查询数据库判断是否有这个人
-					List<User> list  = baseDao.query(u);
-					if (list==null||list.size()!= 1) {
+					List<User> list = baseDao.query(u);
+					if (list == null || list.size() != 1) {
 						// rb.code = 1;// 表示认证成功
 						// rb.data = "登录成功";
 						return null;
@@ -197,13 +200,13 @@ public class UserServiceImpl extends ResponseType implements UserService {
 				// 数据不唯一,返回错误码
 				// rb.code=0;
 				// rb.data="user不唯一";
-				return  null;
+				return null;
 			}
 			// result = GsonUtils.objectToJson(rb);
 		} catch (DataFormatException e) {
 			return null;
 		}
-		
+
 	}
 
 }

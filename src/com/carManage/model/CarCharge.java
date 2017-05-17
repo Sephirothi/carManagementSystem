@@ -25,6 +25,8 @@ public class CarCharge {
 	private String pay_fee;// 缴费金额
 	private String pay_year;// 交款年
 	private Integer pay_month;// 交款月
+	private String pay_date_start;// 入库时间
+	private String pay_date_end;// 出库时间
 	private String gather_person;// 收款人
 	private String comment;// 备注
 
@@ -33,7 +35,7 @@ public class CarCharge {
 
 	public CarCharge(String recript_id, String carId, Date pay_time,
 			String pay_type, String hand_fee_person, String pay_fee,
-			String pay_year, Integer pay_month, String gather_person,
+			String pay_date_start, String pay_date_end, String gather_person,
 			String comment) {
 		super();
 		this.recript_id = recript_id;
@@ -42,8 +44,8 @@ public class CarCharge {
 		this.pay_type = pay_type;
 		this.hand_fee_person = hand_fee_person;
 		this.pay_fee = pay_fee;
-		this.pay_year = pay_year;
-		this.pay_month = pay_month;
+		this.pay_date_start = pay_date_start;
+		this.pay_date_end = pay_date_end;
 		this.gather_person = gather_person;
 		this.comment = comment;
 	}
@@ -113,6 +115,22 @@ public class CarCharge {
 		this.pay_month = pay_month;
 	}
 
+	public String getPay_date_start() {
+		return pay_date_start;
+	}
+
+	public void setPay_date_start(String pay_date_start) {
+		this.pay_date_start = pay_date_start;
+	}
+
+	public String getPay_date_end() {
+		return pay_date_end;
+	}
+
+	public void setPay_date_end(String pay_date_end) {
+		this.pay_date_end = pay_date_end;
+	}
+
 	public String getGather_person() {
 		return gather_person;
 	}
@@ -134,8 +152,8 @@ public class CarCharge {
 		return "CarCharge [recript_id=" + recript_id + ", car=" + carId
 				+ ", pay_time=" + pay_time + ", pay_type=" + pay_type
 				+ ", hand_fee_person=" + hand_fee_person + ", pay_fee="
-				+ pay_fee + ", pay_year=" + pay_year + ", pay_month="
-				+ pay_month + ", gather_person=" + gather_person + ", comment="
+				+ pay_fee + ""+", pay_year"+pay_year+", pay_month"+pay_month+", pay_date_start=" + pay_date_start + ", pay_date_end="
+				+ pay_date_end + ", gather_person=" + gather_person + ", comment="
 				+ comment + "]";
 	}
 
@@ -145,6 +163,8 @@ public class CarCharge {
 				: cc.gather_person;
 		this.pay_year = cc.pay_year == null ? this.pay_year : cc.pay_year;
 		this.pay_month = cc.pay_month == null ? this.pay_month : cc.pay_month;
+		this.pay_date_start = cc.pay_date_start == null ? this.pay_date_start : cc.pay_date_start;
+		this.pay_date_end = cc.pay_date_end == null ? this.pay_date_end : cc.pay_date_end;
 		this.comment = cc.comment == null ? this.comment : cc.comment;
 	}
 }

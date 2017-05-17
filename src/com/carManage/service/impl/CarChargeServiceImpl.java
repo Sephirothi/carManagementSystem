@@ -25,7 +25,7 @@ import com.carManage.utils.GsonUtils;
 @Repository("carChargeServiceImpl")
 public class CarChargeServiceImpl extends ResponseType implements CarChargeService {
 	@Resource(name= "carChargeDAOImpl")
-	private BaseDAO<CarCharge,String> baseDao;
+	private BaseDAO<CarCharge,Integer> baseDao;
 	@Override
 	public String queryCarCharges(String json) {
 		String result = null;
@@ -35,15 +35,18 @@ public class CarChargeServiceImpl extends ResponseType implements CarChargeServi
 			// 按条件查询的json传输要求为一个对象,即{name:..}
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarCharge cc = getMaptoObject(map, CarCharge.class);
-			
-			cc.setCarId(map.get("car_id"));
+			Integer o1 = stringToInteger(map.get("starttime"));
+			Integer o2 = stringToInteger(map.get("endtime"));
+			cc.setCarId(map.get("carId"));
 			List<CarCharge> list = baseDao.query(cc, stringToInteger(map.get("start")), stringToInteger(map.get("count")),
-					map.get("starttime"), map.get("endtime"));
-			if (list == null || list.size() == 0) {
-				result = rr.extracted(0, "没有查到符合条件的数据");
-			} else {
-				result = rr.extracted(1, list, baseDao.getDataCount(cc));
-			}
+					o1,o2);
+			result = (list == null) ? rr.extracted(0, "没有查到符合条件的数据")
+					:rr.extracted(1, list, baseDao.getDataCountWithLimit(cc,o1,o2));
+//			if (list == null || list.size() == 0) {
+//				result = rr.extracted(0, "没有查到符合条件的数据");
+//			} else {
+//				result = rr.extracted(1, list, baseDao.getDataCountWithLimit(cc, o1, o2));
+//			}
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化失败");
 		} catch (Exception e) {
@@ -103,7 +106,7 @@ public class CarChargeServiceImpl extends ResponseType implements CarChargeServi
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarCharge cc = getMaptoObject(map, CarCharge.class);
 			cc.setPay_time(StringToDate(map.get("pay_time")));
-			cc.setCarId(map.get("car_id"));
+			cc.setCarId(map.get("carId"));
 			result=!baseDao.insert(cc)?rr.extracted(0, "添加失败"):rr.extracted(1, "添加成功");
 		} catch (DataFormatException e) {
 			result = rr.extracted(0, "json转化失败");

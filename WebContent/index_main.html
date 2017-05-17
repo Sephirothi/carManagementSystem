@@ -38,57 +38,16 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
-                              首页
-                            </header>
-                            <table class="table table-striped border-top" id="sample_1">
-                              <thead>
-                                <tr>
-                                    <th>车牌号</th>
-                                    <th class="hidden-phone">颜色</th>
-                                    <th class="hidden-phone">类型</th>
-                                    <th class="hidden-phone">品牌</th>
-                                    <th class="hidden-phone">所属车主</th>
-                                    <th class="hidden-phone">座位号</th>
-                                    <th class="hidden-phone">登记时间</th>
-                                    <th class="hidden-phone">备注</th>
-                                    <th class="hidden-phone">操作</th>
-                                </tr>
-                              </thead>
-                              <tbody id="content">
-
-                              </tbody>
-                            </table>
+                              欢迎使用本系统！
+                            </header>                  
+                            <img id="image-1" alt="" src="img/msld.jpg" width="100%" height="75%"/>
+                            <p>本系统由张涵越设计与开发，使用过程中如有任何问题，请致电：+86-18883858684。上图车辆仅供参考，如有雷同，纯属故意。</p>
                         </section>
                     </div>
                 </div>
                 <!-- page end-->
 
-                 <div class="modal fade" id="myModalSelect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                          &times;
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">
-                         删除
-                        </h4>
-                      </div>
-                      <div class="modal-body">
-                        是否删除这些数据？
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                          确定删除
-                        </button>
-                      </div>
-                    </div><!-- /.modal-content -->
-                  </div><!-- /.modal -->
-                </div>
-          </section>
-        </section>
+                
         <!--main content end-->
 
      <!-- js placed at the end of the document so the pages load faster -->
@@ -107,43 +66,6 @@
     <script src="js/dynamic-table.js"></script>
    
 <!--请求数据-->
-<script type="text/javascript">
-           $.ajax({
-               url: 'car_querys.action',      // 请求的地址
-               type: 'post',
-               dataType: 'json',
-               data:{},
-               success: function(datas) {
-                  var t =_.template($("#t1").html());
-                  $('#content').html(t({"data":datas}));
-                  
-               },
-               error: function() {
-                  console.log('请求出错');
-               }
-           })
-</script>
-     <script type="text/template" id="t1">
-      <% _.each(data, function (item) { %>
-              <tr class="odd gradeX">
-                                    <td class="hidden-phone"><%=item.title1 %></td>
-                                    <td class="hidden-phone"><%=item.title2 %></td>
-                                    <td class="hidden-phone"><%=item.title3 %></td>
-                                    <td class="hidden-phone"><%=item.title4 %></td>
-                                    <td class="hidden-phone"><%=item.title5 %></td>
-                                    <td class="hidden-phone"><%=item.title6 %></td>                           
-                                    <td class="hidden-phone"><%=item.title7 %></td>
-                                    <td class="hidden-phone"><%=item.title8 %></td>
-                                    <td class="hidden-phone">
-                                       <button class="btn btn-success btn-xs"><i class="icon-ok"></i>
-                                       </button>
-                                       <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                       <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
-                                    </td>
-                                </tr>
-      <% }); %>
-
-    </script>
   </body>
 </html>
 

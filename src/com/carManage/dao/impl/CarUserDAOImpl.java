@@ -90,7 +90,7 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 				List<CarUser> tList = query(carUser);
 				if (tList == null || tList.size() == 0) {
 					System.out.println("[CarUserDaoImpl#update]======>数据库中无此人");
-					return 0 ;
+					return 0;
 				}
 				CarUser tempUser = tList.get(0);
 				if (tempUser == null) {
@@ -107,7 +107,7 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 				SQLQuery query2 = session.createSQLQuery(sql2);
 				query2.setParameter(0, tempUser.getId());
 				query2.executeUpdate();
-				
+
 				session.getTransaction().commit();
 				// commit之后并且没有出异常表示成功删除一个数据
 				successCount++;
@@ -149,7 +149,8 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 	@Override
 	public List<CarUser> query(CarUser t) {
 		Session session = sessionFactory.openSession();
-		List<CarUser> resultList = new LinkedList();;
+		List<CarUser> resultList = new LinkedList();
+		;
 		try {
 			CarUser r = (CarUser) session.get(CarUser.class, t.getId());
 			if (r != null) {
@@ -168,8 +169,7 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 	 * 查询多个，分页查询的时候对应的方法 不会返回null
 	 */
 	@Override
-	public List<CarUser> query(CarUser cu, Integer start, Integer count,
-			Date o1, Date o2) {
+	public List<CarUser> query(CarUser cu, Integer start, Integer count, Date o1, Date o2) {
 		if (start == null || count == null) {
 			System.out.println("传入的start | count为空");
 			return null;
@@ -206,6 +206,8 @@ public class CarUserDAOImpl extends BaseDAO<CarUser, Date> {
 			e.printStackTrace();
 			System.out.println("======>根据条件查询数据数量出错");
 			return -1;
+		} finally {
+			session.close();
 		}
 	}
 

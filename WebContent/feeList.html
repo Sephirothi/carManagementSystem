@@ -169,35 +169,38 @@
                                     <div class="col-lg-2">
                                         <input type="text" class="form-control" id="carNumber" /><!--  -->
                                     </div>
-                                    <label class="col-lg-1 control-label" for="carNumber">年份</label>
+                                    <label class="col-lg-1 control-label" for="pay_year">年份</label>
                                     <div class="col-lg-2">
-                                          <select name="sample_1_length" aria-controls="sample_1" class="form-control">
+                                          <select name="sample_1_length" id="pay_year" aria-controls="sample_1" class="form-control">
                                           <option value="全部" selected="selected">全部</option>
-                                          <option value="男">男</option>
-                                          <option value="女">女</option>
+                                          <option value="2013年">2013年</option>
+                                          <option value="2014年">2014年</option>
+                                          <option value="2015年">2015年</option>
+                                          <option value="2016年">2016年</option>
+                                          <option value="2017年">2017年</option>
                                           </select>
                                       </div>
-                                    <label class="col-lg-1 control-label" for="carNumber">月份</label>
+                                    <label class="col-lg-1 control-label" for="payfm">月份</label>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control" id="carNumber" value="1" /><!--  -->
+                                        <input type="text" class="form-control" id="payfm" value="1" /><!--  -->
                                     </div>
-                                    <label class="col-lg-1 control-label" for="carNumber">--------------</label>
+                                    <label class="col-lg-1 control-label" for="payem">------------</label>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control" id="carNumber" value="12" /><!--  -->
+                                        <input type="text" class="form-control" id="payem" value="12" /><!--  -->
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="carNumber">收据号</label>
+                                    <label class="col-lg-1 control-label" for="recript">收据号</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" id="carNumber"/><!--  -->
+                                        <input type="text" class="form-control" id="recript"/><!--  -->
                                     </div>
-                                    <label class="col-lg-1 control-label" for="carNumber" >缴费日期</label>
+                                    <label class="col-lg-1 control-label" for="payday" >缴费日期</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" id="carNumber" value="2013-09-09" /><!--  -->
+                                        <input type="text" class="form-control" id="payday" value="2013-09-09" /><!--  -->
                                     </div>  
                                 
                                 <div class="col-lg-5">
-                                      <button class="btn btn-shadow btn-primary">查询</button>
+                                      <button class="btn btn-shadow btn-primary" onclick="querys();return false;">查询</button>
                                 </div>
                                 </div>
                           </form>
@@ -205,28 +208,18 @@
                           <table class="table table-striped border-top" id="sample_1">
                             <thead>
                               <tr>
-                                  <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
+                                  <!-- <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th> -->
                                   <th>车牌号</th>
                                   <th>收据号</th>
+                                  <th>交款人</th>
                                   <th>交费日期</th>
-                                  <th>金额</th>
-                                  <th>查看</th>
+                                  <th>缴纳金额</th>
+                                  <th>备注</th>
                               </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="content">
                              
-                          <!--     <tr class="odd gradeX">
-                              <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                              <td>Jhone doe</td>
-                              <td class="hidden-phone">100</td>
-                              <td class="hidden-phone">10</td>
-                              <td class="hidden-phone">02.03.2013</td>
-                              <td class="hidden-phone">
-                                <button class="btn btn-success btn-xs"><i class="icon-eye-open"></i>
-                                </button>
-                              </td>
-                          </tr> -->
-                              <tr class="odd gradeX">
+                              <!-- <tr class="odd gradeX">
                                   <td><input type="checkbox" class="checkboxes" value="1" /></td>
                                   <td>Jhone doe</td>
                                   <td class="hidden-phone">100</td>
@@ -235,11 +228,11 @@
                                   <td class="hidden-phone">
                                     <button class="btn btn-success btn-xs"><i class="icon-eye-open view"></i>
                                     </button>
-                                    <!-- <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                    <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button> -->
+                                    <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
 
                                   </td>
-                              </tr>
+                              </tr> -->
                             </tbody>
                           </table>
                       </section>
@@ -264,23 +257,75 @@
     <!--script for this page only-->
     <script src="js/dynamic-table.js"></script>
 
-    <script type="text/javascript">
-      $(function() {
-          var view = $('.view');
-          view.on('click', function() {
-             $.ajax({
-               url: '',
-               type: 'POST',
-               dataType: 'json',
-               data: {param1: 'value1'},
-               success: function(data) {
-                  
-               }
-             })
-             
-          })
-      })
-    </script>
+    <script src="js/Underscore.js"></script>
+		
+		<script src="js/json2.js"></script>
+		<script type="text/javascript">
+			function querys() {
+				var carId = $('#carNumber').val(),
+				pay_year = $('#pay_year').val(),
+				recript_id = $('#recript').val(),
+				starttime = $('#payfm').val(),
+				endtime = $('#payem').val(),
+				pay_time = $('#payday').val();
+				
+				var datalist = {
+					'carId': carId,
+					'pay_year': pay_year,
+					'recript_id': recript_id,
+					'pay_time':pay_time,
+					'starttime': starttime,
+					'endtime': endtime, 
+					'start': 0,
+					'count': 10
+				};
+				var dd = JSON.stringify(datalist);
+				$.ajax({
+					url: 'carcharge_querys.action', // 请求的地址
+					type: 'POST',
+					dataType: 'json',
+					data: "data=" + dd,
+
+					success: function(datas) {
+						if(datas.code == 0) {
+							alert(datas.data);
+							console.log('请求出错');
+							return false;
+						}
+						//取出datas中包含的数组data并遍历取值
+						var arr = datas.data;
+						var t = _.template($("#temp").html());
+						$("#content").html(t(arr));
+					}
+				})
+			}
+			
+		</script>
+		<script type="text/template" id="temp">
+			<% _.each(obj, function (index,item) { %>
+			<tr class="odd gradeX">
+				<!-- <td><input type="checkbox" class="checkboxes" value="1" /></td> -->
+				<td class="hidden-phone">
+					<%=index.carId %>
+				</td>
+				<td class="hidden-phone">
+					<%=index.recript_id %>
+				</td>
+                <td class="hidden-phone">
+					<%=index.hand_fee_person %>
+				</td>
+				<td class="hidden-phone">
+					<%=index.pay_time %>
+				</td>
+				<td class="hidden-phone">
+					<%=index.pay_fee %>
+				</td>
+				<td class="hidden-phone">
+					<%=index.comment %>
+                </td>
+			</tr>
+			<% }); %>
+		</script>
 
   </body>
 </html>

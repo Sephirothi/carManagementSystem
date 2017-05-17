@@ -102,13 +102,14 @@ public class CarChargeDAOImpl extends BaseDAO<CarCharge, Integer> {
 			}
 
 			// 判断车辆是否存在
-			Car tCar = new Car();
-			tCar.setId(t.getCarId());
-			List<Car> list = carDao.query(tCar);
-			if (list == null || list.size() == 0) {
-				System.out.println("并无此车");
-				return false;
-			}
+//			Car tCar = new Car();
+//			tCar.setId(t.getCarId());
+//			List<Car> list = carDao.query(tCar);
+//			if (list == null || list.size() == 0) {
+//				System.out.println("并无此车");
+//				return false;
+//			}
+			
 			session.save(t);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -181,6 +182,8 @@ public class CarChargeDAOImpl extends BaseDAO<CarCharge, Integer> {
 			e.printStackTrace();
 			System.out.println("======>根据条件查询数据数量出错");
 			return -1;
+		} finally {
+			session.close();
 		}
 	}
 

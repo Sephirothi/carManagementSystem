@@ -158,27 +158,27 @@
                                     <div class="col-lg-2">
                                         <input type="text" class="form-control" id="carNumber" /><!--  -->
                                     </div>
-                                    <label class="col-lg-1 control-label" for="carNumber">原车主</label>
+                                    <label class="col-lg-1 control-label" for="carOwner">原车主</label>
                                     <div class="col-lg-2">
-                                          <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                          <input type="text" class="form-control" id="carOwner" /><!--  -->
                                       </div>
-                                    <label class="col-lg-1 control-label" for="carNumber">现车主</label>
+                                    <label class="col-lg-1 control-label" for="carOwnerNow">现车主</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                        <input type="text" class="form-control" id="carOwnerNow" /><!--  -->
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-1 control-label" for="carNumber">转让日期</label>
+                                    <label class="col-lg-1 control-label" for="tdateStart">转让日期</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                        <input type="text" class="form-control" id="tdateStart" value="1960-01-01"/><!--  -->
                                     </div>
-                                    <label class="col-lg-1 control-label" for="carNumber">至</label>
+                                    <label class="col-lg-1 control-label" for="tdateEnd">至</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" id="carNumber" /><!--  -->
+                                        <input type="text" class="form-control" id="tdateEnd" value="2017-12-30"/><!--  -->
                                     </div>  
                                 
                                 <div class="col-lg-5">
-                                      <button class="btn btn-shadow btn-primary">查询</button>
+                                      <button class="btn btn-shadow btn-primary" onclick="querys();return false;">查询</button>
                                 </div>
                                 </div>
                           </form>
@@ -189,93 +189,21 @@
                               <th>车牌号</th>
                               <th>原车主</th>
                               <th>现车主</th>
-                              <th>金额</th>
-                              <th>日期</th>
+                              <th>转让金额</th>
+                              <th>转让日期</th>
                               <th>备注</th>
                           </tr>
                           </thead>
-                          <tbody>
-                          <tr class="odd gradeX">
+                          <tbody id="content">
+                          <!-- 动态插入内容 -->
+                          <!-- <tr class="odd gradeX">
                               <td>川A001</td>
                               <td class="hidden-phone">张三</td>
                               <td class="hidden-phone">李四</td>
                               <td class="hidden-phone">15000</td>
                               <td class="hidden-phone">2016-10-10</td>
                               <td class="hidden-phone">转手</td>
-                          </tr>
-                         <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
-                         <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
-                          <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
-                          <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
-                          <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
-                           <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
-                          <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
-                       
-                          <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
-                         <tr class="odd gradeX">
-                              <td>川A001</td>
-                              <td class="hidden-phone">张三</td>
-                              <td class="hidden-phone">李四</td>
-                              <td class="hidden-phone">15000</td>
-                              <td class="hidden-phone">2016-10-10</td>
-                              <td class="hidden-phone">转手</td>
-                          </tr>
+                          </tr> -->
                           </tbody>
                           </table>
                       </section>
@@ -312,6 +240,71 @@
 
     <!--script for this page only-->
     <script src="js/dynamic-table.js"></script>
+    <script src="js/Underscore.js"></script>
+		
+		<script src="js/json2.js"></script>
+		<script type="text/javascript">
+			function querys() {
+				var carId = $('#carNumber').val(),
+				    old_user_id = $('#carOwner').val(),
+					new_user_id = $('#carOwnerNow').val(),
+					starttime = $('#tdateStart').val(),
+					endtime = $('#tdateEnd').val();
+				var datalist = {
+					'carId': carId,
+					'old_user_id': old_user_id,
+					'new_user_id': new_user_id,
+					'starttime': starttime,
+					'endtime': endtime,
+					'start': 0,
+					'count': 10
+				};
+				var dd = JSON.stringify(datalist);
+				$.ajax({
+					url: 'cartransfer_querys.action', // 请求的地址
+					type: 'POST',
+					dataType: 'json',
+					data: "data=" + dd,
+
+					success: function(datas) {
+						//alert(datas.data[0].id);
+						if(datas.code == 0) {
+							alert(datas.data);
+							console.log('请求出错');
+							return false;
+						}
+						//取出datas中包含的数组data并遍历取值
+						var arr = datas.data;
+						var t = _.template($("#temp").html());
+						$("#content").html(t(arr));
+					}
+				})
+			}
+		</script>
+		<script type="text/template" id="temp">
+			<% _.each(obj, function (index,item) { %>
+			<tr class="odd gradeX">
+				<td class="hidden-phone">
+					<%=index.carId %>
+				</td>
+				<td class="hidden-phone">
+					<%=index.old_user_id %>
+				</td>
+				<td class="hidden-phone">
+					<%=index.new_user_id %>
+				</td>
+				<td class="hidden-phone">
+					<%=index.transfer_fee %>
+				</td>
+				<td class="hidden-phone">
+					<%=index.transfer_time %>
+				</td>
+				<td class="hidden-phone">
+                    <%=index.comment %>
+				</td>
+			</tr>
+			<% }); %>
+		</script>
 
   </body>
 </html>

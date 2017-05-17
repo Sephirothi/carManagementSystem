@@ -45,20 +45,24 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 			session.beginTransaction();
 
 			// 查询库中是否有这个用户
+			String temp = t.getPassword();
+			t.setPassword(null);
 			List<User> tList = query(t);
-			if(tList == null || tList.size() == 0) {
+			if (tList == null || tList.size() == 0) {
 				System.out.println("======>数据库中查询没有此用户");
 				return false;
 			}
+			t.setPassword(temp);
 			User user = tList.get(0);
-//			String hql = "from User u where u.username = ?";
-//			Query query = session.createQuery(hql);
-//			query.setParameter(0, t.getUsername());
-//			User user = (User) query.uniqueResult();
-//			if (user == null) {
-//				System.out.println("======>数据库中查询没有此用户");
-//				return false;
-//			}
+			
+			// String hql = "from User u where u.username = ?";
+			// Query query = session.createQuery(hql);
+			// query.setParameter(0, t.getUsername());
+			// User user = (User) query.uniqueResult();
+			// if (user == null) {
+			// System.out.println("======>数据库中查询没有此用户");
+			// return false;
+			// }
 			// 更新User数据
 			user.updateUser(t);
 			session.update(user);
@@ -85,10 +89,10 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 
 			try {
 				// 查询
-//				String hql = "from User u where u.username = ?";
-//				Query query = session.createQuery(hql);
-//				query.setParameter(0, user.getUsername());
-//				User tempUser = (User) query.uniqueResult();
+				// String hql = "from User u where u.username = ?";
+				// Query query = session.createQuery(hql);
+				// query.setParameter(0, user.getUsername());
+				// User tempUser = (User) query.uniqueResult();
 				List<User> tList = query(user);
 				if (tList == null || tList.size() == 0) {
 					// 表示表中并没有这个数据
@@ -135,7 +139,7 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 	 */
 	@Override
 	public List<User> query(User t) {
-		if(t == null) {
+		if (t == null) {
 			System.out.println("[UserDao#query]=====>传入的User对象为null");
 			return null;
 		}
@@ -146,16 +150,23 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		if (t.getUsername() != null && !t.getUsername().equals("")) {
 			criteria.add(Restrictions.eq("username", t.getUsername()));
 			// 添加密码条件
-			if(t.getPassword() != null) {
-				if(t.getPassword().equals("")) {
-					//是在登录，但是没有输入密码的情况
+			if (t.getPassword() != null) {
+				if (t.getPassword().equals("")) {
+					// 是在登录，但是没有输入密码的情况
 					return null;
 				}
 				criteria.add(Restrictions.eq("password", t.getPassword()));
+
+				if (t.getState() != null && !t.getState().equals("")) {
+					if (!t.getState().equals("全部")) {
+						criteria.add(Restrictions.eq("state", t.getState()));
+					}
+				}
+
 			}
 			try {
 				resultList = criteria.list();
-			} catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("[UserDao#query]======>查询出错");
 			} finally {
@@ -171,8 +182,7 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 	 * 进行分页查询 正常返回固定条数的集合 如果出现错误，或者是参数有误，返回值为null
 	 */
 	@Override
-	public List<User> query(User t, Integer start, Integer count, NULL o1,
-			NULL o2) {
+	public List<User> query(User t, Integer start, Integer count, NULL o1, NULL o2) {
 		if (start == null || count == null) {
 			System.out.println("======>传入的start | count为空");
 			return null;
@@ -187,27 +197,35 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 		List<User> resultList = null;
 		try {
 			resultList = criteria.list();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("UserD#querys======>查询出错");
+		} finally {
+			session.close();
 		}
 		return resultList;
 	}
 
 	@Override
-	protected void doBussiness(User t, Criteria criteria) {
-		if (t != null) {
+	protected void doBussiness(User user, Criteria criteria) {
+		if (user != null) {
 			// 此时表示查询多个
-			if (t.getName() != null && !t.getName().equals(""))
-				criteria.add(Restrictions.eq("name", t.getName()));
-			if (t.getState() != null && !t.getState().equals("全部"))
-				criteria.add(Restrictions.eq("state", t.getState()));
+			//添加用户名条件
+			String username = user.getUsername();
+			if (username != null && !username.equals("")){
+				criteria.add(Restrictions.eq("username", username));	
+			}
+			//添加用户状态
+			String state = user.getState();
+			if (state != null && !state.equals("全部")) {
+				criteria.add(Restrictions.eq("state", state));
+			} 
+					
 		}
 	}
 
 	@Override
-	public long getDataCountWithLimit(User t,
-			com.carManage.dao.BaseDAO.NULL o1, com.carManage.dao.BaseDAO.NULL o2) {
+	public long getDataCountWithLimit(User t, com.carManage.dao.BaseDAO.NULL o1, com.carManage.dao.BaseDAO.NULL o2) {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = getCriteria(t, o1, o2, "", session);
 		criteria.setProjection(Projections.rowCount());
@@ -218,6 +236,8 @@ public class UserDAOImpl extends BaseDAO<User, NULL> {
 			e.printStackTrace();
 			System.out.println("======>根据条件查询数据数量出错");
 			return -1;
+		} finally {
+			session.close();
 		}
 	}
 

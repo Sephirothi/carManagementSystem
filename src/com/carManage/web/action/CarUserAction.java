@@ -47,13 +47,17 @@ public class CarUserAction extends ActionSupport {
 	 */
 
 	public String querys() {
+		System.out.println(data);
 		String json = cus.queryCarUsers(data);
+		System.out.println(json);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
 	public String delete() {
+		System.out.println(data);
 		String json = cus.deleteCarUsers(data);
+		System.out.println(json);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
@@ -65,7 +69,9 @@ public class CarUserAction extends ActionSupport {
 	}
 
 	public String update() {
+		System.out.println(data);
 		String json = cus.updateCar(data);
+		System.out.println(json);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}

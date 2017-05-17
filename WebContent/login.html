@@ -1,67 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Mosaddek">
-    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="img/favicon.html">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Mosaddek">
+<meta name="keyword"
+	content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+<link rel="shortcut icon" href="img/favicon.html">
 
-    <title>登录</title>
+<title>登录</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-reset.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-reset.css" rel="stylesheet">
+<!--external css-->
+<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<!-- Custom styles for this template -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-responsive.css" rel="stylesheet" />
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+<!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-</head>
-
-  <body class="login-body">
-
-    <div class="container">
-        <form class="form-signin" action="">
-            <h2 class="form-signin-heading">登录</h2>
-            <div class="login-wrap">
-                <input type="text" class="form-control userId" placeholder="用户ID" autofocus  name="" value="">
-                <input type="password" class="form-control password" placeholder="密码" name="" value="">
-               <!--  <label class="checkbox">
-                   <input type="checkbox" value="remember-me" name=""> 记住我
-                   <span class="pull-right"> <a href="#"> 忘记密码?</a></span>
-               </label> -->
-                <button class="btn btn-lg btn-login btn-block" onclick="login()">登录</button>
-            </div>
-        </form>
-    </div>
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="js/json2.js"></script>
-    <script type="text/javascript">
+<script src="js/jquery-1.8.3.min.js"></script> 
+<script src="js/json2.js"></script>
+<script type="text/javascript">
         function login() {
            var userId = $('.userId').val(),
                password = $('.password').val();
+           if(userId == "" || password == ""){
+        	   alert("用户名或密码为空，请重新输入！");
+        	   return false;
+           }
            var datalist = [{
                username: userId,
                password: password
            }];
            var t=JSON.stringify(datalist);
            $.ajax({
+        	   async: false,
                url: 'user_login.action',
                type: 'POST',
                dataType: 'json',
                data: "data="+t,
                
+               success: function(datas) {
+					//var d = JSON.parse(data); //将数据转换成json类型，可以把data用alert()输出出来看看到底是什么样的结构
+					//得到的d是一个形如{"key":"value","key1":"value1"}的数据类型，然后取值出来   eval("(" + data + ")")
+					if(datas.code == 0){
+						alert(datas.data);
+						return false;
+					}
+					if(datas.data.state == "禁用"){
+						alert("该用户不可用！");
+						return false;
+					}
+					
+					sessionStorage.setItem("mess", JSON.stringify(datas.data));
+					location.href='index.html';	
+					location.replace('index.html');
+				},
+
+				error: function() {
+					alert(arguments[1]);
+						//alert("用户名或密码有误，请重新输入！");
+				} //这里不要加","
+				
            })
         }
     </script>
+</head>
 
-    </body>
+<body class="login-body">
+
+	<div class="container">
+		<form class="form-signin" action="">
+			<h2 class="form-signin-heading">欢迎使用本系统!</h2>
+			<div class="login-wrap">
+				<input type="text" class="form-control userId" placeholder="用户ID" autofocus name="" value="root" required="required">
+			    <input type="password" class="form-control password" placeholder="密码" name="" value="root" required="required">
+				<!--  <label class="checkbox">
+                   <input type="checkbox" value="remember-me" name=""> 记住我
+                   <span class="pull-right"> <a href="#"> 忘记密码?</a></span>
+               </label> -->
+				<button class="btn btn-lg btn-login btn-block" onclick="login();return false;">登录</button>
+			</div>
+		</form>
+	</div>
+
+</body>
 </html>

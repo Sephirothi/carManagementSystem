@@ -38,8 +38,8 @@ public class CarUserServiceImpl extends ResponseType implements CarUserService {
 		try {
 			Map<String, String> map = GsonUtils.jsonToMaps(json);
 			CarUser cu = getMaptoObject(map, CarUser.class);
-			Date o1 = StringToDate(map.get("starttime"));
-			Date o2 = StringToDate(map.get("endtime"));
+			Date o1 = StringToDate(map.get("birthDayStart"));
+			Date o2 = StringToDate(map.get("birthDayEnd"));
 			List<CarUser> list = baseDao.query(cu, stringToInteger(map.get("start")), stringToInteger(map.get("count")),
 					o1, o2);
 			result = (list == null) ? rr.extracted(0, "没有要查询的数据")
@@ -59,9 +59,9 @@ public class CarUserServiceImpl extends ResponseType implements CarUserService {
 		try {
 			List<CarUser> list = GsonUtils.jsonToList(json, CarUser.class);
 			if (list.size() == 0) {
-				result = rr.extracted(0, "没有要删除的数据");
+				result = rr.extracted(0, "请选择要删除的对象！");
 			} else {
-				result = (baseDao.delete(list) == list.size()) ? rr.extracted(0, "删除成功") : rr.extracted(0, "删除失败");
+				result = (baseDao.delete(list) == list.size()) ? rr.extracted(1, "删除成功") : rr.extracted(0, "删除失败");
 			}
 		} catch (DataFormatException e) {
 			rr.extracted(0, "json转化失败");

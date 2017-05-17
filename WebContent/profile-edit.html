@@ -8,7 +8,7 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="img/favicon.html">
 
-    <title>修改密码</title>
+    <title>新增用户</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
               <div data-original-title="" data-placement="right" class="icon-reorder tooltips"></div>
           </div>
           <!--logo start-->
-           <a href="#" class="logo">车辆<span>管理系统</span></a>
+           <a href="#" class="logo">基于web的<span>车辆管理系统</span></a>
           <!--logo end-->
          
           <div class="top-nav ">
@@ -81,8 +81,8 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="general.html">车辆列表</a></li>
-                          <li><a class="" href="buttons.html">新增车辆</a></li>
+                          <li><a class="" href="carList.html">车辆列表</a></li>
+                          <li><a class="" href="addCar.html">新增车辆</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -92,8 +92,8 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="grids.html">车主列表</a></li>
-                          <li><a class="" href="calendar.html">新增车主</a></li>
+                          <li><a class="" href="carOwnerList.html">车主列表</a></li>
+                          <li><a class="" href="addCarOwner.html">新增车主</a></li>
                         
                       </ul>
                   </li>
@@ -104,8 +104,8 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">费用列表</a></li>
-                          <li><a class="" href="form_wizard.html">收取管理费</a></li>
+                          <li><a class="" href="feeList.html">费用列表</a></li>
+                          <li><a class="" href="chargeMoney.html">收取管理费</a></li>
                           
                       </ul>
                   </li>
@@ -116,8 +116,8 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="basic_table.html">车辆变更列表</a></li>
-                          <li><a class="" href="dynamic_table.html">新增车辆变更</a></li>
+                          <li><a class="" href="carTransferList.html">车辆变更列表</a></li>
+                          <li><a class="" href="addCarTransfer.html">新增车辆变更</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -127,9 +127,9 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="blank.html">用户管理</a></li>
-                          <li><a class="" href="profile.html">修改密码</a></li>
-                          <li><a class="" href="invoice.html">安全退出</a></li>
+                          <li><a class="" href="queryOwner.html">查看用户</a></li>
+                          <li><a class="" href="ownerManagement.html">用户管理</a></li>
+                          <li><a class="" href="quit.html">安全退出</a></li>
                       </ul>
                   </li>
                   <li>
@@ -154,14 +154,14 @@
                               <a href="#">
                                   <img src="img/profile-avatar.jpg" alt="">
                               </a>
-                              <h1>Jonathan Smith</h1>
-                              <p>jsmith@flatlab.com</p>
+                              <!-- <h1>Jonathan Smith</h1> -->
+                              <p>欢迎新用户注册</p>
                           </div>
 
                           <ul class="nav nav-pills nav-stacked">
-                              <li><a href="profile.html"> <i class="icon-user"></i> Profile</a></li>
-                              <li><a href="profile-activity.html"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
-                              <li  class="active"><a href="profile-edit.html"> <i class="icon-edit"></i> Edit profile</a></li>
+                              <li><a href="ownerManagement.html"> <i class="icon-user"></i> 个人信息修改</a></li>
+                              <li><a href="#"> <i class="icon-calendar"></i> 近期活动 <span class="label label-danger pull-right r-activity">9</span></a></li>
+                              <li  class="active"><a href="profile-edit.html"> <i class="icon-edit"></i> 用户新增</a></li>
                           </ul>
 
                       </section>
@@ -169,76 +169,73 @@
                   <aside class="profile-info col-lg-9">
                       <section class="panel">
                           <div class="bio-graph-heading">
-                              Aliquam ac magna metus. Nam sed arcu non tellus fringilla fringilla ut vel ispum. Aliquam ac magna metus.
+                              请编辑你的用户信息！
                           </div>
                           <div class="panel-body bio-graph-info">
-                              <h1> Profile Info</h1>
+                              <h1> 个人信息</h1>
                               <form class="form-horizontal" role="form">
+                            
                                   <div class="form-group">
-                                      <label  class="col-lg-2 control-label">About Me</label>
-                                      <div class="col-lg-10">
-                                          <textarea name="" id="" class="form-control" cols="30" rows="10"></textarea>
+                                      <label  class="col-lg-2 control-label">用户名</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" id="username" placeholder=" ">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label  class="col-lg-2 control-label">First Name</label>
+                                      <label  class="col-lg-2 control-label">用户密码</label>
                                       <div class="col-lg-6">
-                                          <input type="text" class="form-control" id="f-name" placeholder=" ">
+                                          <input type="password" class="form-control" id="password" placeholder=" ">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label  class="col-lg-2 control-label">Last Name</label>
+                                      <label  class="col-lg-2 control-label">密码确认</label>
                                       <div class="col-lg-6">
-                                          <input type="text" class="form-control" id="l-name" placeholder=" ">
+                                          <input type="password" class="form-control" id="passwordConfirm" placeholder=" ">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label  class="col-lg-2 control-label">Country</label>
+                                      <label  class="col-lg-2 control-label">用户姓名</label>
                                       <div class="col-lg-6">
-                                          <input type="text" class="form-control" id="c-name" placeholder=" ">
+                                          <input type="text" class="form-control" id="name" placeholder=" ">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label  class="col-lg-2 control-label">Birthday</label>
+                                      <label  class="col-lg-2 control-label">用户性别</label>
                                       <div class="col-lg-6">
-                                          <input type="text" class="form-control" id="b-day" placeholder=" ">
+                                          <input type="text" class="form-control" id="sex" placeholder=" ">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label  class="col-lg-2 control-label">Occupation</label>
+                                      <label  class="col-lg-2 control-label">用户状态</label>
                                       <div class="col-lg-6">
-                                          <input type="text" class="form-control" id="occupation" placeholder=" ">
+                                          <input type="text" class="form-control" id="condition" placeholder=" ">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label  class="col-lg-2 control-label">Email</label>
+                                      <label  class="col-lg-2 control-label">用户级别</label>
                                       <div class="col-lg-6">
-                                          <input type="text" class="form-control" id="email" placeholder=" ">
+                                          <input type="text" class="form-control" id="authority" placeholder=" ">
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label  class="col-lg-2 control-label">Mobile</label>
+                                      <label  class="col-lg-2 control-label">注册时间</label>
                                       <div class="col-lg-6">
-                                          <input type="text" class="form-control" id="mobile" placeholder=" ">
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label  class="col-lg-2 control-label">Website URL</label>
-                                      <div class="col-lg-6">
-                                          <input type="text" class="form-control" id="url" placeholder="http://www.demowebsite.com ">
+                                          <input type="text" class="form-control" id="date" placeholder=" " onclick="jeDate({dateCell:'#date',isTime:true,format:'YYYY-MM-DD hh:mm:ss'})"/>
                                       </div>
                                   </div>
 
                                   <div class="form-group">
                                       <div class="col-lg-offset-2 col-lg-10">
-                                          <button type="submit" class="btn btn-success">Save</button>
-                                          <button type="button" class="btn btn-default">Cancel</button>
+                                          <div class="col-lg-6" style="float: left">
+                                             <button type="submit" class="btn btn-success" onclick="insert();return false;">保存</button>
+                                             <button type="reset" class="btn btn-default" style="float: right">取消</button>
+                                          </div>
                                       </div>
                                   </div>
                               </form>
                           </div>
                       </section>
-                      <section>
+                     <!--  <section>
                           <div class="panel panel-primary">
                               <div class="panel-heading"> Sets New Password & Avatar</div>
                               <div class="panel-body">
@@ -278,7 +275,7 @@
                                   </form>
                               </div>
                           </div>
-                      </section>
+                      </section> -->
                   </aside>
               </div>
 
@@ -294,31 +291,59 @@
     <script src="js/jquery.scrollTo.min.js"></script>
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="assets/jquery-knob/js/jquery.knob.js"></script>
+    <script src="js/jedate/jedate.js"></script>
 
     <!--common script for all pages-->
     <script src="js/common-scripts.js"></script>
 
     <script type="text/javascript">
-       $(function() {
-           var userId = $('.userId').val(),
-               password = $('.password').val();
-           var datalist = {
-               id: userId,
-               password: password
-           };
-  
-           loginInfo.push(JSON.stringify(datalist));
-           $.ajax({
-               url: '',
-               type: 'POST',
-               dataType: 'json',
-               data: ,
-               success: function(data) {
-                  console.log('success');
-                  
-               }
-           })
-        })
+    function insert() {
+		 var username = $('#username').val(),
+		    password = $('#password').val(),
+		    passwordConfirm = $('#passwordConfirm').val(),
+		    name = $('#name').val(),
+		    sex = $('#sex').val(),
+		    state = $('#condition').val(),
+		    authority = $('#authority').val(),
+		    date = $('#date').val();
+		 
+		if(password != passwordConfirm){
+			alert("两次输入的密码不一致，请重新输入！");
+			$("input[id='password']").val("");
+			$("input[id='passwordConfirm']").val("");
+			return false;
+		}else{
+			var datalist = [{
+					username: username,
+					password:password,
+					name:name,
+					sex:sex,
+					state:state,
+					authority:authority,
+					date:date
+				}];
+			var t = JSON.stringify(datalist);
+			$.ajax({
+				url: 'user_insert.action',
+				type: 'POST',
+				dataType: 'json',
+				data: "data=" + t,
+		
+				success: function(data) {
+					alert(data.data);
+					console.log('success');
+					return false;
+				},
+
+				error: function(data) {
+					alert(data.data);
+					return false;
+				}
+			})							
+		}
+					
+	}
+ 
     </script>
   </body>
 </html>

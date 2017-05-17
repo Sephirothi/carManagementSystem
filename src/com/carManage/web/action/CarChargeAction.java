@@ -45,13 +45,14 @@ public class CarChargeAction extends ActionSupport {
 	 */
 
 	public String querys() {
-
+		System.out.println(data);
 		String json = ccs.queryCarCharges(data);
+		System.out.println(json);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
 
-	public String query() {
+	public String query() {	
 		String json = ccs.queryCarCharge(data);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
@@ -64,7 +65,9 @@ public class CarChargeAction extends ActionSupport {
 	}
 
 	public String insert() {
+		System.out.println(data);
 		String json = ccs.insertCarCharge(data);
+		System.out.println(json);
 		inputStream = new ByteArrayInputStream(GsonUtils.getJsonByte(json));
 		return SUCCESS;
 	}
